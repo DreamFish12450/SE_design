@@ -25,9 +25,10 @@
             height: 100%;
         }
 
-        .info{
+        .info {
 
         }
+
         #panel {
             position: fixed;
             background-color: white;
@@ -37,11 +38,13 @@
             left: 50px;
             width: 280px;
         }
+
         #panel .amap-call {
             background-color: #009cf9;
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
         }
+
         #panel .amap-lib-driving {
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
@@ -51,12 +54,14 @@
 <body>
 <div id='container'></div>
 <div id="panel"></div>
-<div class="col-lg-6 info"  id="info" style="width: 400px">
+<div class="col-lg-6 info" id="info" style="width: 400px">
     <div class="card">
         <div class="card-close">
             <div class="dropdown">
-                <button type="button" id="closeCard2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                <div aria-labelledby="closeCard2" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove">
+                <button type="button" id="closeCard2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                <div aria-labelledby="closeCard2" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#"
+                                                                                                          class="dropdown-item remove">
                     <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit">
                     <i class="fa fa-gear"></i>Edit</a></div>
             </div>
@@ -69,13 +74,13 @@
                 <div class="form-group row input-item">
                     <label class="col-sm-3 form-control-label">起点</label>
                     <div class="col-sm-9">
-                        <input id='input_start' type="text" onchange="getStart()" placeholder="请输入起点" >
+                        <input id='input_start' type="text" onchange="getStart()" placeholder="请输入起点">
                     </div>
                 </div>
                 <div class="form-group row input-item">
                     <label class="col-sm-3 form-control-label">终点</label>
                     <div class="col-sm-9">
-                        <input id='input_end' type="text" onchange="getEnd()"  placeholder="请输入终点" >
+                        <input id='input_end' type="text" onchange="getEnd()" placeholder="请输入终点">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -87,7 +92,7 @@
         </div>
     </div>
 </div>
-<div >
+<div>
 
     <br>
 
@@ -96,7 +101,7 @@
     <!--    <p id='result'></p>-->
     <!--    <hr>-->
 </div>
-<link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+<link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
 <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
 <script type="text/javascript"
         src="https://webapi.amap.com/maps?v=1.4.15&key=dcada9127871dae9e3b92d182cf0d96e&plugin=AMap.Autocomplete&&plugin=AMap.Driving"></script>
@@ -154,71 +159,131 @@
     var auto2 = new AMap.Autocomplete({
         input: "input_end"
     });
-    function Location(lat,lng){
-        this.lat= lat;
+
+    function Location(lat, lng) {
+        this.lat = lat;
         this.lng = lng;
 
     }
+
     Location.prototype = {
         constructor: Location,  //每个函数都有prototype属性，指向该函数原型对象，原型对象都有constructor属性，这是一个指向prototype属性所在函数的指针
-        say: function(){
-            alert(this.lat +" "+this.lng);
+        say: function () {
+            alert(this.lat + " " + this.lng);
         }
     }
-    var startP=new Location(null,null);
-    var endP=new Location(null,null);
+    var startP = new Location(null, null);
+    var endP = new Location(null, null);
     var statrR
     var endR;
-    getStart = ()=>{
+    getStart = () => {
         var input_startVal = document.getElementById("input_start").value;
-        if (input_startVal !== null&&input_startVal!==undefined) {
+        if (input_startVal !== null && input_startVal !== undefined) {
             auto.search(input_startVal, function (status, result) {
                 // 搜索成功时，result即是对应的匹配数据
-                if(result !== undefined&&result!==null&&result!=="") statrR = result
+                if (result !== undefined && result !== null && result !== "") statrR = result
 
 
             })
         }
     }
-    getEnd = ()=>{
+    getEnd = () => {
         var input_endVal = document.getElementById("input_end").value
 
-        if(input_endVal !== null&&input_endVal!==undefined){
+        if (input_endVal !== null && input_endVal !== undefined) {
             // console.log("i want to end")
             auto2.search(input_endVal, (status, result) => {
-                if(result !== undefined&&result!==null&&result!=="") endR = result
+                if (result !== undefined && result !== null && result !== "") endR = result
 
 
             })
         }
     }
-    Carguide = () =>{
+    var parking = [
+        {
+            name: '图书馆地下停车场',
+            price: 0,
+            lat: 120.034856,
+            lng: 30.225243,
+        },
+        {
+            name: '养贤门口停车场',
+            price: 5,
+            lat: 120.044142,
+            lng: 30.22928,
+        },
+         {
+            name: '博易地下停车场',
+            price: 10,
+            lat: 120.032812,
+            lng: 30.22786,
+        },
+    ]
+    initMarker = () => {
+        // var endp = new AMap.LngLat(sp.lat,sp.lng)
+        parking.forEach((value,index,parking)=>{
+            let tempp = new AMap.LngLat(value.lat,value.lng)
+            // let endp = new AMap.LngLat()
+            let distance =  Math.round(tempp.distance(s));
+            console.log(distance)
+            if(distance < 5000){
+                let m1 = new AMap.Marker({
+                    map: map,
+                    // draggable:true,
+                    position: tempp
+                });
+                map.setFitView();
+                let line = new AMap.Polyline({
+                    strokeColor:'#80d8ff',
+                    isOutline:true,
+                    outlineColor:'white'
+                });
+                line.setMap(map);
+                let text = new AMap.Text({
+                    text:'',
+                    style:{'background-color':'#29b6f6',
+                        'border-color':'#e1f5fe',
+                        'font-size':'12px'}
+                });
+                text.setMap(map)
+                let textPos = s.divideBy(2).add(tempp.divideBy(2));
+                // var distance = Math.round(p1.distance(p2));
+                var path = [s,tempp];
+                line.setPath(path);
+                text.setText('两点相距'+distance+'米')
+                text.setPosition(textPos)
+            }
+
+        })
+    }
+    Carguide = () => {
 
         console.log(endR.tips[0].location)
         window.sp = endR.tips[0].location
+        //这里有错误 把StartP用end初始化了
         window.ep = statrR.tips[0].location
         console.log(statrR.tips[0].location)
-        if(sp.lat !==undefined){
+        if (sp.lat !== undefined) {
             startP.lat = sp.lat
             console.log(sp.lat);
         }
 
-        if(sp.lng!==undefined){
+        if (sp.lng !== undefined) {
             startP.lng = sp.lng
             console.log(sp.lng);
         }
-        if(ep.lat !==undefined){
+        if (ep.lat !== undefined) {
             endP.lat = ep.lat
             console.log(ep.lat);
         }
 
-        if(ep.lng!==undefined){
+        if (ep.lng !== undefined) {
             endP.lng = ep.lng
             console.log(ep.lng);
         }
-        let s = new AMap.LngLat(startP.lng, startP.lat)
+        window.s = new AMap.LngLat(startP.lng, startP.lat)
         let e = new AMap.LngLat(endP.lng, endP.lat)
-        driving.search(e,s, function(status, result) {
+        driving.search(e, s, function (status, result) {
             // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
             if (status === 'complete') {
                 log.success('绘制驾车路线完成')
@@ -226,6 +291,7 @@
                 log.error('获取驾车数据失败：' + result)
             }
         });
+        initMarker()
         // document.getElementById("info").style.display='none'
     }
 
