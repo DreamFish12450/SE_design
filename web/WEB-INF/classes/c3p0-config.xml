@@ -3,7 +3,7 @@
 <c3p0-config>
     <default-config>
         <property name="driverClass">com.mysql.jdbc.Driver</property>
-        <property name="jdbcUrl">jdbc:mysql://118.25.154:3306/esparking</property>
+        <property name="jdbcUrl">jdbc:mysql://118.25.154.83:3306/esparking</property>
         <property name="user">root</property>
         <property name="password">123456</property>
     </default-config>

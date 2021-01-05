@@ -53,6 +53,16 @@ public class Parking {
         this.charges = charges;
     }
 
+    public Parking(String parkingName, int parkingId, int charges, double lng, double lat, int maxSize, int spare) {
+        this.lat = lat;
+        this.lng = lng;
+        this.parkingId = parkingId;
+        this.parkingName = parkingName;
+        this.charges = charges;
+        this.maxSize = maxSize;
+        this.spare = spare;
+    }
+
     public int getMaxSize() {
         return maxSize;
     }
@@ -69,7 +79,7 @@ public class Parking {
         this.spare = spare;
     }
 
-    public Parking(String parkingName,int parkingId, int charges,double lng,double lat  ) {
+    public Parking(String parkingName, int parkingId, int charges, double lng, double lat) {
         this.lat = lat;
         this.lng = lng;
         this.parkingName = parkingName;
