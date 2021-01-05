@@ -50,10 +50,22 @@
             border-bottom-right-radius: 4px;
             overflow: hidden;
         }
+
+        .arrival {
+            position: absolute;
+            /*display:;*/
+            bottom: 0;
+            right: 0;
+            display: none;
+            z-index: 99;
+            margin: 0.3rem;
+        }
     </style>
 <body>
 <div id='container'></div>
-<div id="panel"></div>
+<div id="panel">
+    <button class="arrival btn btn-primary" id="arrivalButton" hidden="hidden">确认已经到达</button>
+</div>
 <div class="col-lg-6 info" id="info" style="width: 400px">
     <div class="card">
         <div class="card-close">
@@ -205,53 +217,80 @@
             price: 0,
             lat: 120.034856,
             lng: 30.225243,
+            spare: 20,
+            size: 30
         },
         {
             name: '养贤门口停车场',
             price: 5,
             lat: 120.044142,
             lng: 30.22928,
+            spare: 20,
+            size: 25
         },
-         {
+        {
             name: '博易地下停车场',
             price: 10,
             lat: 120.032812,
             lng: 30.22786,
+            spare: 30,
+            size: 35
         },
     ]
+    changeEnd = (lat, lng) => {
+        let temp = new AMap.LngLat(lat, lng)
+        driving.search(e, temp, function (status, result) {
+            document.getElementById("arrivalButton").removeAttribute('hidden')
+            // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+            if (status === 'complete') {
+                log.success('绘制驾车路线完成')
+            } else {
+                log.error('获取驾车数据失败：' + result)
+            }
+        })
+
+    }
     initMarker = () => {
         // var endp = new AMap.LngLat(sp.lat,sp.lng)
-        parking.forEach((value,index,parking)=>{
-            let tempp = new AMap.LngLat(value.lat,value.lng)
+        parking.forEach((value, index, parking) => {
+            let tempp = new AMap.LngLat(value.lat, value.lng)
             // let endp = new AMap.LngLat()
-            let distance =  Math.round(tempp.distance(s));
+            let distance = Math.round(tempp.distance(s));
             console.log(distance)
-            if(distance < 5000){
+            if (distance < 5000) {
                 let m1 = new AMap.Marker({
                     map: map,
                     // draggable:true,
-                    position: tempp
+                    position: tempp,
+                    title: `${value.name}。\n 收费价格每小时:${value.price}元\n停车场容量${value.size}\n停车场空余停车位：${value.spare}`
                 });
                 map.setFitView();
+                // m1.on('click',changeEnd(value.lat,value.lng))
+                m1.on('click', () => {
+                    changeEnd(value.lat, value.lng)
+                })
                 let line = new AMap.Polyline({
-                    strokeColor:'#80d8ff',
-                    isOutline:true,
-                    outlineColor:'white'
+                    strokeColor: '#80d8ff',
+                    isOutline: true,
+                    outlineColor: 'white'
                 });
                 line.setMap(map);
                 let text = new AMap.Text({
-                    text:'',
-                    style:{'background-color':'#29b6f6',
-                        'border-color':'#e1f5fe',
-                        'font-size':'12px'}
+                    text: '',
+                    style: {
+                        'background-color': '#29b6f6',
+                        'border-color': '#e1f5fe',
+                        'font-size': '12px'
+                    }
                 });
                 text.setMap(map)
                 let textPos = s.divideBy(2).add(tempp.divideBy(2));
                 // var distance = Math.round(p1.distance(p2));
-                var path = [s,tempp];
+                var path = [s, tempp];
                 line.setPath(path);
-                text.setText('两点相距'+distance+'米')
+                text.setText('两点相距' + distance + '米')
                 text.setPosition(textPos)
+
             }
 
         })
@@ -282,7 +321,7 @@
             console.log(ep.lng);
         }
         window.s = new AMap.LngLat(startP.lng, startP.lat)
-        let e = new AMap.LngLat(endP.lng, endP.lat)
+        window.e = new AMap.LngLat(endP.lng, endP.lat)
         driving.search(e, s, function (status, result) {
             // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
             if (status === 'complete') {
