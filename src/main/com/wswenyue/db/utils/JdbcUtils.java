@@ -9,13 +9,13 @@ import java.sql.SQLException;
 public class JdbcUtils {
 	private static ComboPooledDataSource ds = null;
 	private static ThreadLocal<Connection> threadLocal = new ThreadLocal();
-	
+
 	static{
-		ds = new ComboPooledDataSource("parkingLot");
+		ds = new ComboPooledDataSource();
 	}
-	
+
 	public static Connection getConnection() throws SQLException{
-		
+
 		Connection conn = threadLocal.get();
 		if(conn==null){
 			conn = getDataSource().getConnection();
@@ -23,12 +23,12 @@ public class JdbcUtils {
 		}
 		return conn;
 	}
-	
+
 	public static DataSource getDataSource(){
 		return ds;
 	}
-	
-	
+
+
 	public static void startTransaction(){
 		try{
 			Connection conn =  threadLocal.get();
@@ -41,9 +41,9 @@ public class JdbcUtils {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public static void rollback(){
-		
+
 		try{
 			Connection conn =  threadLocal.get();
 			if(conn!=null){
@@ -53,9 +53,9 @@ public class JdbcUtils {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public static void commit(){
-		
+
 		try{
 			Connection conn =  threadLocal.get();
 			if(conn!=null){
@@ -65,7 +65,7 @@ public class JdbcUtils {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public static void release(){
 		try{
 			Connection conn =  threadLocal.get();
@@ -77,7 +77,7 @@ public class JdbcUtils {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	
-	
+
+
+
 }
