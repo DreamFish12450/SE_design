@@ -24,7 +24,7 @@ public class indexServlet extends HttpServlet {
         Long time = nowtime - second;
 
         request.setAttribute("time",time);
-        request.getRequestDispatcher("/index.jsp").forward(request,response);
+        request.getRequestDispatcher("/indexk.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
