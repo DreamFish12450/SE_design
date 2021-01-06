@@ -1,4 +1,5 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html class="no-js">
 
@@ -10,6 +11,7 @@
   <!--/.fluid-container-->
   <script src="scripts/jquery-1.9.1.min.js"></script>
   <script src="scripts/bootstrap.min.js"></script>
+
   <script>
     function toDou(n)
     {
@@ -23,10 +25,12 @@
       }
     }
 
+
     window.onload=function ()
     {
       var aImg=document.getElementsByTagName('img');
-      var c=0;
+      var c = ${time};
+
       var hour=0,min=0;
       function tick()
       {
@@ -64,6 +68,7 @@
       tick();
     };
   </script>
+
 </head>
 
 <body>
@@ -74,7 +79,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="indexk.jsp">Admin Panel</a>
+      <a class="brand" href="index.do">Admin Panel</a>
       <div class="nav-collapse collapse">
         <ul class="nav pull-right">
           <li class="dropdown">
@@ -157,13 +162,13 @@
           <a href="pay.jsp"><i class="icon-chevron-right"></i>用户充值</a>
         </li>
         <li >
-          <a href="indexk.jsp"><i class="icon-chevron-right"></i>回到首页</a>
+          <a href="index.do"><i class="icon-chevron-right"></i>回到首页</a>
         </li >
 
       </ul>
     </div>
 
-    <div class="span6" id="content" >
+    <div class="span7" id="content" >
       <div class="row-fluid">
         <!-- block -->
         <div class="block">
@@ -173,8 +178,8 @@
           <div class="block-content collapse in">
             <div class="span12">
               <div id="timechart" style="width:100%;height:400px">
-                <h4>服务已开启</h4>
-                <p>服务运行时间：</p>
+                <h4>ADMIN 欢迎您！</h4>
+                <p>服务运行时长：</p>
                 <img  src="images/img/0.png"/>
                 <img  src="images/img/0.png"/>
                 <img src="images/img/second.png">
