@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: ASUS
+  Date: 2021/1/5
+  Time: 20:35
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
 <head>
@@ -56,7 +64,6 @@
             /*display:;*/
             bottom: 0;
             right: 0;
-            display: none;
             z-index: 99;
             margin: 0.3rem;
         }
@@ -64,7 +71,7 @@
 <body>
 <div id='container'></div>
 <div id="panel">
-    <button class="arrival btn btn-primary" id="arrivalButton" hidden="hidden">确认已经到达</button>
+<%--    --%>
 </div>
 <div class="col-lg-6 info" id="info" style="width: 400px">
     <div class="card">
@@ -127,6 +134,24 @@
 <!-- Main File-->
 <script src="template/js/front.js"></script>
 <script type="text/javascript">
+    window.onload = function () {
+        $.ajax({
+            type: 'post',
+            //ansyv:true,
+            cache: false,
+            url: '<%=application.getContextPath()%>/getParkingList.do',
+            success: function (data) {
+                console.log(data)
+                window.parking = new Array();
+                data.forEach((value, index) => {
+                    console.log(value)
+                    parking.push(new Parking(value.parkingName, value.lat, value.lng, value.charges, value.spare, value.maxSize))
+                })
+            },
+            error: function () {
+            }
+        })
+    }
     var map = new AMap.Map('container', {
         resizeEnable: true
     });
@@ -158,6 +183,8 @@
         // document.getElementById('status').innerHTML = '定位成功'
         var str = [];
         str.push('定位结果：' + data.position);
+        window.nowPos = data.position
+        window.ep = window.nowPos
         console.log(data)
         str.push('定位类别：' + data.location_type);
         if (data.accuracy) {
@@ -186,8 +213,23 @@
 
     }
 
+    function Parking(name, lat, lng, charge, spare, maxSize) {
+        this.name = name
+        this.lat = lat
+        this.lng = lng
+        this.charge = charge
+        this.spare = spare
+        this.maxSize = maxSize
+    }
+
     Location.prototype = {
         constructor: Location,  //每个函数都有prototype属性，指向该函数原型对象，原型对象都有constructor属性，这是一个指向prototype属性所在函数的指针
+        say: function () {
+            alert(this.lat + " " + this.lng);
+        }
+    }
+    Parking.prototype = {
+        constructor: Parking,
         say: function () {
             alert(this.lat + " " + this.lng);
         }
@@ -203,8 +245,9 @@
                 // 搜索成功时，result即是对应的匹配数据
                 if (result !== undefined && result !== null && result !== "") statrR = result
 
-
             })
+        } else {
+            window.ep = window.nowPos
         }
     }
     getEnd = () => {
@@ -219,36 +262,13 @@
             })
         }
     }
-    var parking = [
-        {
-            name: '图书馆地下停车场',
-            price: 0,
-            lat: 120.034856,
-            lng: 30.225243,
-            spare: 20,
-            size: 30
-        },
-        {
-            name: '养贤门口停车场',
-            price: 5,
-            lat: 120.044142,
-            lng: 30.22928,
-            spare: 20,
-            size: 25
-        },
-        {
-            name: '博易地下停车场',
-            price: 10,
-            lat: 120.032812,
-            lng: 30.22786,
-            spare: 30,
-            size: 35
-        },
-    ]
-    changeEnd = (lat, lng) => {
-        let temp = new AMap.LngLat(lat, lng)
+
+    changeEnd = (lng, lat) => {
+        let temp = new AMap.LngLat(lng, lat)
         driving.search(e, temp, function (status, result) {
-            document.getElementById("arrivalButton").removeAttribute('hidden')
+            // var $newElement=;//创建元素,返回jQuery对象
+            $("#panel").append($('<button class="arrival btn btn-primary" id="arrivalButton" >确认已经到达</button>'))
+            // document.getElementById("arrivalButton").style.opacity = '1'
             // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
             if (status === 'complete') {
                 log.success('绘制驾车路线完成')
@@ -260,8 +280,9 @@
     }
     initMarker = () => {
         // var endp = new AMap.LngLat(sp.lat,sp.lng)
-        parking.forEach((value, index, parking) => {
-            let tempp = new AMap.LngLat(value.lat, value.lng)
+        window.parking.forEach((value, index, parking) => {
+            let tempp = new AMap.LngLat(value.lng, value.lat)
+            console.log(tempp)
             // let endp = new AMap.LngLat()
             let distance = Math.round(tempp.distance(s));
             console.log(distance)
@@ -275,7 +296,7 @@
                 map.setFitView();
                 // m1.on('click',changeEnd(value.lat,value.lng))
                 m1.on('click', () => {
-                    changeEnd(value.lat, value.lng)
+                    changeEnd(value.lng, value.lat)
                 })
                 let line = new AMap.Polyline({
                     strokeColor: '#80d8ff',
@@ -308,23 +329,26 @@
         console.log(endR.tips[0].location)
         window.sp = endR.tips[0].location
         //这里有错误 把StartP用end初始化了
-        window.ep = statrR.tips[0].location
-        console.log(statrR.tips[0].location)
-        if (sp.lat !== undefined) {
+        if (statrR !== undefined) {
+            window.ep = statrR.tips[0].location
+
+            console.log(statrR.tips[0].location)
+        }
+        if (window.sp.lat !== undefined) {
             startP.lat = sp.lat
             console.log(sp.lat);
         }
 
-        if (sp.lng !== undefined) {
+        if (window.sp.lng !== undefined) {
             startP.lng = sp.lng
             console.log(sp.lng);
         }
-        if (ep.lat !== undefined) {
+        if (window.ep.lat !== undefined) {
             endP.lat = ep.lat
             console.log(ep.lat);
         }
 
-        if (ep.lng !== undefined) {
+        if (window.ep.lng !== undefined) {
             endP.lng = ep.lng
             console.log(ep.lng);
         }
