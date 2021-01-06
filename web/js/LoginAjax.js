@@ -34,8 +34,8 @@ function countDown(secs){
          
      if(--secs>0){       
          setTimeout("countDown("+secs+")",1000);       
-     }else{         
-         location.href='indexc.jsp';
+     }else{
+         location.href="http://localhost:8080/SE_design_Web_exploded/home.jsp";
      }       
  }       
 

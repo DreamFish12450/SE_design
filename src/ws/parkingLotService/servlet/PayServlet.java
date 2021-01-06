@@ -23,9 +23,9 @@ public class PayServlet extends HttpServlet {
         System.out.println(uname+":"+phone+":"+moneystr+":"+passwd);
         if(passwd.equals("admin") && BasicUserService.FindUser(uname,phone)){
             int money = Integer.parseInt(moneystr);
-            if(BasicUserService.Prepaid(phone,money)){
+          //  if(BasicUserService.Prepaid(phone,money)){
                request.setAttribute("message","用户"+uname+"充值成功");
-            }
+          //  }
         }else {
             request.setAttribute("message","用户"+uname+"充值失败");
         }

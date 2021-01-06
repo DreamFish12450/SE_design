@@ -2,7 +2,7 @@ package main.com.wswenyue.db.service;
 
 
 import main.com.wswenyue.db.dao.impl.UserDaoImpl;
-import main.com.wswenyue.db.domain.User;
+import main.com.wswenyue.db.domain.UserW;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,31 +19,17 @@ import java.util.List;
  */
 public class BasicUserService {
     static UserDaoImpl userDao = new UserDaoImpl();
-    /**
-     * 查找用户是否存在
-     * @param user
-     * @return 用户存在返回true，不存在返回false
-     * */
-    public static boolean FindUser(User user){
-        try {
-            if(userDao.find(user.getPhone()) != null){
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+
     /**
      * 查找用户是否存在
      * @param uname
-     * @param phone
+     * @param pass
      * @return 用户存在返回true，不存在返回false
      * */
-    public static boolean FindUser(String uname,String phone){
+    public static boolean FindUser(String uname,String pass){
         try {
-            User user = userDao.find(phone);
-            if( user!= null && user.getUname().equals(uname)){
+            UserW user = userDao.find(uname,pass);
+            if( user!= null && user.getUsername().equals(uname)){
                 return true;
             }
         } catch (SQLException e) {
@@ -53,46 +39,16 @@ public class BasicUserService {
     }
 
 
-    /**
-     * 通过手机号得到uid
-     * @param phone
-     * @return 用户存在返回uid，不存在返回null
-     * */
-    public static Integer FindUser(String phone){
-        try {
-            User user = userDao.find(phone);
-            if(user != null){
-                return user.getUid();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
-    /**
-     * 通过手机号得到user
-     * @param phone
-     * @return 用户存在返回uid，不存在返回null
-     * */
-    public static User GetUser(String phone){
-        try {
-            User user = userDao.find(phone);
-            if(user != null){
-                return user;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
+
     /**
      * 得到users
      * @return 用户存在返回uid，不存在返回null
      * */
-    public static List<User> GetUsers(){
+    public static List<UserW> GetUsers(){
         try {
-            List<User> users = userDao.find();
+            List<UserW> users = userDao.find();
             if(users.size()!=0){
                return users;
             }
@@ -102,21 +58,7 @@ public class BasicUserService {
         return null;
     }
 
-    /**
-     * 得到在线用户users
-     * @return 用户存在返回uid，不存在返回null
-     * */
-    public static List<User> GetOnlineUsers(){
-        try {
-            List<User> users = userDao.findOnline();
-            if(users.size()!=0){
-               return users;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
 
 
     /**
@@ -124,9 +66,9 @@ public class BasicUserService {
      * @param uname
      * @return 用户存在返回uid，不存在返回null
      * */
-    public static User GetUserByName(String uname){
+    public static UserW GetUserByName(String uname){
         try {
-            User user = userDao.findUserByName(uname);
+            UserW user = userDao.findUserByName(uname);
             if(user != null){
                 return user;
             }
@@ -137,68 +79,17 @@ public class BasicUserService {
     }
 
 
-    /**
-     * 通过用户名和密码得到user
-     * @param uname
-     * @param passwd
-     * @return 用户存在返回uid，不存在返回null
-     * */
-    public static User GetUserByNameAndPasswd(String uname,String passwd){
-        try {
-            User user = userDao.findUserByNameAndPasswd(uname,passwd);
-            if(user != null){
-                return user;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
-    /**
-     * 通过User得到uid
-     * @param u
-     * @return 用户存在返回uid，不存在返回null
-     * */
-    public static Integer GetUid(User u){
-        try {
-            User user = userDao.find(u.getPhone());
-            if(user != null){
-                return user.getUid();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
-    /**
-     * 通过UName得到uid
-     * @param uname
-     * @return 用户存在返回uid，不存在返回null
-     * */
-    public static Integer GetUidByUname(String uname){
-        try {
-            User user = userDao.findUserByName(uname);
-            if(user != null){
-                return user.getUid();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
+
 
     /**查询余额
      * */
-    public static Integer InquireBalance(User user){
+    public static Integer InquireBalance(UserW user){
         Integer balance = null;
-        if(FindUser(user)){
-            try {
-                balance = userDao.find(user.getPhone()).getBalance();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        if(GetUserByName(user.getUsername())!=null){
+            balance = user.getBalance();
         }
         return balance;
     }
@@ -208,7 +99,7 @@ public class BasicUserService {
      * @param user
      * @return 余额大于零返回true，小于零返回false
      * */
-    public static boolean CheckBalance(User user){
+    public static boolean CheckBalance(UserW user){
         Integer money = InquireBalance(user);
         if( money != null && money > 0){
             return true;
@@ -217,38 +108,9 @@ public class BasicUserService {
     }
 
 
-    /**
-     * 返回用户登录状态
-     * @param user
-     * @return 查询到状态返回状态值：0、1、2
-     * @return 查询出错返回NUll
-     * */
-    public static Integer UserStatus(User user){
-        Integer userStatus = null;
-        if(FindUser(user)){
-            try {
-                userStatus = userDao.find(user.getPhone()).getUserflag();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return userStatus;
-    }
 
 
 
-    /**
-     * 查看用户是否已登录
-     * @param user
-     * @return 已登录返回true，否则返回false
-     * */
-    public static boolean CheckAlreadyLogin(User user){
-        Integer status = UserStatus(user);
-        if( status != null && status == 1 ){
-            return true;
-        }
-        return false;
-    }
 
     /**
      * 更新余额
@@ -265,11 +127,11 @@ public class BasicUserService {
     /**
      * 充值
      * */
-    public static boolean Prepaid(String phone, int money){
+    public static boolean Prepaid(String username, int money){
         try {
-            User user = GetUser(phone);
+            UserW user = GetUserByName(username);
             if(user!=null){
-                userDao.updateBalance(phone,user.getBalance()+money);
+                userDao.updateBalance(username,user.getBalance()+money);
             }
             return true;
         } catch (SQLException e) {

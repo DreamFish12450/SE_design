@@ -17,7 +17,7 @@ public class ListUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tag = request.getParameter("tag");
         if(tag.equals("online")){
-            request.setAttribute("users",BasicUserService.GetOnlineUsers());
+         //   request.setAttribute("users",BasicUserService.GetOnlineUsers());
         }else {
             request.setAttribute("users",BasicUserService.GetUsers());
         }
