@@ -71,7 +71,7 @@
 <body>
 <div id='container'></div>
 <div id="panel">
-<%--    --%>
+    <%--    --%>
 </div>
 <div class="col-lg-6 info" id="info" style="width: 400px">
     <div class="card">
@@ -145,7 +145,7 @@
                 window.parking = new Array();
                 data.forEach((value, index) => {
                     console.log(value)
-                    parking.push(new Parking(value.parkingName, value.lat, value.lng, value.charges, value.spare, value.maxSize))
+                    window.parking.push(new Parking(value.parkingName, value.lat, value.lng, value.charges, value.spare, value.maxSize,value.parkingId))
                 })
             },
             error: function () {
@@ -213,13 +213,14 @@
 
     }
 
-    function Parking(name, lat, lng, charge, spare, maxSize) {
+    function Parking(name, lat, lng, charge, spare, maxSize,parking_id) {
         this.name = name
         this.lat = lat
         this.lng = lng
         this.charge = charge
         this.spare = spare
         this.maxSize = maxSize
+        this.parking_id = parking_id
     }
 
     Location.prototype = {
@@ -263,13 +264,31 @@
         }
     }
 
-    changeEnd = (lng, lat) => {
+    changeEnd = (lng, lat,parkingId) => {
         let temp = new AMap.LngLat(lng, lat)
         driving.search(e, temp, function (status, result) {
             // var $newElement=;//创建元素,返回jQuery对象
             $("#panel").append($('<button class="arrival btn btn-primary" id="arrivalButton" >确认已经到达</button>'))
             // document.getElementById("arrivalButton").style.opacity = '1'
             // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+            console.log(parkingId)
+            $.ajax({
+                    type: 'post',
+                    // ansyv:true,
+                    cache: false,
+                    data:{parking_id:parkingId},
+                    url: '<%=application.getContextPath()%>/reserve.do',
+                    success: function (data) {
+                        console.log(data)
+                        // window.parking = new Array();
+                        // data.forEach((value, index) => {
+                        //     console.log(value)
+                        //     window.parking.push(new Parking(value.parkingName, value.lat, value.lng, value.charges, value.spare, value.maxSize))
+                        // })
+                    },
+                    error: function () {
+                    }
+                })
             if (status === 'complete') {
                 log.success('绘制驾车路线完成')
             } else {
@@ -282,21 +301,22 @@
         // var endp = new AMap.LngLat(sp.lat,sp.lng)
         window.parking.forEach((value, index, parking) => {
             let tempp = new AMap.LngLat(value.lng, value.lat)
+            var valuet = value.name+"\n 收费价格每小时:"+value.charge+"元\n停车场容量"+value.maxSize+"\n停车场空余停车位："+value.spare
             console.log(tempp)
             // let endp = new AMap.LngLat()
             let distance = Math.round(tempp.distance(s));
-            console.log(distance)
+            // console.log(distance)
             if (distance < 5000) {
                 let m1 = new AMap.Marker({
                     map: map,
                     // draggable:true,
                     position: tempp,
-                    title: `${value.name}。\n 收费价格每小时:${value.price}元\n停车场容量${value.size}\n停车场空余停车位：${value.spare}`
+                    title: valuet
                 });
                 map.setFitView();
                 // m1.on('click',changeEnd(value.lat,value.lng))
                 m1.on('click', () => {
-                    changeEnd(value.lng, value.lat)
+                    changeEnd(value.lng, value.lat,value.parking_id)
                 })
                 let line = new AMap.Polyline({
                     strokeColor: '#80d8ff',

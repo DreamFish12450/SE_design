@@ -4,7 +4,7 @@ public class Parking {
     double lat;
     double lng;
     String parkingName;
-    int parkingId;
+    String parkingId;
     int charges;
     int maxSize;
     int spare;
@@ -37,11 +37,11 @@ public class Parking {
         this.parkingName = parkingName;
     }
 
-    public int getParkingId() {
+    public String getParkingId() {
         return parkingId;
     }
 
-    public void setParkingId(int parkingId) {
+    public void setParkingId(String parkingId) {
         this.parkingId = parkingId;
     }
 
@@ -53,7 +53,7 @@ public class Parking {
         this.charges = charges;
     }
 
-    public Parking(String parkingName, int parkingId, int charges, double lng, double lat, int maxSize, int spare) {
+    public Parking(String parkingName, String parkingId, int charges, double lng, double lat, int maxSize, int spare) {
         this.lat = lat;
         this.lng = lng;
         this.parkingId = parkingId;
@@ -79,7 +79,7 @@ public class Parking {
         this.spare = spare;
     }
 
-    public Parking(String parkingName, int parkingId, int charges, double lng, double lat) {
+    public Parking(String parkingName, String parkingId, int charges, double lng, double lat) {
         this.lat = lat;
         this.lng = lng;
         this.parkingName = parkingName;

@@ -2,6 +2,7 @@ package ws.parkingLotService.servlet;
 
 import com.google.gson.Gson;
 import main.com.wswenyue.db.domain.Parking;
+import main.com.wswenyue.db.service.ParkingPlaceService;
 import main.com.wswenyue.db.service.ParkingService;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,7 +27,6 @@ public class ListParkingServlet extends HttpServlet {
             List<Parking> parkingList = ParkingService.getAll();
             String result = new Gson().toJson(parkingList);
             System.out.println("返回的结果：" + result);
-
 
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json;charset=utf-8");
