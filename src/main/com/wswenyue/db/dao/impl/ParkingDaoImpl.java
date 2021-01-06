@@ -1,7 +1,9 @@
 package main.com.wswenyue.db.dao.impl;
 
 import main.com.wswenyue.db.dao.ParkingDao;
+import main.com.wswenyue.db.dao.ParkingPlaceDao;
 import main.com.wswenyue.db.domain.Parking;
+import main.com.wswenyue.db.service.ParkingPlaceService;
 import main.com.wswenyue.db.utils.JDBCUTIL;
 import main.com.wswenyue.db.utils.JdbcUtils;
 import org.apache.commons.dbutils.QueryRunner;
@@ -31,7 +33,12 @@ public class ParkingDaoImpl implements ParkingDao {
 
             ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
             while (rs.next()) { /*遍历select语句查询得到的记录表*/
-                Parking p = new Parking(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getDouble(4), rs.getDouble(5),rs.getInt(6),rs.getInt(7));
+                Parking p = new Parking(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getDouble(5),rs.getInt(6),rs.getInt(7));
+                //及其不推荐在这里更新页面
+
+                p.setSpare(ParkingPlaceService.getFreeParkSize(p.getParkingId()));
+                ParkingPlaceDaoImpl placeDao = new ParkingPlaceDaoImpl();
+                placeDao.updateSpare(p.getParkingId(),p.getSpare());
                 parkingList.add(p);
             }
         } catch (SQLException e) {

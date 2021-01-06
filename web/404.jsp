@@ -6,6 +6,6 @@
 </head>
 <body>
 	<h1>Page Not Found</h1>
-<h2><a href="index.do">回到首页</a></h2>
+<h2><a href="inite.jsp">回到首页</a></h2>
 </body>
 </html>

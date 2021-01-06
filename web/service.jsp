@@ -74,7 +74,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="index.jsp">Admin Panel</a>
+      <a class="brand" href="indexk.jsp">Admin Panel</a>
       <div class="nav-collapse collapse">
         <ul class="nav pull-right">
           <li class="dropdown">
@@ -157,7 +157,7 @@
           <a href="pay.jsp"><i class="icon-chevron-right"></i>用户充值</a>
         </li>
         <li >
-          <a href="index.jsp"><i class="icon-chevron-right"></i>回到首页</a>
+          <a href="indexk.jsp"><i class="icon-chevron-right"></i>回到首页</a>
         </li >
 
       </ul>
