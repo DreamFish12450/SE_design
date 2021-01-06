@@ -46,19 +46,18 @@ public class inforegisteServlet extends HttpServlet {
             UserDaoImpl ud = new UserDaoImpl();
             System.out.println("进入：123458");
             try {
-                ud.findUserByName(username);
-                if(ud.findUserByName(username)==null) {
+                UserW u2 = ud.findUserByName(username);
+//                System.out.println();
+                if(u2==null) {
                     ud.add(u1);
                     System.out.println("添加成功：123");
-                    request.getRequestDispatcher("http://localhost:8080/SE_design_Web_exploded/home.jsp").forward(request, response);
+                    request.getRequestDispatcher("/home.jsp").forward(request, response);
                        }
                 else
                 {   System.out.println("添加失败：123");
                     request.setAttribute("error","该用户名已注册，请重新填写");
-                    request.getRequestDispatcher("http://localhost:8080/SE_design_Web_exploded/home.jsp").forward(request, response);
+                    request.getRequestDispatcher("/home.jsp").forward(request, response);
                 }
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }

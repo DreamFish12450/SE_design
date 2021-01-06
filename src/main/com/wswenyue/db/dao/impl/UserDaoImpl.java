@@ -28,14 +28,12 @@ public class UserDaoImpl implements UserDao {
     JDBCUTIL jdbcutil = new JDBCUTIL();
 
 
-
-
     @Override
     public void updateBalance(String username, int money) throws SQLException {
         QueryRunner qr = new QueryRunner();
-        String sql = "update user set balance=? where username=?";
-        Object params[] = {money,username};
-        qr.update(JdbcUtils.getConnection(),sql, params);
+        String sql = "update user set balance = ? where username = ?";
+        Object params[] = {money, username};
+        qr.update(JdbcUtils.getConnection(), sql, params);
     }
 
 
@@ -43,7 +41,7 @@ public class UserDaoImpl implements UserDao {
     public void add(UserW user) throws SQLException {
         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
         String sql = "insert into user(username,password,name,age,sex,ID_number,phone_number,Face_ID,balance,VIP_level) values(?,?,?,?,?,?,?,?,?,?)";
-        Object params[] = {user.getUsername(),user.getPassword(),user.getName(),user.getAge(),user.getSex(),user.getID_number(),user.getPhone_number(),null,null,null,};
+        Object params[] = {user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getSex(), user.getID_number(), user.getPhone_number(), null, null, null,};
         qr.update(sql, params);
     }
 
@@ -51,15 +49,15 @@ public class UserDaoImpl implements UserDao {
     public UserW find(String username, String password) throws SQLException {
         QueryRunner qr = new QueryRunner();
         String sql = "select * from user where username=? and password=?";
-        Object params[] = {username,password};
-        return (UserW) qr.query(JdbcUtils.getConnection(),sql,params, new BeanHandler(UserW.class));
+        Object params[] = {username, password};
+        return (UserW) qr.query(JdbcUtils.getConnection(), sql, params, new BeanHandler(UserW.class));
     }
 
     @Override
     public List<UserW> find() throws SQLException {
         QueryRunner qr = new QueryRunner();
         String sql = "select * from user";
-        return (List<UserW>) qr.query(JdbcUtils.getConnection(),sql, new BeanListHandler(UserW.class));
+        return (List<UserW>) qr.query(JdbcUtils.getConnection(), sql, new BeanListHandler(UserW.class));
     }
 
 
@@ -70,29 +68,49 @@ public class UserDaoImpl implements UserDao {
         // UserW uu = (UserW) qr.query(JdbcUtils.getConnection(), sql, new Object[]{uname}, new BeanHandler(UserW.class));
         //return (UserW) qr.query(JdbcUtils.getConnection(), sql, uname, new BeanHandler(UserW.class));
         Connection conn = null;
-        conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
-        String sql="select * from user where username=?";
-        PreparedStatement ps = conn.prepareStatement(sql); /*创建预处理对象，并进行数据库查询*/
-        ps.setString(1,uname);
-        ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
+        conn = jdbcutil.getConnection();
+        try {
+            uname = "zjut";
+ /*通过User帐号与数据库连接*/
+            String sql = "select * from user where username = ?";
+            PreparedStatement ps = conn.prepareStatement("select * from user where username = ?"); /*创建预处理对象，并进行数据库查询*/
+            ps.setString(1, uname);
+            ResultSet rs = null;
+            if(ps.executeQuery() != null) { rs = ps.executeQuery();}
+//            else {};
+              /*resultset对象表示select语句查询得到的记录集合*/
 
-        String name=null;
-        UserW u1=null;
-        while (rs.next()) { /*遍历select语句查询得到的记录表*/
-            //int id=rs.getInt("user");
-            name=rs.getString("username");
-            String pw=rs.getString("password");
-            String na=rs.getString("name");
-            Integer age=rs.getInt("age");
-            String sex=rs.getString("sex");
-            String ID_number=rs.getString("ID_number");
-            String ph=rs.getString("phone_number");
-            u1=new UserW(name,pw,na,age,sex,ID_number,ph,null,null,null);
-            //parkingList.add(p);
+            String name = null;
+            UserW u1 = null;
+//            while (rs.next()) {}
+            if(rs!=null){
+                while (rs.next()) { /*遍历select语句查询得到的记录表*/
+                    //int id=rs.getInt("user");
+                    name = rs.getString(1);
+                    String pw = rs.getString(2);
+                    String na = rs.getString(3);
+                    Integer age = rs.getInt(4);
+                    String sex = rs.getString(5);
+                    String ID_number = rs.getString(6);
+                    String ph = rs.getString(7);
+                    u1 = new UserW(name, pw, na, age, sex, ID_number, ph, null, null, null);
+//            parkingList.add(p);
+                    System.out.println(u1);
+                    return u1;
+                }
+            }else {return null;}
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jdbcutil.closeConnection(conn);
         }
-        return u1;
+//        return u1;
 
         //  return uu;
+        return null;
     }
 
 }

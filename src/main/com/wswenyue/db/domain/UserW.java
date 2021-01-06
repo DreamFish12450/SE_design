@@ -103,4 +103,20 @@ public class UserW {
 		balance=null;
 		VIP_level=null;
 	}
+
+	@Override
+	public String toString() {
+		return "UserW{" +
+				"username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", name='" + name + '\'' +
+				", age=" + age +
+				", sex='" + sex + '\'' +
+				", ID_number='" + ID_number + '\'' +
+				", phone_number='" + phone_number + '\'' +
+				", Face_ID='" + Face_ID + '\'' +
+				", VIP_level=" + VIP_level +
+				", balance=" + balance +
+				'}';
+	}
 }

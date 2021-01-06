@@ -16,8 +16,7 @@ public class parkingTest {
     static UserDaoImpl ud=new UserDaoImpl();
     @Test
     public void getList() throws SQLException {
-     // ComboPooledDataSource db=new ComboPooledDataSource();
-    //    QueryRunner qr = new QueryRunner();
+
         UserW u1=new UserW("czy2","123","cc",18,"男","330","189",null,null,null);
         if(ud.findUserByName("czy2")==null) {
             ud.add(u1);
