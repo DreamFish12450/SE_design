@@ -33,11 +33,14 @@
 </head>
 <!--<script src="js/Url.js"></script>-->
 <body>
+
 <app id="app" :info="info" :state="state">
     <!-- Content -->
+
     <div class="row"><c:forEach items="${sessionScope.carList}" var="car">
 
         <div class="col-lg-4">
+            <form method="get" action="${pageContext.request.contextPath}/chooseCar.do?car_number=${car.car_number}">
             <div class="work-amount card">
                 <div class="card-close">
                     <div class="dropdown">
@@ -51,7 +54,7 @@
                 <div class="card-body">
                     <h3>车牌号是${car.car_number}</h3>
 
-                    <h3>您的车型是:${car.car_model}</h3><submit class="btn btn-primary" onclick='chooseThisCar(${car.car_number})'>出行</submit>
+                    <h3>您的车型是:${car.car_model}</h3> <button type="submit" class="btn btn-primary" id="sub" value="${car.car_number}">出行</button>
                     <div class="chart text-center">
                         <div class="chartjs-size-monitor"
                              style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
@@ -78,7 +81,9 @@
                     </div>
                 </div>
             </div>
+            </form>
         </div>
+
     </c:forEach></div>
 
 </app>
@@ -135,23 +140,23 @@
         }
     })
     chooseThisCar = (car_number) =>{
-        $.ajax({
-            type: 'post',
-            // ansyv:true,
-            cache: false,
-            data: {car_number:car_number},
-            url: '<%=application.getContextPath()%>/chooseCar.do',
-            success: function (data) {
-                console.log(data)
-                // window.parking = new Array();
-                // data.forEach((value, index) => {
-                //     console.log(value)
-                //     window.parking.push(new Parking(value.parkingName, value.lat, value.lng, value.charges, value.spare, value.maxSize))
-                // })
-            },
-            error: function () {
-            }
-        })
+        <%--$.ajax({--%>
+        <%--    type: 'post',--%>
+        <%--    // ansyv:true,--%>
+        <%--    cache: false,--%>
+        <%--    data: {car_number:car_number},--%>
+        <%--    url: '<%=application.getContextPath()%>/chooseCar.do',--%>
+        <%--    success: function (data) {--%>
+        <%--        console.log(data)--%>
+        <%--        // window.parking = new Array();--%>
+        <%--        // data.forEach((value, index) => {--%>
+        <%--        //     console.log(value)--%>
+        <%--        //     window.parking.push(new Parking(value.parkingName, value.lat, value.lng, value.charges, value.spare, value.maxSize))--%>
+        <%--        // })--%>
+        <%--    },--%>
+        <%--    error: function () {--%>
+        <%--    }--%>
+        <%--})--%>
     }
     window.addEventListener('load', () => {
         app.init();
