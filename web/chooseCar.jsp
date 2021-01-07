@@ -37,14 +37,59 @@
 <app id="app" :info="info" :state="state">
     <!-- Content -->
 
-    <div class="row"><c:forEach items="${sessionScope.carList}" var="car">
-
+    <div class="row">
+        <c:forEach items="${sessionScope.carList}" var="car">
         <div class="col-lg-4">
             <form method="get" action="${pageContext.request.contextPath}/chooseCar.do?car_number=${car.car_number}">
+                <div class="work-amount card">
+                    <div class="card-close">
+                        <div class="dropdown">
+                            <%--                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>--%>
+                            <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a
+                                    href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a
+                                    href="#" class="dropdown-item edit">
+                                <i class="fa fa-gear"></i>Edit</a></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>车牌号是${car.car_number}</h3>
+
+                        <h3>您的车型是:${car.car_model}</h3>
+                        <button type="submit" class="btn btn-primary" id="sub" value="${car.car_number}">出行</button>
+                        <div class="chart text-center">
+                            <div class="chartjs-size-monitor"
+                                 style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                <div class="chartjs-size-monitor-expand"
+                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink"
+                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                </div>
+                            </div>
+                            <%--                        <div class="text"><strong>90</strong><br><span>Hours</span></div>--%>
+                            <%--                        <canvas id="pieChart" width="428" height="213" class="chartjs-render-monitor" style="display: block; height: 171px; width: 343px;"></canvas>--%>
+                            <c:if test="${car.car_model.equals('轿车')}">
+                                <img src="img/car.png" height="200px" width="200px">
+                            </c:if>
+                            <c:if test="${car.car_model.equals('货车')}">
+                                <img src="img/truck.png" height="200px" width="200px">
+                            </c:if>
+                            <%--                        <c:otherwise>--%>
+                            <%--                            <img src="img/truck.png" height="50px" width="50px">--%>
+                            <%--                        </c:otherwise>--%>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </c:forEach>
+        <br>
+        <div class="col-lg-4">
             <div class="work-amount card">
                 <div class="card-close">
                     <div class="dropdown">
-                            <%--                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>--%>
                         <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a
                                 href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#"
                                                                                                               class="dropdown-item edit">
@@ -52,9 +97,52 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <h3>车牌号是${car.car_number}</h3>
-
-                    <h3>您的车型是:${car.car_model}</h3> <button type="submit" class="btn btn-primary" id="sub" value="${car.car_number}">出行</button>
+                    <h3>添加新车</h3>
+                    <br>
+                    <br>
+                    <br>
+                    <!--                       <button type="button"  class="btn btn-primary">添加新车</button>-->
+                    <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                         class="modal fade text-left" style="display: none;" aria-hidden="true">
+                        <div role="document" class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 id="exampleModalLabel" class="modal-title">请输入相关您爱车的数据</h4>
+                                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                                            aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>车牌号</label>
+                                        <input id='car_number' type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>车辆品牌</label>
+                                        <input id='car_brand' type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>车型</label>
+                                        <select name="account" class="form-control mb-3" id="car_model">
+                                            <option value="轿车">轿车</option>
+                                            <option value="货车">货车</option>
+                                            <option value="客车">客车</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="checkboxCustom1" type="checkbox" value="" class="checkbox-template">
+                                        <label for="checkboxCustom1">已经拥有驾照</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" value="" onclick="insertCar()">注册该车辆</button>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="chart text-center">
                         <div class="chartjs-size-monitor"
                              style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
@@ -67,24 +155,17 @@
                                 <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                             </div>
                         </div>
-                            <%--                        <div class="text"><strong>90</strong><br><span>Hours</span></div>--%>
-                            <%--                        <canvas id="pieChart" width="428" height="213" class="chartjs-render-monitor" style="display: block; height: 171px; width: 343px;"></canvas>--%>
-                        <c:if test="${car.car_model.equals('轿车')}">
-                            <img src="img/car.png" height="200px" width="200px">
-                        </c:if>
-                        <c:if test="${car.car_model.equals('货车')}">
-                            <img src="img/truck.png" height="200px" width="200px">
-                        </c:if>
-                            <%--                        <c:otherwise>--%>
-                            <%--                            <img src="img/truck.png" height="50px" width="50px">--%>
-                            <%--                        </c:otherwise>--%>
+                        <div>
+                            <img src="img/addCar.png" height="200px" width="200px" data-toggle="modal"
+                                 data-target="#myModal">
+                        </div>
                     </div>
                 </div>
             </div>
-            </form>
-        </div>
 
-    </c:forEach></div>
+        </div>
+    </div>
+
 
 </app>
 <!-- JavaScript files-->
@@ -139,7 +220,23 @@
             }
         }
     })
-    chooseThisCar = (car_number) =>{
+    insertCar = () => {
+        let carNumber = document.getElementById("car_number").value
+        let carBrand = document.getElementById("car_brand").value
+        let getPermit = document.getElementById("checkboxCustom1").checked ? '是' : '否'
+        let index = document.getElementById("car_model").selectedIndex
+        let carModel = document.getElementById("car_model").options[index].value
+        $.ajax({
+            type: 'post',
+            cache: 'false',
+            data: {car_number: carNumber, car_brand: carBrand, get_permit: getPermit, car_model: carModel},
+            url: '<%=application.getContextPath()%>/addNewCar.do',
+            success: function (data) {
+                window.location.href('/chooseCar.jsp')
+            }
+        })
+    }
+    chooseThisCar = (car_number) => {
         <%--$.ajax({--%>
         <%--    type: 'post',--%>
         <%--    // ansyv:true,--%>
