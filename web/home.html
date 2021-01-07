@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="template/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="template/img/favicon.ico">
+
 </head>
 <script src="js/Url.js"></script>
 <%
@@ -28,6 +29,7 @@ String M1 = session.getAttribute("password").toString();
 String M2 = session.getAttribute("ID_number").toString();
 String M3 = session.getAttribute("phone_number").toString();
 String M4 = session.getAttribute("name").toString();
+
 %>
 <body>
 <app id="app" :info="info" :state="state">
