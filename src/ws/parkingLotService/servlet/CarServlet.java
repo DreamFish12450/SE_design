@@ -31,7 +31,6 @@ public class CarServlet extends HttpServlet {
             session.setAttribute("carList",carList);
             String result = new Gson().toJson(carList);
             System.out.println("返回的结果：" + result);
-
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json;charset=utf-8");
             /*返回数据*/

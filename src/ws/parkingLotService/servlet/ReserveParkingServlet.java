@@ -20,17 +20,18 @@ public class ReserveParkingServlet extends HttpServlet {
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        boolean whether_newP = false;
-//            whether_newP = session.getAttribute(whether_newP)
+//        boolean whether_newP = false;
+        String whether_newP = (String) session.getAttribute("whether_new");
         String parking_id = request.getParameter("parking_id");
         System.out.println("the parking id is"+parking_id);
-        String car = "888";
-//        car = session.getAttribute("carNumber");
-        if(!whether_newP){
+//        String car = "888";
+        String car = (String) session.getAttribute("car_number");
+        if(whether_newP.equals("否")){
             try {
                 ParkingPlace parkingPlace=ParkingPlaceService.reserveLocation(parking_id,car);
                 session.setAttribute("car_x",parkingPlace.getLocation_x());
                 session.setAttribute("car_y",parkingPlace.getLocation_y());
+                System.out.println("carx"+parkingPlace.getLocation_x()+"cary"+parkingPlace.getLocation_y());
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } catch (ParseException e) {
@@ -41,6 +42,7 @@ public class ReserveParkingServlet extends HttpServlet {
                 ParkingPlace parkingPlace= ParkingPlaceService.reserveLocationForNewMan(parking_id,car);
                 session.setAttribute("car_x",parkingPlace.getLocation_x());
                 session.setAttribute("car_y",parkingPlace.getLocation_y());
+                System.out.println("carx"+parkingPlace.getLocation_x()+"cary"+parkingPlace.getLocation_y());
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } catch (ParseException e) {
