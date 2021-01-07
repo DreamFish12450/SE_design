@@ -4,6 +4,8 @@ import main.com.wswenyue.db.dao.CarDao;
 import main.com.wswenyue.db.domain.Car;
 import main.com.wswenyue.db.domain.ParkingPlace;
 import main.com.wswenyue.db.utils.JDBCUTIL;
+import main.com.wswenyue.db.utils.JdbcUtils;
+import org.apache.commons.dbutils.QueryRunner;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,5 +45,19 @@ public class CarDaoImpl implements CarDao {
         }
 
         return CarList;
+    }
+
+
+    @Override
+    public void insertCar(Car car) throws SQLException {
+        QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+        String sql = "insert into vehicle values(?,?,?,?,?)";
+//            SimpleDateFormat temp=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//            Date date=new Date();
+//            String date1=temp.format(date);
+//            Date date2=temp.parse(date1);
+//            Timestamp timestamp = java.sql.Timestamp.valueOf(date1);
+        Object params[] = {car.getCar_number(),car.getCar_brand(),car.getCar_model(),car.getTraffic_permit(),car.getUsername()};
+        qr.update(jdbcutil.getConnection(), sql,params);
     }
 }
