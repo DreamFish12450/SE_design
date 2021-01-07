@@ -67,7 +67,7 @@
                         </div>
                         <div class="card-body">
                             <p>Lorem ipsum dolor sit amet consectetur.</p>
-                            <form action="Register.do" method="post" >
+                            <form action="Register" method="post" >
                                 <div class="form-group">
                                     <label class="form-control-label">用户名</label>
                                     <input type="text" name="username" placeholder="username" class="form-control">

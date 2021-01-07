@@ -31,7 +31,7 @@
         <servlet-name>PayServlet</servlet-name>
         <url-pattern>/pay.do</url-pattern>
     </servlet-mapping>
-
+    
     <servlet>
         <servlet-name>indexServlet</servlet-name>
         <servlet-class>ws.parkingLotService.servlet.indexServlet</servlet-class>
@@ -53,10 +53,17 @@
         <servlet-class>ws.parkingLotService.servlet.inforegisteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>inforegisterServlet</servlet-name>
-        <url-pattern>/Register.do</url-pattern>
+       <servlet-name>inforegisterServlet</servlet-name>
+        <url-pattern>/Register</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>writeloginServlet</servlet-name>
+        <servlet-class>ws.parkingLotService.servlet.writeloginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>writeloginServlet</servlet-name>
+        <url-pattern>/forward</url-pattern>
+    </servlet-mapping>
     <!--++++++JSP+++++++-->
     <welcome-file-list>
         <welcome-file>inite.jsp</welcome-file>

@@ -17,8 +17,8 @@ public class parkingTest {
     @Test
     public void getList() throws SQLException {
 
-        UserW u1=new UserW("czy2","123","cc",18,"男","330","189",null,null,null);
-        if(ud.findUserByName("czy2")==null) {
+        UserW u1=new UserW("czy12","123","cc",18,"男","330","189",null,null,null);
+        if(ud.findUserByName("czy12")==null) {
             ud.add(u1);
             System.out.println("允许");
         }
