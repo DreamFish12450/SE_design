@@ -1,9 +1,12 @@
-function FaceRegister() {
+function FaceRegister(path) {
     setTimeout(function () {
+
+        let index = window.location.href .lastIndexOf("\/")
+        var str  =  window.location.href .substring(0,index)
         img = getFace();
         $.ajax({
             type:"post",
-            url:"http://localhost:8080/SE_design_Web_exploded/user/register",//后台接口
+            url:`${str}/register`,//后台接口
             data:{
             	"imgId":$("#imgId").val(),
                 "imgStr":img,
@@ -35,6 +38,6 @@ function countDown(secs){
     if(--secs>0){
         setTimeout("countDown("+secs+")",1000);
     }else{
-        location.href='indexk.jsp';
+        location.href='/inite.jsp';
     }
 }
