@@ -14,7 +14,7 @@ import java.util.List;
 
 public class parkingTest {
     static ParkingDaoImpl pdl = new ParkingDaoImpl();
-    @Test
+    @org.junit.
     public void getList() throws SQLException {
 //        ComboPooledDataSource db=new ComboPooledDataSource();
         QueryRunner qr = new QueryRunner();

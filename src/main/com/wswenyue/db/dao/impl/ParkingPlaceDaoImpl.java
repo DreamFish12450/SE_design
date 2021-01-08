@@ -64,6 +64,31 @@ public class ParkingPlaceDaoImpl implements ParkingPlaceDao {
             return parkingPlaceList;
 
         }
+    @Override
+    public ParkingPlace getParkingPlace(String parkingId,String parkingplace_id){ //通过停车场标号和车位的ID返回车位
+        Connection conn = null;
+        List<ParkingPlace> parkingPlaceList = new ArrayList<>();
+        try {
+            conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
+            PreparedStatement ps = conn.prepareStatement("select * from parkingplace where parking_ID = ?"); /*创建预处理对象，并进行数据库查询*/
+            ps.setString(1,parkingId);
+            ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
+            while (rs.next()) { /*遍历select语句查询得到的记录表*/
+                ParkingPlace pl = new ParkingPlace(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getDate(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8));
+                System.out.println(pl.toString());
+                parkingPlaceList.add(pl);
+            }
+            for (ParkingPlace l : parkingPlaceList) {
+                if(l.parkingplace_id == parkingplace_id) return l;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jdbcutil.closeConnection(conn);
+        }
 
+    }
 
 }
