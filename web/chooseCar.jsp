@@ -234,13 +234,17 @@
         let getPermit = document.getElementById("checkboxCustom1").checked ? '是' : '否'
         let index = document.getElementById("car_model").selectedIndex
         let carModel = document.getElementById("car_model").options[index].value
+        // let temp = document.getElementById("whether_new").checked?"是":"否"
+
         $.ajax({
             type: 'post',
             cache: 'false',
             data: {car_number: carNumber, car_brand: carBrand, get_permit: getPermit, car_model: carModel},
             url: '<%=application.getContextPath()%>/addNewCar.do',
             success: function (data) {
-                window.location.href('/chooseCar.jsp')
+                let index = window.location.href .lastIndexOf("\/")
+                let str  =  window.location.href.substring(0,index)
+                window.location.href=str+'/chooseCar.jsp'
             }
         })
     }

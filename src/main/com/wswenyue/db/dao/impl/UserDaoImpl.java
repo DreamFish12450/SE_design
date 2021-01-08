@@ -2,6 +2,7 @@ package main.com.wswenyue.db.dao.impl;
 
 import cn.cy.domain.User;
 import main.com.wswenyue.db.dao.UserDao;
+import main.com.wswenyue.db.domain.Amount;
 import main.com.wswenyue.db.domain.Parking;
 import main.com.wswenyue.db.domain.UserW;
 import main.com.wswenyue.db.utils.JDBCUTIL;
@@ -35,13 +36,38 @@ public class UserDaoImpl implements UserDao {
         Object params[] = {money, username};
         qr.update(JdbcUtils.getConnection(), sql, params);
     }
+    @Override
+    public UserW getBalanceAndPassword(String user) throws SQLException{
+        Connection conn = null;
+        UserW userW = new UserW();
+        try {
+            conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
+            PreparedStatement ps = conn.prepareStatement("select password,balance from user where username = ?"); /*创建预处理对象，并进行数据库查询*/
+            ps.setString(1,user);
+            ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
+            while (rs.next()) { /*遍历select语句查询得到的记录表*/
 
+                userW.setPassword(rs.getString(1));
+                userW.setUsername(user);
+                userW.setBalance(rs.getInt(2));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jdbcutil.closeConnection(conn);
+        }
+
+        return userW;
+    }
 
     @Override
     public void add(UserW user) throws SQLException {
         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
-        String sql = "insert into user(username,password,name,age,sex,ID_number,phone_number,Face_ID,balance,VIP_level) values(?,?,?,?,?,?,?,?,?,?)";
-        Object params[] = {user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getSex(), user.getID_number(), user.getPhone_number(), null, null, null};
+        String sql = "insert into user(username,password,name,age,sex,ID_number,phone_number,Face_ID,balance) values(?,?,?,?,?,?,?,?,?,?)";
+        Object params[] = {user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getSex(), user.getID_number(), user.getPhone_number(), null, null};
         System.out.println(user.getSex());
         qr.update(sql, params);
     }
