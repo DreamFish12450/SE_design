@@ -1,0 +1,431 @@
+/* Responsive */
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    .header.fixed.trim {
+        top: -210px;
+    }
+    .header.fixed.scroll-down {
+        top: -54px;
+    }
+    /*Main Menu Start*/
+    .header-fixed {
+        padding-top: 190px
+    }
+    .main-menu-deputy .logo {
+        float: none; 
+        margin: auto;
+        display: table;
+        padding-top: 15px;
+    }
+    .main-menu {
+        float: none;
+        display: table;
+        margin: auto;
+    }
+    .main-menu .main-nav {
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /*Main Menu End*/
+}
+
+/* Medium Devices, Tablet, Mobile */    
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    /*Header Top*/
+    .header-fixed {
+        padding-top: 80px;
+    }
+    .header-top {
+        border-bottom: none;
+    }
+    .header-top ul {
+        display: table;
+        margin: auto;
+    }
+    .header-top ul li a {
+        margin-bottom: 15px;
+    }
+    .header-top .contact-text {
+        margin-top: 10px;
+         float: none; 
+    }
+    .header-top .contact-text ul li {
+        float: none;
+    }
+    .header-top .social-to ul li a {
+        margin: 0 3px;
+    }
+    .header.fixed.trim {
+        top: -90px;
+    }
+    .header.fixed.scroll-down {
+        top: -2px;
+    }
+    /*Main Menu Start*/
+    .overflow-hidden {
+        overflow: hidden
+    }
+    .main-menu  .close-nav {
+        display: block
+    }
+    .menu-collapse-after-effect,
+    .main-menu-deputy .menu-when-collapse,
+    .main-menu .main-nav li {
+        display: block;
+        
+    }
+    .menu-collapse-after-effect {
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: visibility ease-in-out .3s, opacity ease-in-out .3s;
+        -o-transition: visibility ease-in-out .3s, opacity ease-in-out .3s;
+        transition: visibility ease-in-out .3s, opacity ease-in-out .3s
+    }
+    .menu-collapse-after-effect.show-casing {
+        visibility: visible;
+        opacity: 1;
+    }
+    .main-menu {
+        background: #180638;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: -50%;;
+        z-index: 12;
+        width: 50%;;
+        height: 100%;
+        overflow: auto;
+        margin: 0;
+        padding: 0;
+        -webkit-transition: left ease-in-out .3s;
+        -o-transition: left ease-in-out .3s;
+        transition: left ease-in-out .3s;
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch
+    }
+    .main-menu .main-nav .sub-nav .sub-nav,
+    .main-menu.toggle-nav {
+        left: 0;
+    }
+    .main-menu .main-nav li a {
+        line-height: 60px;
+        color: rgba(255, 255, 255, .5)
+    }
+    .main-menu .main-nav li.has-children:after {
+        content: "\f107";
+        line-height: 60px
+    }
+    .main-menu .main-nav li.has-children.active:after {
+        content: "\f106"
+    }
+    .main-menu .main-nav .sub-nav {
+        position: relative;
+        top: 0;
+        width: 100%;
+        height: auto;
+        display: none
+    }
+        
+    .main-menu .main-nav li .sub-nav li .sub-nav li:hover .sub-nav,
+    .main-menu .main-nav li .sub-nav li:hover .sub-nav,
+    .main-menu .main-nav li .sub-nav li:hover .sub-nav li .sub-nav,
+    .main-menu .main-nav li:hover .sub-nav,
+    .main-menu .main-nav li:hover .sub-nav li .sub-nav {
+        display: none
+    }
+    .main-menu .main-nav li .toggle-submenu {
+        display: block
+    }
+    .main-menu .main-nav .sub-nav li a {
+        padding-left: 30px
+    }
+    .main-menu .main-nav .sub-nav .sub-nav li a {
+        padding-left: 40px
+    }
+    .main-menu .main-nav .sub-nav .sub-nav .sub-nav li a {
+        padding-left: 50px
+    }
+        
+    .main-menu .main-nav .sub-nav li.has-children:after {
+        content: "\f107"
+    }
+    .main-menu .main-nav .sub-nav li.has-children.active:after {
+        content: "\f106";
+        color: #fff;
+    }
+    /*Main Menu End*/
+
+}
+
+        
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    /*Header Top*/
+    .header-fixed {
+        padding-top: 80px;
+    }
+    /*Header Top*/
+    .header-top {
+        border-bottom: none;
+    }
+    .header-top ul {
+        display: table;
+        margin: auto;
+    }
+    .header-top ul li a {
+        margin-bottom: 15px;
+    }
+    .header-top .contact-text {
+        margin-top: 10px;
+        float: none; 
+    }
+    .header-top .contact-text ul li {
+        float: none;
+    }
+    .header-top .social-to ul li a {
+        margin: 0 3px;
+    }
+    .header.fixed.trim {
+        top: -220px;
+    }
+    .header.fixed.scroll-down {
+        top: -135px;
+    }
+    /*Main Menu Start*/
+    .overflow-hidden {
+        overflow: hidden
+    }
+    .main-menu  .close-nav {
+        display: block
+    }
+    .menu-collapse-after-effect,
+    .main-menu-deputy .menu-when-collapse,
+    .main-menu .main-nav li {
+        display: block;
+        
+    }
+    .menu-collapse-after-effect {
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: visibility ease-in-out .3s, opacity ease-in-out .3s;
+        -o-transition: visibility ease-in-out .3s, opacity ease-in-out .3s;
+        transition: visibility ease-in-out .3s, opacity ease-in-out .3s
+    }
+    .menu-collapse-after-effect.show-casing {
+        visibility: visible;
+        opacity: 1;
+    }
+    .main-menu {
+        background: #180638;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: -50%;;
+        z-index: 12;
+        width: 50%;;
+        height: 100%;
+        overflow: auto;
+        margin: 0;
+        padding: 0;
+        -webkit-transition: left ease-in-out .3s;
+        -o-transition: left ease-in-out .3s;
+        transition: left ease-in-out .3s;
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch
+    }
+    .main-menu .main-nav .sub-nav .sub-nav,
+    .main-menu.toggle-nav {
+        left: 0;
+    }
+    .main-menu .main-nav li a {
+        line-height: 50px;
+        color: rgba(255, 255, 255, .5)
+    }
+    .main-menu .main-nav li.has-children:after {
+        content: "\f107";
+        line-height: 50px
+    }
+    .main-menu .main-nav li.has-children.active:after {
+        content: "\f106"
+    }
+    .main-menu .main-nav .sub-nav {
+        position: relative;
+        top: 0;
+        width: 100%;
+        height: auto;
+        display: none
+    }
+        
+    .main-menu .main-nav li .sub-nav li .sub-nav li:hover .sub-nav,
+    .main-menu .main-nav li .sub-nav li:hover .sub-nav,
+    .main-menu .main-nav li .sub-nav li:hover .sub-nav li .sub-nav,
+    .main-menu .main-nav li:hover .sub-nav,
+    .main-menu .main-nav li:hover .sub-nav li .sub-nav {
+        display: none
+    }
+    .main-menu .main-nav li .toggle-submenu {
+        display: block
+    }
+    .main-menu .main-nav .sub-nav li a {
+        padding-left: 30px
+    }
+    .main-menu .main-nav .sub-nav .sub-nav li a {
+        padding-left: 40px
+    }
+    .main-menu .main-nav .sub-nav .sub-nav .sub-nav li a {
+        padding-left: 50px
+    }
+        
+    .main-menu .main-nav .sub-nav li.has-children:after {
+        content: "\f107"
+    }
+    .main-menu .main-nav .sub-nav li.has-children.active:after {
+        content: "\f106";
+        color: #fff;
+    }
+    /*Main Menu End*/
+}
+
+        
+@media only screen and (min-width: 0px) and (max-width: 479px) {
+    /*Header Top*/
+    .header-fixed {
+        padding-top: 60px;
+    }
+    /*Header Top*/
+    .header-top {
+        border-bottom: none;
+    }
+    .header-top ul {
+        display: table;
+        margin: auto;
+    }
+    .header-top ul li a {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+    .header-top ul li .fa {
+        margin-right: 6px;
+    }
+    .header-top .contact-text {
+        margin-top: 10px;
+         float: none; 
+    }
+    .header-top .contact-text ul li {
+        float: none;
+    }
+    .header-top .social-to ul li a {
+        margin: 0 4px;
+    }
+    .header.fixed.trim {
+        top: -2px;
+    }
+    .header.fixed.scroll-down {
+        top: -90px;
+    }
+    /*Main Menu Start*/
+    .main-menu-deputy .logo img {
+        height: 40px;
+    }
+    .main-menu-deputy .menu-when-collapse {
+        height: 70px;
+    }
+    .overflow-hidden {
+        overflow: hidden
+    }
+    .main-menu-deputy .logo {
+        max-width: 70%;
+    }
+    .main-menu-deputy .logo img {
+        max-width: 100%;
+    }
+    .main-menu  .close-nav {
+        display: block
+    }
+    .menu-collapse-after-effect,
+    .main-menu-deputy .menu-when-collapse,
+    .main-menu .main-nav li {
+        display: block;
+        
+    }
+    .menu-collapse-after-effect {
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: visibility ease-in-out .3s, opacity ease-in-out .3s;
+        -o-transition: visibility ease-in-out .3s, opacity ease-in-out .3s;
+        transition: visibility ease-in-out .3s, opacity ease-in-out .3s
+    }
+    .menu-collapse-after-effect.show-casing {
+        visibility: visible;
+        opacity: 1;
+    }
+    .main-menu {
+        background: #180638;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: -100%;;
+        z-index: 12;
+        width: 100%;;
+        height: 100%;
+        overflow: auto;
+        margin: 0;
+        padding: 0;
+        -webkit-transition: left ease-in-out .3s;
+        -o-transition: left ease-in-out .3s;
+        transition: left ease-in-out .3s;
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch
+    }
+    .main-menu .main-nav .sub-nav .sub-nav,
+    .main-menu.toggle-nav {
+        left: 0;
+    }
+    .main-menu .main-nav li a {
+        font-size: 15px;
+        line-height: 45px;
+        color: rgba(255, 255, 255, .5)
+    }
+    .main-menu .main-nav li.has-children:after {
+        content: "\f107";
+        line-height: 50px
+    }
+    .main-menu .main-nav li.has-children.active:after {
+        content: "\f106"
+    }
+    .main-menu .main-nav .sub-nav {
+        position: relative;
+        top: 0;
+        width: 100%;
+        height: auto;
+        display: none
+    }
+        
+    .main-menu .main-nav li .sub-nav li .sub-nav li:hover .sub-nav,
+    .main-menu .main-nav li .sub-nav li:hover .sub-nav,
+    .main-menu .main-nav li .sub-nav li:hover .sub-nav li .sub-nav,
+    .main-menu .main-nav li:hover .sub-nav,
+    .main-menu .main-nav li:hover .sub-nav li .sub-nav {
+        display: none
+    }
+    .main-menu .main-nav li .toggle-submenu {
+        display: block
+    }
+    .main-menu .main-nav .sub-nav li a {
+        padding-left: 30px
+    }
+    .main-menu .main-nav .sub-nav .sub-nav li a {
+        padding-left: 40px
+    }
+    .main-menu .main-nav .sub-nav .sub-nav .sub-nav li a {
+        padding-left: 50px
+    }
+        
+    .main-menu .main-nav .sub-nav li.has-children:after {
+        content: "\f107"
+    }
+    .main-menu .main-nav .sub-nav li.has-children.active:after {
+        content: "\f106";
+        color: #fff;
+    }
+    /*Main Menu End*/
+}

@@ -106,7 +106,13 @@
     }
 
 </style>
-
+<%String mess=(String)session.getAttribute("error2");
+    if("".equals(mess)&&mess==null)
+    {}else{%>
+<script type="text/javascript">
+    alert("<%=mess%>");
+</script>
+<%}%>
 <body>
 <div class="container" style="height: 650px;background: rgba(255,255,255,0.5);">
     <div class="header-text" style="margin-top: 50px;">
@@ -118,12 +124,12 @@
             <tr><button  type="submit" class="choice"style="border-radius:0px;background-color:white;color:black;" onclick="window.location.href='index.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Face ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></tr>
         </table>
     </div>
-    <form style="margin-top: 150px;">
+    <form style="margin-top: 150px;"action="forward" method="post">
 
 
         <input type="text"
                placeholder="UserId"
-               name="email"
+               name="username"
                id="email"
                autofocus>
         <input type="password"

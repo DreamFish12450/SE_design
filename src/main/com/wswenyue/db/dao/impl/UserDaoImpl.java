@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://118.25.154.83:3306/esparking";
+    static final String DB_URL = "jdbc:mysql://118.25.154.83:3306/esparking?characterEncoding=UTF-8";
     static final String USER = "root";
     static final String PASS = "123456";
     JDBCUTIL jdbcutil = new JDBCUTIL();
@@ -41,7 +41,8 @@ public class UserDaoImpl implements UserDao {
     public void add(UserW user) throws SQLException {
         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
         String sql = "insert into user(username,password,name,age,sex,ID_number,phone_number,Face_ID,balance,VIP_level) values(?,?,?,?,?,?,?,?,?,?)";
-        Object params[] = {user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getSex(), user.getID_number(), user.getPhone_number(), null, null, null,};
+        Object params[] = {user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getSex(), user.getID_number(), user.getPhone_number(), null, null, null};
+        System.out.println(user.getSex());
         qr.update(sql, params);
     }
 
@@ -70,7 +71,7 @@ public class UserDaoImpl implements UserDao {
         Connection conn = null;
         conn = jdbcutil.getConnection();
         try {
-            uname = "zjut";
+            //uname = "zjut";
  /*通过User帐号与数据库连接*/
             String sql = "select * from user where username = ?";
             PreparedStatement ps = conn.prepareStatement("select * from user where username = ?"); /*创建预处理对象，并进行数据库查询*/
