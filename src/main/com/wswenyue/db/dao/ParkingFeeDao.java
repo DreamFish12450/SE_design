@@ -2,6 +2,7 @@ package main.com.wswenyue.db.dao;
 
 
 import main.com.wswenyue.db.domain.ParkingFee;
+import main.com.wswenyue.db.service.List;
 
 import java.sql.SQLException;
 
@@ -11,9 +12,9 @@ import java.sql.SQLException;
 public interface ParkingFeeDao {
     void add(ParkingFee parkingFee) throws SQLException;
 
-    void update(ParkingFee parkingFee) throws SQLException;
-
-    void delete(ParkingFee parkingFee) throws SQLException;
+//    void update(ParkingFee parkingFee) throws SQLException;
+//
+//    void delete(ParkingFee parkingFee) throws SQLException;
 
     List<ParkingFee> find(String username , String car_number) throws SQLException;
 }

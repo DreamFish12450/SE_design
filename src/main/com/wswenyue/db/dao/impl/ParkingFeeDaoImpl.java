@@ -5,7 +5,6 @@ import main.com.wswenyue.db.domain.ParkingFee;
 import main.com.wswenyue.db.utils.JdbcUtils;
 import main.com.wswenyue.db.utils.JDBCUTIL;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -13,9 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-/**
- * Created by wswenyue on 2015/6/6.
- */
+
 public class ParkingFeeDaoImpl implements ParkingFeeDao {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://118.25.154.83:3306/esparking";
@@ -24,7 +21,7 @@ public class ParkingFeeDaoImpl implements ParkingFeeDao {
     JDBCUTIL jdbcutil = new JDBCUTIL();
 
     @Override
-    public List<ParkingFee> find(String username , String car_number) throws SQLException {
+    public main.com.wswenyue.db.service.List<ParkingFee> find(String username , String car_number) throws SQLException {
         Connection conn = null;
         List<ParkingFee> parkingFeeList = new ArrayList<>();
         try {
@@ -33,7 +30,7 @@ public class ParkingFeeDaoImpl implements ParkingFeeDao {
 
             ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
             while (rs.next()) { /*遍历select语句查询得到的记录表*/
-                ParkingFee p = new ParkingFee(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getString(5));
+                ParkingFee p = new ParkingFee(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getInt(5));
                 parkingFeeList.add(p);
             }
         } catch (SQLException e) {
@@ -44,7 +41,7 @@ public class ParkingFeeDaoImpl implements ParkingFeeDao {
             jdbcutil.closeConnection(conn);
         }
 
-        return parkingFeeList;
+        return (main.com.wswenyue.db.service.List<ParkingFee>) parkingFeeList;
 
     }
 
@@ -56,23 +53,23 @@ public class ParkingFeeDaoImpl implements ParkingFeeDao {
         qr.update(sql, params);
     }
 
-    @Override
-    public void update(ParkingFee parkingFee) throws SQLException {
-        QueryRunner qr = new QueryRunner();
-        String sql = "update price set  unitprice=? where pname=?";
-        Object params[] = {price.getUnitprice(),price.getPname()};
-        qr.update(JdbcUtils.getConnection(),sql, params);
+//    @Override
+//    public void update(ParkingFee parkingFee) throws SQLException {
+//        QueryRunner qr = new QueryRunner();
+//        String sql = "update price set  unitprice=? where pname=?";
+//        Object params[] = {price.getUnitprice(),price.getPname()};
+//        qr.update(JdbcUtils.getConnection(),sql, params);
+//
+//    }
+//
+//    @Override
+//    public void delete(String pname) throws SQLException {
+//        QueryRunner qr = new QueryRunner();
+//        String sql = "delete from price where pname=?";
+//        qr.update(JdbcUtils.getConnection(),sql, pname);
+//    }
 
-    }
 
-    @Override
-    public void delete(String pname) throws SQLException {
-        QueryRunner qr = new QueryRunner();
-        String sql = "delete from price where pname=?";
-        qr.update(JdbcUtils.getConnection(),sql, pname);
-    }
-
-    @Override
 //    public List<ParkingFee> find(String username , String car_number) throws SQLException { //每个人通过个人用户名和车辆编号查找费用信息表
 //        QueryRunner qr = new QueryRunner();
 //        String sql = "select * from parkingfee where username=? and car_number=?";

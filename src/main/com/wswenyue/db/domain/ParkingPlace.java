@@ -11,7 +11,7 @@ public class ParkingPlace {
     int status;
     int location_x;
     int location_y;
-
+    public ParkingPlace(){}
     public ParkingPlace(int location_x,
                         int location_y) {
         this.location_x = location_x;
@@ -95,6 +95,14 @@ public class ParkingPlace {
 
     public int getLocation_x() {
         return location_x;
+    }
+
+    public int getParkingplace_id() {
+        return parkingplace_id;
+    }
+
+    public void setParkingplace_id(int parkingplace_id) {
+        this.parkingplace_id = parkingplace_id;
     }
 
     public void setLocation_x(int location_x) {

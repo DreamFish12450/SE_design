@@ -25,34 +25,105 @@ public class ParkingPlaceDaoImpl implements ParkingPlaceDao {
     static final String USER = "root";
     static final String PASS = "123456";
     JDBCUTIL jdbcutil = new JDBCUTIL();
+
     @Override
     public void reservePlace(String car_number, String parking_ID, int location_x, int location_y) throws SQLException, ParseException {
         final long l = System.currentTimeMillis();
-        final int i = (int)( l % 10000 );
+        final int i = (int) (l % 10000);
         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
         String sql = "insert into parkingplace values(?,?,?,?,?,?,?,?)";
-        SimpleDateFormat temp=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date date=new Date();
-        String date1=temp.format(date);
-        Date date2=temp.parse(date1);
+        SimpleDateFormat temp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = new Date();
+        String date1 = temp.format(date);
+        Date date2 = temp.parse(date1);
         Timestamp timestamp = java.sql.Timestamp.valueOf(date1);
-        Object params[] = {i,car_number,timestamp,null,parking_ID,1,location_y,location_x};
+        Object params[] = {i, car_number, timestamp, null, parking_ID, 1, location_y, location_x};
         qr.update(sql, params);
     }
+
     @Override
-    public List<ParkingPlace> getSpareParkings(String parkingId){
+    public List<ParkingPlace> getSpareParkings(String parkingId) {
+        Connection conn = null;
+        List<ParkingPlace> parkingPlaceList = new ArrayList<>();
+        try {
+            conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
+            PreparedStatement ps = conn.prepareStatement("select * from parkingplace where parking_ID = ?"); /*创建预处理对象，并进行数据库查询*/
+            ps.setString(1, parkingId);
+            ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
+            while (rs.next()) { /*遍历select语句查询得到的记录表*/
+                ParkingPlace pl = new ParkingPlace(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8));
+                System.out.println(pl.toString());
+                parkingPlaceList.add(pl);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jdbcutil.closeConnection(conn);
+        }
+
+        return parkingPlaceList;
+
+    }
+
+    @Override
+    public void updateSpare(String parkingId, Integer spacing) throws SQLException {
+        QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+        String sql = "update parkinglot set spare_space = ? where parking_id=?";
+//            SimpleDateFormat temp=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//            Date date=new Date();
+//            String date1=temp.format(date);
+//            Date date2=temp.parse(date1);
+//            Timestamp timestamp = java.sql.Timestamp.valueOf(date1);
+        Object params[] = {spacing, parkingId};
+        qr.update(sql, params);
+    }
+
+    ;
+
+
+    @Override
+    public ParkingPlace getParkingPlace(String parkingId, int parkingplace_id) throws SQLException { //通过停车场标号和车位的ID返回车位
+        Connection conn = null;
+        ParkingPlace l1 =new ParkingPlace();
+        List<ParkingPlace> parkingPlaceList = new ArrayList<>();
+        try {
+            conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
+            PreparedStatement ps = conn.prepareStatement("select * from parkingplace where parking_ID = ?"); /*创建预处理对象，并进行数据库查询*/
+            ps.setString(1, parkingId);
+            ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
+            while (rs.next()) { /*遍历select语句查询得到的记录表*/
+                ParkingPlace pl = new ParkingPlace(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8));
+                System.out.println(pl.toString());
+                parkingPlaceList.add(pl);
+            }
+            for (ParkingPlace l : parkingPlaceList) {
+                if (l.getParkingplace_id() ==parkingplace_id)  l1=l;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jdbcutil.closeConnection(conn);
+        }
+        return l1;
+    }
+
+        @Override
+        public void setParkingPlaceST (String parkingId, int location_x , int location_y, Date start_time){ //向数据库提交车位初始时间的更新
             Connection conn = null;
             List<ParkingPlace> parkingPlaceList = new ArrayList<>();
             try {
                 conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
-                PreparedStatement ps = conn.prepareStatement("select * from parkingplace where parking_ID = ?"); /*创建预处理对象，并进行数据库查询*/
-                ps.setString(1,parkingId);
-                ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
-                while (rs.next()) { /*遍历select语句查询得到的记录表*/
-                    ParkingPlace pl = new ParkingPlace(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getDate(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8));
-                    System.out.println(pl.toString());
-                    parkingPlaceList.add(pl);
-                }
+                PreparedStatement ps = conn.prepareStatement("update parkingplace set start_time = ? where parking_ID = ? and  location_x = ? and location_y = ? "); /*创建预处理对象，并进行数据库查询*/
+                ps.setDate(1, (java.sql.Date) start_time);
+                ps.setString(2, parkingId);
+                ps.setInt(3, location_x);
+                ps.setInt(4, location_y);
+                ps.execute();
+                conn.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception e) {
@@ -61,69 +132,27 @@ public class ParkingPlaceDaoImpl implements ParkingPlaceDao {
                 jdbcutil.closeConnection(conn);
             }
 
-            return parkingPlaceList;
-
         }
-
-    @Override
-    public ParkingPlace getParkingPlace(String parkingId,String parkingplace_id){ //通过停车场标号和车位的ID返回车位
-        Connection conn = null;
-        List<ParkingPlace> parkingPlaceList = new ArrayList<>();
-        try {
-            conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
-            PreparedStatement ps = conn.prepareStatement("select * from parkingplace where parking_ID = ?"); /*创建预处理对象，并进行数据库查询*/
-            ps.setString(1,parkingId);
-            ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
-            while (rs.next()) { /*遍历select语句查询得到的记录表*/
-                ParkingPlace pl = new ParkingPlace(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getDate(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8));
-                System.out.println(pl.toString());
-                parkingPlaceList.add(pl);
-            }
-            for (ParkingPlace l : parkingPlaceList) {
-                if(l.parkingplace_id == parkingplace_id) return l;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            jdbcutil.closeConnection(conn);
-        }
-
         @Override
-        public void updateSpare(String parkingId,Integer spacing) throws SQLException {
-            QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
-            String sql = "update parkinglot set spare_space = ? where parking_id=?";
-//            SimpleDateFormat temp=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//            Date date=new Date();
-//            String date1=temp.format(date);
-//            Date date2=temp.parse(date1);
-//            Timestamp timestamp = java.sql.Timestamp.valueOf(date1);
-            Object params[] = {spacing,parkingId};
-            qr.update(sql, params);
-        };
+        public void setParkingPlaceET (String parkingId, int parkingplace_id, Date end_time){ //向数据库提交车位结束时间的更新
+            Connection conn = null;
+            List<ParkingPlace> parkingPlaceList = new ArrayList<>();
+            try {
+                conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
+                PreparedStatement ps = conn.prepareStatement("update parkingplace set end_time = ? where parking_ID = ? and  parkingplace_id = ? "); /*创建预处理对象，并进行数据库查询*/
+                ps.setDate(1, (java.sql.Date) end_time);
+                ps.setString(2, parkingId);
+                ps.setInt(3, parkingplace_id);
+                ps.execute();
+                conn.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                jdbcutil.closeConnection(conn);
+            }
 
-
-    }
-    @Override
-    public void setParkingPlaceST(Sting parkingId , String parkingplace_id ,Date start_time){ //向数据库提交车位初始时间的更新
-        Connection conn = null;
-        List<ParkingPlace> parkingPlaceList = new ArrayList<>();
-        try {
-            conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
-            PreparedStatement ps = conn.prepareStatement("update parkingplace start_time = ? where parking_ID = ? and parkingplace_id = ? "); /*创建预处理对象，并进行数据库查询*/
-            ps.setString(1,start_time);
-            ps.setString(2,parkingId);
-            ps.setString(3,parkingplace_id);
-            ps.execute();
-            conn.commit();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            jdbcutil.closeConnection(conn);
         }
-
     }
-}
+

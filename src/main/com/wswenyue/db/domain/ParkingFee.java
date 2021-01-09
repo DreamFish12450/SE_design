@@ -1,16 +1,14 @@
 package main.com.wswenyue.db.domain;
 
-/**
- * Created by wswenyue on 2015/6/6.
- */
+
 public class ParkingFee {
     private String username;
     private String car_number;
-    private Int parking_time;
+    private int parking_time;
     private float fee;
-    private string parkplace_ID;
+    private int parkplace_ID;
 
-    public Price(String username, String car_number, Int parking_time, float fee, string parkplace_ID) {
+    public ParkingFee(String username, String car_number, int parking_time, float fee, int parkplace_ID) {
         this.username = username;
         this.car_number = car_number;
         this.parking_time = parking_time;
@@ -34,11 +32,11 @@ public class ParkingFee {
         this.car_number = car_number;
     }
 
-    public Int getParking_time() {
+    public int getParking_time() {
         return parking_time;
     }
 
-    public void setParking_time(Int parking_time) {
+    public void setParking_time(int parking_time) {
         this.parking_time = parking_time;
     }
 
@@ -50,11 +48,11 @@ public class ParkingFee {
         this.fee = fee;
     }
 
-    public string getParkplace_ID() {
+    public int getParkplace_ID() {
         return parkplace_ID;
     }
 
-    public void setParkplace_ID(string parkplace_ID) {
+    public void setParkplace_ID(int parkplace_ID) {
         this.parkplace_ID = parkplace_ID;
     }
 
