@@ -1,9 +1,13 @@
 function Facelogin() {
     setTimeout(function () {
+
+        let index = window.location.href .lastIndexOf("\/")
+        window.str  =  window.location.href .substring(0,index)
+        console.log(str)
         img = getFace();
         $.ajax({
             type:"post",
-            url:"http://localhost:8080/SE_design_Web_exploded/user/login",//后台接口
+            url:`${str}/user/login`,//后台接口
             data:{
                 "imgStr":img,
                 "imgType":"BASE64"
@@ -12,8 +16,8 @@ function Facelogin() {
             success:function (data) {
                 console.log(data);
                 var start = data["start"]
-                if(start == true){
-                    alert("用户id:"+data["userId"]+"登录"+data["msg"])
+                if(start === true){
+                    // alert("用户id:"+data["userId"]+"登录"+data["msg"])
                     var secs=1;
                     countDown(secs)
 
@@ -24,7 +28,7 @@ function Facelogin() {
                 }
             },
             error:function () {
-                alert("连接服务器失败")
+                // alert("连接服务器失败")
             },
             async:true
         })
@@ -34,8 +38,8 @@ function countDown(secs){
          
      if(--secs>0){       
          setTimeout("countDown("+secs+")",1000);       
-     }else{         
-         location.href='indexc.jsp';
+     }else{
+         location.href=` ${window.str}/home.jsp;`
      }       
  }       
 

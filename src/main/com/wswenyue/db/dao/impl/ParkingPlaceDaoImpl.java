@@ -64,6 +64,7 @@ public class ParkingPlaceDaoImpl implements ParkingPlaceDao {
             return parkingPlaceList;
 
         }
+
     @Override
     public ParkingPlace getParkingPlace(String parkingId,String parkingplace_id){ //通过停车场标号和车位的ID返回车位
         Connection conn = null;
@@ -88,6 +89,20 @@ public class ParkingPlaceDaoImpl implements ParkingPlaceDao {
         } finally {
             jdbcutil.closeConnection(conn);
         }
+
+        @Override
+        public void updateSpare(String parkingId,Integer spacing) throws SQLException {
+            QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+            String sql = "update parkinglot set spare_space = ? where parking_id=?";
+//            SimpleDateFormat temp=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//            Date date=new Date();
+//            String date1=temp.format(date);
+//            Date date2=temp.parse(date1);
+//            Timestamp timestamp = java.sql.Timestamp.valueOf(date1);
+            Object params[] = {spacing,parkingId};
+            qr.update(sql, params);
+        };
+
 
     }
     @Override

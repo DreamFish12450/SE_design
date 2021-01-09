@@ -185,6 +185,41 @@ Vue.component('form-card', {
       </div>
       </div>`
 });
+    Vue.component('carCard', {
+    props: ['carNumber','carModel'],
+    template:`
+        <div class="col-lg-4">
+            <div class="work-amount card">
+                <div class="card-close">
+                    <div class="dropdown">
+                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a
+                            href="#" class="dropdown-item remove"><i class="fa fa-times"></i>Close</a><a
+                            href="#" class="dropdown-item edit"><i class="fa fa-gear"></i>Edit</a></div>
+                    </div>
+                </div>
+                <div class="card-body"><h3>车牌为{{carNumber}}</h3><small></small>
+                    <div class="chart text-center">
+                        <div class="chartjs-size-monitor"
+                             style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                            <div class="chartjs-size-monitor-expand"
+                                 style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                <div
+                                    style="position: absolute; width: 100000px; height: 100000px; left: 0px; top: 0px;"></div>
+                            </div>
+                            <div class="chartjs-size-monitor-shrink"
+                                 style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                <div style="position: absolute; width: 200%; height: 200%; left: 0px; top: 0px;"></div>
+                            </div>
+                        </div>
+                        <img src="img/car.png" width="200px" height="200px"></div>
+                </div>
+            </div>
+        </div>
+      `
+})
 
 /**
  * Form表单空间组，有属性label

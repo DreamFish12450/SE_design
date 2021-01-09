@@ -58,5 +58,9 @@ public class ParkingPlaceTest {
     public void reservedNew() throws SQLException, ParseException {
         ParkingPlaceService.reserveLocationForNewMan("1","982");
     }
+    @Test
+    public void updateSpare() throws SQLException{
+        pdl.updateSpare("1",19);
+    }
 
 }

@@ -106,7 +106,13 @@
     }
 
 </style>
-
+<%String mess=(String)session.getAttribute("error2");
+    if("".equals(mess)&&mess==null)
+    {}else{%>
+<script type="text/javascript">
+    alert("<%=mess%>");
+</script>
+<%}%>
 <body>
 <div class="container" style="height: 650px;background: rgba(255,255,255,0.5);">
     <div class="header-text" style="margin-top: 50px;">
@@ -115,15 +121,15 @@
     </div>
     <div align="left" style="float: left;display: block;margin-left: 25%; margin-top:3% ;">
         <table> <tr><button type="submit" class="choice" style="border-radius:0px;background-color:rgb(113, 227, 247);color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></tr>
-            <tr><button  type="submit" class="choice"style="border-radius:0px;background-color:white;color:black;" onclick="window.location.href='index.html'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Face ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></tr>
+            <tr><button  type="submit" class="choice"style="border-radius:0px;background-color:white;color:black;" onclick="window.location.href='index.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Face ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></tr>
         </table>
     </div>
-    <form style="margin-top: 150px;">
+    <form style="margin-top: 150px;"action="forward" method="post">
 
 
         <input type="text"
                placeholder="UserId"
-               name="email"
+               name="username"
                id="email"
                autofocus>
         <input type="password"
@@ -133,10 +139,12 @@
                required>
         <div align="left" style="float: left;display: block;margin-top: 50px; ">
             <button type="submit" name="login"style="margin-left:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-            <button type="button" name="Register" style="margin-left:40px ;"onclick="window.location.href='register.html'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <script>
+                let index = window.location.href .lastIndexOf("\/")
+                window.str  =  window.location.href .substring(0,index)
+            </script>
+            <button type="button" name="Register" style="margin-left:40px ;" onclick="window.location.href='<%=application.getContextPath()%>/inforegist.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
         </div>
-
-
 
 </form>
 </div>

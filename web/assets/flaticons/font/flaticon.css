@@ -1,0 +1,80 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 16/08/2016 14:42
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
+.flaticon-armchair:before { content: "\f100"; }
+.flaticon-bath:before { content: "\f101"; }
+.flaticon-bathtub:before { content: "\f102"; }
+.flaticon-bed:before { content: "\f103"; }
+.flaticon-bed-1:before { content: "\f104"; }
+.flaticon-black:before { content: "\f105"; }
+.flaticon-building:before { content: "\f106"; }
+.flaticon-burj-al-arab:before { content: "\f107"; }
+.flaticon-burj-al-arab-1:before { content: "\f108"; }
+.flaticon-burj-al-arab-2:before { content: "\f109"; }
+.flaticon-business:before { content: "\f10a"; }
+.flaticon-calendar:before { content: "\f10b"; }
+.flaticon-calendar-interface-symbol-with-squares-in-rounded-rectangular-shape-with-spring-on-top-border:before { content: "\f10c"; }
+.flaticon-calendar-weekly:before { content: "\f10d"; }
+.flaticon-cityscape:before { content: "\f10e"; }
+.flaticon-clothes:before { content: "\f10f"; }
+.flaticon-clothes-1:before { content: "\f110"; }
+.flaticon-command:before { content: "\f111"; }
+.flaticon-commerce:before { content: "\f112"; }
+.flaticon-door:before { content: "\f113"; }
+.flaticon-dubai-burj-al-arab:before { content: "\f114"; }
+.flaticon-full-bed:before { content: "\f115"; }
+.flaticon-furniture:before { content: "\f116"; }
+.flaticon-furniture-1:before { content: "\f117"; }
+.flaticon-home:before { content: "\f118"; }
+.flaticon-home-1:before { content: "\f119"; }
+.flaticon-house:before { content: "\f11a"; }
+.flaticon-livingroom-black-double-sofa:before { content: "\f11b"; }
+.flaticon-luxury:before { content: "\f11c"; }
+.flaticon-man:before { content: "\f11d"; }
+.flaticon-mansion:before { content: "\f11e"; }
+.flaticon-people:before { content: "\f11f"; }
+.flaticon-people-1:before { content: "\f120"; }
+.flaticon-placeholder-tool:before { content: "\f121"; }
+.flaticon-school:before { content: "\f122"; }
+.flaticon-shield:before { content: "\f123"; }
+.flaticon-shop:before { content: "\f124"; }
+.flaticon-shopping:before { content: "\f125"; }
+.flaticon-sleep:before { content: "\f126"; }
+.flaticon-social:before { content: "\f127"; }
+.flaticon-sofa:before { content: "\f128"; }
+.flaticon-sofa-1:before { content: "\f129"; }
+.flaticon-sofa-2:before { content: "\f12a"; }
+.flaticon-sofa-of-one-place-outline:before { content: "\f12b"; }
+.flaticon-support:before { content: "\f12c"; }
+.flaticon-tag:before { content: "\f12d"; }
+.flaticon-ten-commandment:before { content: "\f12e"; }
+.flaticon-timetable-outline:before { content: "\f12f"; }
+.flaticon-two-seat-sofa:before { content: "\f130"; }

@@ -45,12 +45,13 @@ public class ParkingPlaceService {
         return getFreeParking(parkingId).size();
     }
 
-    public static void reserveLocation(String parkId, String carNumber) throws SQLException, ParseException {
+    public static ParkingPlace reserveLocation(String parkId, String carNumber) throws SQLException, ParseException {
         List<ParkingPlace> freeList = getFreeParking(parkId);
         placeDao.reservePlace(carNumber, parkId, freeList.get(1).getLocation_x(), freeList.get(1).getLocation_y());
+        return new ParkingPlace(freeList.get(1).getLocation_x(), freeList.get(1).getLocation_y());
     }
 
-    public static void reserveLocationForNewMan(String parkId, String carNumber) throws SQLException, ParseException {
+    public static ParkingPlace reserveLocationForNewMan(String parkId, String carNumber) throws SQLException, ParseException {
         List<ParkingPlace> freeList = getFreeParking(parkId);
         for (int i = 1; i <= freeList.size(); i++) {
             ParkingPlace tempPlace = freeList.get(i);
@@ -68,12 +69,13 @@ public class ParkingPlaceService {
                             && nowY == prevLocationY + 1 && nowY == nextLocationY - 1) {
                         placeDao.reservePlace(carNumber, parkId, freeList.get(i).getLocation_x(), freeList.get(i).getLocation_y());
                         System.out.println("the reserveX is " + nowX + "the reserveY is" + nowY);
-                        return;
+                        return new ParkingPlace(nowX,nowY);
 //                        break;
                     }
                 }
 
             }
         }
+        return null;
     }
 }

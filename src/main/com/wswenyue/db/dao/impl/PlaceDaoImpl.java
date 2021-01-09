@@ -79,3 +79,4 @@ public class PlaceDaoImpl implements PlaceDao {
         return (Place) qr.query(JdbcUtils.getConnection(), uname, sql, new BeanHandler(Place.class));
     }
 }
+
