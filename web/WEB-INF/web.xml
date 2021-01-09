@@ -64,6 +64,14 @@
         <servlet-name>writeloginServlet</servlet-name>
         <url-pattern>/forward</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>faceloginServlet</servlet-name>
+        <servlet-class>ws.parkingLotService.servlet.faceloginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>faceloginServlet</servlet-name>
+        <url-pattern>/queryRole</url-pattern>
+    </servlet-mapping>
     <!--++++++JSP+++++++-->
     <welcome-file-list>
         <welcome-file>inite.jsp</welcome-file>

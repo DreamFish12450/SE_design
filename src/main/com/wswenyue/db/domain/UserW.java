@@ -72,13 +72,7 @@ public class UserW {
 		this.phone_number = phone_number;
 	}
 
-	public Integer getVIP_level() {
-		return VIP_level;
-	}
 
-	public void setVIP_level(Integer VIP_level) {
-		this.VIP_level = VIP_level;
-	}
 
 	public Integer getBalance() {
 		return balance;
@@ -91,7 +85,7 @@ public class UserW {
 	public UserW() {
 	}
 
-	public UserW(String username, String password, String name, Integer age, String sex, String ID_number, String phone_number, String Face_ID, Integer balance, String VIP_level) {
+	public UserW(String username, String password, String name, Integer age, String sex, String ID_number, String phone_number, String Face_ID, Integer balance) {
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -101,7 +95,7 @@ public class UserW {
 		this.phone_number = phone_number;
 		Face_ID=null;
 		balance=null;
-		VIP_level=null;
+
 	}
 
 	@Override

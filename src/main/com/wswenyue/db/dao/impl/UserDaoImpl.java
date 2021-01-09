@@ -66,8 +66,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void add(UserW user) throws SQLException {
         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
-        String sql = "insert into user(username,password,name,age,sex,ID_number,phone_number,Face_ID,balance) values(?,?,?,?,?,?,?,?,?)";
-        Object params[] = {user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getSex(), user.getID_number(), user.getPhone_number(), null,0};
+        String sql = "insert into user(username,password,name,age,sex,ID_number,phone_number,Face_ID,balance) values(?,?,?,?,?,?,?,?,?,?)";
+        Object params[] = {user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getSex(), user.getID_number(), user.getPhone_number(), null, null};
         System.out.println(user.getSex());
         qr.update(sql, params);
     }

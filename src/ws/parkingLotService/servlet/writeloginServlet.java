@@ -27,7 +27,6 @@ public class writeloginServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         String username=request.getParameter("username");
         String pwd=request.getParameter("password");
-
         UserDaoImpl ud=new UserDaoImpl();
         HttpSession session=request.getSession();
         try {
@@ -43,15 +42,10 @@ public class writeloginServlet extends HttpServlet {
                 session.setAttribute("balance",u1.getBalance());
 //                session.setAttribute("VIP_level",u1.getVIP_level());
                 Amount amount=AmountService.getAmount(u1.getUsername());
-                if(amount!=null){
-                    session.setAttribute("VIP_level",amount.getVip_level());
-                    session.setAttribute("totalMoney",amount.getTotal_amount());
-                }
+                session.setAttribute("VIP_level",amount.getVip_level());
+                session.setAttribute("totalMoney",amount.getTotal_amount());
                 List<Car> carList = CarService.getCarByUserName(username);
-                if(carList!=null){
-                    session.setAttribute("carList",carList);
-                }
-
+                session.setAttribute("carList",carList);
                 request.getRequestDispatcher("/home.jsp").forward(request, response);
             }
             else {
