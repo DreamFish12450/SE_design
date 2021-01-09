@@ -166,7 +166,7 @@
                         <canvas id="barChartHome1"></canvas>
                         <div class="card-body text-center">
                             <button type="button" data-toggle="modal" data-target="#myModal" style="margin-top: -450px"
-                                    class="btn btn-primary">&nbsp;修 改 密 码&nbsp;
+                                    class="btn btn-primary"style="margin-top: -300px">&nbsp;修 改 密 码&nbsp;
                             </button>
                             <!-- Modal-->
 

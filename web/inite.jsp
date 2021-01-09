@@ -104,15 +104,24 @@
     .choice{
         border: 1px solid black;
     }
-
+    input:invalid+span::after{
+        content:"";
+        padding-left: 10px;
+    }
+    input:valid+span::after{
+        content:"";
+        padding-left: 10px;
+    }
 </style>
-<%String mess=(String)session.getAttribute("error2");
-    if("".equals(mess)&&mess==null)
-    {}else{%>
+<script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
 <script type="text/javascript">
-    alert("<%=mess%>");
+    $(function(){
+        //替换为abc
+        if(<%=session.getAttribute("error2")%>='err')
+        $("span").html('<p style="color: red">账号或密码错误！</p>');
+      // alert('替换成功！');
+    })
 </script>
-<%}%>
 <body>
 <div class="container" style="height: 650px;background: rgba(255,255,255,0.5);">
     <div class="header-text" style="margin-top: 50px;">
@@ -132,11 +141,13 @@
                name="username"
                id="email"
                autofocus>
+
         <input type="password"
                name="password"
                id="password"
                placeholder="Password"
                required>
+        <span class="inputTip" style="margin-left: 35%"></span>
         <div align="left" style="float: left;display: block;margin-top: 50px; ">
             <button type="submit" name="login"style="margin-left:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
             <button type="button" name="Register" style="margin-left:40px ;"onclick="window.location.href='http://localhost:8080/SE_design_Web_exploded/inforegist.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>

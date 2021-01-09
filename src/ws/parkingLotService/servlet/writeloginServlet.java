@@ -4,10 +4,11 @@ import cn.cy.domain.User;
 import com.google.gson.Gson;
 import main.com.wswenyue.db.dao.UserDao;
 import main.com.wswenyue.db.dao.impl.UserDaoImpl;
-import main.com.wswenyue.db.domain.Amount;
+
 import main.com.wswenyue.db.domain.Car;
 import main.com.wswenyue.db.domain.Parking;
 import main.com.wswenyue.db.domain.UserW;
+import main.com.wswenyue.db.domain.personnel;
 import main.com.wswenyue.db.service.*;
 
 import javax.servlet.ServletException;
@@ -29,34 +30,43 @@ public class writeloginServlet extends HttpServlet {
         String pwd=request.getParameter("password");
         UserDaoImpl ud=new UserDaoImpl();
         HttpSession session=request.getSession();
+        personnel p1=null;
+        UserW u1=null;
         try {
-            if(ud.find(username,pwd)!=null)
-            {
-                UserW u1=ud.find(username,pwd);
-                session.setAttribute("username",u1.getUsername());
-                session.setAttribute("password",u1.getPassword());
-                session.setAttribute("name",u1.getName());
-                session.setAttribute("age",u1.getAge());
-                session.setAttribute("sex",u1.getSex());
-                session.setAttribute("ID_number",u1.getID_number());
-                session.setAttribute("balance",u1.getBalance());
-//                session.setAttribute("VIP_level",u1.getVIP_level());
-                Amount amount=AmountService.getAmount(u1.getUsername());
-                session.setAttribute("VIP_level",amount.getVip_level());
-                session.setAttribute("totalMoney",amount.getTotal_amount());
-                List<Car> carList = CarService.getCarByUserName(username);
-                session.setAttribute("carList",carList);
-                request.getRequestDispatcher("/home.jsp").forward(request, response);
-            }
-            else {
-
-                session.setAttribute("error2","密码或者账号错误");
-               // request.setAttribute("error2","密码或者账号错误");
-              //  request.getRequestDispatcher("/inite.jsp").forward(request, response);
-                response.sendRedirect(request.getContextPath()+"/inite.jsp");
-            }
+            p1=ud.findad(username,pwd);
+            u1=ud.find(username,pwd);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        if(u1!=null)
+        {
+
+            session.setAttribute("username",u1.getUsername());
+            session.setAttribute("password",u1.getPassword());
+            session.setAttribute("name",u1.getName());
+            session.setAttribute("age",u1.getAge());
+            session.setAttribute("sex",u1.getSex());
+            session.setAttribute("ID_number",u1.getID_number());
+            session.setAttribute("balance",u1.getBalance());
+//                session.setAttribute("VIP_level",u1.getVIP_level());
+           // Amount amount=AmountService.getAmount(u1.getUsername());
+            //session.setAttribute("VIP_level",amount.getVip_level());
+            //session.setAttribute("totalMoney",amount.getTotal_amount());
+            List<Car> carList = CarService.getCarByUserName(username);
+            session.setAttribute("carList",carList);
+            request.getRequestDispatcher("/home.jsp").forward(request, response);
+        }
+        else if(p1!=null){
+            System.out.println("管理员登录！");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }
+        else {
+
+            session.setAttribute("error2","err");
+           // request.setAttribute("error2","密码或者账号错误");
+          //  request.getRequestDispatcher("/inite.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath()+"/inite.jsp");
         }
 
 

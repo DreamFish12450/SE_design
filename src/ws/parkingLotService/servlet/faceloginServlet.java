@@ -42,7 +42,7 @@ public class faceloginServlet extends HttpServlet {
             session.setAttribute("name",w1.getName());
             session.setAttribute("age",w1.getAge());
             session.setAttribute("sex",w1.getSex());
-            session.setAttribute("ID_number",w1.getPhone_number());
+            session.setAttribute("ID_number",w1.getID_number());
             session.setAttribute("phone_number",w1.getPhone_number());
             session.setAttribute("balance",w1.getBalance());
 
