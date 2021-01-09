@@ -87,7 +87,7 @@
 
                 if(conn != null){
 
-                    out.print("<br />");
+
                     Statement stmt = null;
                     ResultSet rs = null;
                     String sql = "SELECT * FROM showfee;";  //查询语句
@@ -118,7 +118,7 @@
                         out.print(fee);
                         out.print("</td>");
                         out.print("</tr>");
-                        out.print("<br />");
+
                     }
                 }else{
                     out.print("连接失败！");
