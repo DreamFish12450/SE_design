@@ -27,7 +27,7 @@ function FaceRegister(path) {
                 }
             },
             error:function () {
-                alert("连接服务器失败")
+                // alert("连接服务器失败")
             },
             async:true
         })

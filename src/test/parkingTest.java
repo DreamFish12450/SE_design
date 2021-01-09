@@ -1,5 +1,6 @@
 package test;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import main.com.wswenyue.db.dao.impl.ParkingDaoImpl;
 import main.com.wswenyue.db.dao.impl.UserDaoImpl;
 import main.com.wswenyue.db.domain.UserW;
 import main.com.wswenyue.db.utils.JdbcUtils;
@@ -12,9 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class parkingTest {
+
+    static ParkingDaoImpl pdl = new ParkingDaoImpl();
+
+
     //static ParkingDaoImpl pdl = new ParkingDaoImpl();
     static UserDaoImpl ud=new UserDaoImpl();
     @Test
+
     public void getList() throws SQLException {
 
         UserW u1=new UserW("czy12","123","cc",18,"男","330","189",null,null,null);
