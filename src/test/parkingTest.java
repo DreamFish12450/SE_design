@@ -1,5 +1,6 @@
 package test;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import main.com.wswenyue.db.dao.impl.ParkingDaoImpl;
 import main.com.wswenyue.db.dao.impl.UserDaoImpl;
 import main.com.wswenyue.db.domain.UserW;
 import main.com.wswenyue.db.utils.JdbcUtils;

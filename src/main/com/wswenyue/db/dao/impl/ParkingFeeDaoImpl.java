@@ -21,7 +21,7 @@ public class ParkingFeeDaoImpl implements ParkingFeeDao {
     JDBCUTIL jdbcutil = new JDBCUTIL();
 
     @Override
-    public main.com.wswenyue.db.service.List<ParkingFee> find(String username , String car_number) throws SQLException {
+    public List<ParkingFee> find(String username , String car_number) throws SQLException {
         Connection conn = null;
         List<ParkingFee> parkingFeeList = new ArrayList<>();
         try {
@@ -41,7 +41,7 @@ public class ParkingFeeDaoImpl implements ParkingFeeDao {
             jdbcutil.closeConnection(conn);
         }
 
-        return (main.com.wswenyue.db.service.List<ParkingFee>) parkingFeeList;
+        return  parkingFeeList;
 
     }
 

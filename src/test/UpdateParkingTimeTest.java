@@ -30,9 +30,8 @@ public class UpdateParkingTimeTest {
 //        paringPlace.start_time = new Date();
 //    }
     @Test
-    public static void main(String[] args)
-    {
+    public void test() throws ParseException {
         UpdateParkingTime t = new UpdateParkingTime();
-        t.UpdateParkingTime(1,2);
+        t.updateParkingTime(1,1,1);
     }
 }

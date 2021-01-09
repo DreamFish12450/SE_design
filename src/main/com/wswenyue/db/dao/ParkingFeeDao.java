@@ -2,9 +2,9 @@ package main.com.wswenyue.db.dao;
 
 
 import main.com.wswenyue.db.domain.ParkingFee;
-import main.com.wswenyue.db.service.List;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by wswenyue on 2015/6/6.

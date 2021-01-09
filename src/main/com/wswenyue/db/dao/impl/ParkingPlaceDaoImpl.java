@@ -112,18 +112,18 @@ public class ParkingPlaceDaoImpl implements ParkingPlaceDao {
     }
 
         @Override
-        public void setParkingPlaceST (String parkingId, int location_x , int location_y, Date start_time){ //向数据库提交车位初始时间的更新
+        public void setParkingPlaceST (String parkingId, int location_x , int location_y, Timestamp start_time){ //向数据库提交车位初始时间的更新
             Connection conn = null;
             List<ParkingPlace> parkingPlaceList = new ArrayList<>();
             try {
                 conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
                 PreparedStatement ps = conn.prepareStatement("update parkingplace set start_time = ? where parking_ID = ? and  location_x = ? and location_y = ? "); /*创建预处理对象，并进行数据库查询*/
-                ps.setDate(1, (java.sql.Date) start_time);
+                ps.setTimestamp(1, start_time);
                 ps.setString(2, parkingId);
                 ps.setInt(3, location_x);
                 ps.setInt(4, location_y);
                 ps.execute();
-                conn.commit();
+
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception e) {
@@ -134,17 +134,16 @@ public class ParkingPlaceDaoImpl implements ParkingPlaceDao {
 
         }
         @Override
-        public void setParkingPlaceET (String parkingId, int parkingplace_id, Date end_time){ //向数据库提交车位结束时间的更新
+        public void setParkingPlaceET (String parkingId, int parkingplace_id, Timestamp end_time){ //向数据库提交车位结束时间的更新
             Connection conn = null;
             List<ParkingPlace> parkingPlaceList = new ArrayList<>();
             try {
                 conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
                 PreparedStatement ps = conn.prepareStatement("update parkingplace set end_time = ? where parking_ID = ? and  parkingplace_id = ? "); /*创建预处理对象，并进行数据库查询*/
-                ps.setDate(1, (java.sql.Date) end_time);
+                ps.setTimestamp(1, end_time);
                 ps.setString(2, parkingId);
                 ps.setInt(3, parkingplace_id);
                 ps.execute();
-                conn.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception e) {
