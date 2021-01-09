@@ -10,4 +10,7 @@ import java.util.List;
 public interface ParkingPlaceDao {
     List<ParkingPlace> getSpareParkings(String parkingId);
     void reservePlace(String car_number, String parking_ID,int location_x,int location_y) throws SQLException, ParseException;
+    void setParkingPlaceST(Sting parkingId , String parkingplace_id ,Date start_time);
+    ParkingPlace getParkingPlace(String parkingId,String parkingplace_id);
 }
+

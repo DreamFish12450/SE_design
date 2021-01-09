@@ -90,5 +90,25 @@ public class ParkingPlaceDaoImpl implements ParkingPlaceDao {
         }
 
     }
+    @Override
+    public void setParkingPlaceST(Sting parkingId , String parkingplace_id ,Date start_time){ //向数据库提交车位初始时间的更新
+        Connection conn = null;
+        List<ParkingPlace> parkingPlaceList = new ArrayList<>();
+        try {
+            conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
+            PreparedStatement ps = conn.prepareStatement("update parkingplace start_time = ? where parking_ID = ? and parkingplace_id = ? "); /*创建预处理对象，并进行数据库查询*/
+            ps.setString(1,start_time);
+            ps.setString(2,parkingId);
+            ps.setString(3,parkingplace_id);
+            ps.execute();
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jdbcutil.closeConnection(conn);
+        }
 
+    }
 }
