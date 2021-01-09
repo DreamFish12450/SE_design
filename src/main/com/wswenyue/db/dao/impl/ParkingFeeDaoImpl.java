@@ -2,6 +2,7 @@ package main.com.wswenyue.db.dao.impl;
 
 import main.com.wswenyue.db.dao.ParkingFeeDao;
 import main.com.wswenyue.db.domain.ParkingFee;
+import main.com.wswenyue.db.domain.UserW;
 import main.com.wswenyue.db.utils.JdbcUtils;
 import main.com.wswenyue.db.utils.JDBCUTIL;
 import org.apache.commons.dbutils.QueryRunner;
@@ -54,6 +55,48 @@ public class ParkingFeeDaoImpl implements ParkingFeeDao {
         qr.update(sql, params);
     }
 
+    @Override
+    public UserW getUser(String username) throws SQLException{
+        Connection conn = null;
+        UserW userw = new UserW();
+        try {
+            conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
+            PreparedStatement ps = conn.prepareStatement("select * from user where username = ? "); /*创建预处理对象，并进行数据库查询*/
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
+            while (rs.next()) { /*遍历select语句查询得到的记录表*/
+                UserW p = new UserW(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
+                userw = p;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jdbcutil.closeConnection(conn);
+        }
+
+        return  userw;
+    }
+
+    @Override
+    public void updateBalance(String username , int balance){
+        Connection conn = null;
+        try {
+            conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
+            PreparedStatement ps = conn.prepareStatement("update user set balance = ? where username = ? "); /*创建预处理对象，并进行数据库查询*/
+            ps.setInt(1, balance);
+            ps.setString(2, username);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jdbcutil.closeConnection(conn);
+        }
+
+    }
 //    @Override
 //    public void update(ParkingFee parkingFee) throws SQLException {
 //        QueryRunner qr = new QueryRunner();

@@ -17,6 +17,6 @@ public class UpdatePickUpTimeTest {
     @Test
     public void test() throws ParseException, SQLException {
         UpdatePickUpTime t = new UpdatePickUpTime();
-        t.UpdatePickUpTime("1",1,"zky","1");
+        t.UpdatePickUpTime("1",2,"zky","1");
     }
 }
