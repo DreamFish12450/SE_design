@@ -26,8 +26,9 @@ public class ParkingFeeDaoImpl implements ParkingFeeDao {
         List<ParkingFee> parkingFeeList = new ArrayList<>();
         try {
             conn = jdbcutil.getConnection(); /*通过User帐号与数据库连接*/
-            PreparedStatement ps = conn.prepareStatement("select * from parkingfee where username=? and car_number=?"); /*创建预处理对象，并进行数据库查询*/
-
+            PreparedStatement ps = conn.prepareStatement("select * from parkingfee where username = ? and car_number = ?"); /*创建预处理对象，并进行数据库查询*/
+            ps.setString(1, username);
+            ps.setString(2, car_number);
             ResultSet rs = ps.executeQuery();  /*resultset对象表示select语句查询得到的记录集合*/
             while (rs.next()) { /*遍历select语句查询得到的记录表*/
                 ParkingFee p = new ParkingFee(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getInt(5));
