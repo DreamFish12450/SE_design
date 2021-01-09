@@ -13,20 +13,38 @@ Vue.component('blank-view', {
     `
 })
 
+let index = window.location.href.lastIndexOf("\/")
+window.str = window.location.href.substring(index + 1, window.location.href.length)
+window.ppath = window.location.href.substring(0, index)
 
 /**
  * 整个app框架
  */
 Vue.component('app', {
     props: ['info', 'state'],
+    created(){
+        console.log(2233)
+        $.ajax({
+            type: 'post',
+            // ansyv:true,
+            cache: false,
+            data: {},
+            url: `${window.location.href.substring(0,index)}/init.do`,
+            success: function (data) {
+                console.log(data)
+                document.getElementsByClassName("h4")[0].innerText=data.username
+
+
+            }
+        })
+
+    },
     methods: {
         logout: function () {
-            request_su(URL.Logout, "", (status, result) => {
-                if (status === 200) {
-                    window.location.assign("login.html")
-                }
-            })
-        }
+            window.location.assign(`${window.ppath}/inite.jsp`)
+        },
+
+
     },
     template: `
       <div class="page">
@@ -47,7 +65,7 @@ Vue.component('app', {
                 <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
                 <div class="brand-text d-none d-lg-inline-block">
                   <strong>让停车更从容</strong></div>
-                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>教材</strong></div>
+                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>停车</strong></div>
               </a>
                 <!-- Toggle Button--><a id="toggle-btn" href="#"
                                         class="menu-btn active"><span></span><span></span><span></span></a>
@@ -67,45 +85,29 @@ Vue.component('app', {
         <nav class="side-navbar">
           <!-- Sidebar Header-->
           <div class="sidebar-header d-flex align-items-center">
-            <!--                <div class="avatar"><img src="template/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle">-->
-            <!--                </div>-->
-            <!--如果-->
-            <div v-if="state.status" class="title">
-              <h1 class="h4">{{ state.type.display }}</h1>
-              <p>{{ state.type.role_display }} <span v-if="state.type.role === 'student'">\$
-                {{ state.user.balance / 100 }}</span></p>
-            </div>
-            <div v-else class="title">
-              <h1 class="h4">未登录</h1>
+
+            <div class="title">
+              <h1 class="h4"> </h1>
             </div>
           </div>
           <!-- Sidebar Navidation Menus-->
           <span class="heading">Main</span>
           <ul class="list-unstyled">
+          
             <!-- 与书籍有关的三个相关界面，查找功能类似，在订阅功能上略有区别 -->
-            <li v-if="state.type.role === 'student'" :class="info.menu === 'book_list' ? 'active' : ''">
+            <li>
               <a href="orderBook.html"><i class="icon-flask"></i>个人信息</a>
             </li>
-            <li v-else-if="state.type.role === 'teacher'" :class="info.menu === 'book_list' ? 'active' : ''">
+            <li>
               <a href="getBook.html"><i class="icon-flask"></i>账单查询</a>
             </li>
-            <li v-else :class="info.menu === 'book_list' ? 'active' : ''">
-              <a href="searchBook.html"><i class="icon-flask"></i>导航模块</a>
+            <li>
+              <a href="${window.ppath}/chooseCar.jsp"><i class="icon-flask"></i>出行模块</a>
             </li>
-<!--            <li v-if="state.type.role === 'student'"><a href="#dropDown1" aria-expanded="false" data-toggle="collapse">-->
-<!--              <i class="icon-interface-windows"></i>充值服务</a>-->
-<!--              <ul id="dropDown1" class="collapse list-unstyled">-->
-<!--                <li :class="info.menu === 'book_market' ? 'active': ''"><a href="bookMarket.html">二手市场</a>-->
-<!--                </li>-->
-<!--                <li :class="info.menu === 'publish_book' ? 'active': ''"><a href="publishBook2.html">发布二手书</a>-->
-<!--                </li>-->
-<!--                <li :class="info.menu === 'publish_request' ? 'active' : ''"><a href="publishRequest2.html">想要二手书</a>-->
-<!--                </li>-->
-<!--              </ul>-->
-<!--            </li>-->
-            <li :class="info.menu === 'admin_college' ? 'active': ''"><a href="adminCollege.html"><i
-                class="icon-website"></i>充值服务</a>
+            <li>
+              <a href="${window.ppath}/charge.jsp"><i class="icon-flask"></i>充值模块</a>
             </li>
+
             <!-- 管理员的相关界面 -->
             <li v-if="state.type.role === 'admin'"><a href="#dropDown2" aria-expanded="false" data-toggle="collapse">
               <i class="icon-interface-windows"></i>学院管理</a>
@@ -118,31 +120,13 @@ Vue.component('app', {
                 </li>
               </ul>
             </li>
-            <li v-if="state.type.role === 'su'"><a href="#dropDown3" aria-expanded="false" data-toggle="collapse">
-              <i class="icon-interface-windows"></i>超级管理</a>
-              <ul id="dropDown3" class="collapse list-unstyled">
-                <li :class="info.menu === 'admin_add_teacher' ? 'active': ''"><a href="admin_add_teacher.html">添加教师</a>
-                </li>
-                <li :class="info.menu === 'admin_add_student' ? 'active' : ''"><a href="admin_add_student.html">添加学生</a>
-                </li>
-                <li :class="info.menu === 'admin_add_college' ? 'active': ''"><a href="admin_add_college.html">添加学院</a>
-                </li>
-                <li :class="info.menu === 'admin_add_major' ? 'active': ''"><a href="admin_add_major.html">添加专业</a>
-                </li>
-                <li :class="info.menu === 'admin_add_class' ? 'active': ''"><a href="admin_add_class.html">添加班级</a>
-                </li>
-
-              </ul>
-            </li>
-
-            <li :class="info.menu === 'user' ? 'active': ''"><a href="index.html"><i class="icon-user"></i>个人信息</a></li>
-          </ul>
+     
         </nav>
         <div class="content-inner" id="main-content">
           <header class="page-header">
             <div class="container-fluid">
               <h2 class="no-margin-bottom">
-                {{ (state.tip === '') ? info.title : info.title + " - " + state.tip }}</h2>
+              </h2>
             </div>
           </header>
           <blank-view v-if="state.status === false && state.tip !== '正在加载中...'"></blank-view>
@@ -185,9 +169,9 @@ Vue.component('form-card', {
       </div>
       </div>`
 });
-    Vue.component('carCard', {
-    props: ['carNumber','carModel'],
-    template:`
+Vue.component('carCard', {
+    props: ['carNumber', 'carModel'],
+    template: `
         <div class="col-lg-4">
             <div class="work-amount card">
                 <div class="card-close">
