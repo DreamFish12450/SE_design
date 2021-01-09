@@ -27,11 +27,12 @@ public class UpdatePickUpTime {
 
         //返回费用信息
         ParkingPlace parkingPlace = placeDao.getParkingPlace(parkingId,parkingplace_id);
+        System.out.printf("开始时间："+parkingPlace.getEnd_time().getTime()+" "+"结束时间："+parkingPlace.getStart_time().getTime());
         long diff = parkingPlace.getEnd_time().getTime() - parkingPlace.getStart_time().getTime();
         long hour = diff/1000/3600;
         hour = (int) (hour+0.5);
         float money = hour*5;
         ParkingFee parkingFee = new ParkingFee(username,car_mumber, (int) hour,money,parkingplace_id);
-        parkingFeeDao.add(parkingFee);
+        if(money != 0) parkingFeeDao.add(parkingFee);
     }
 }

@@ -48,7 +48,7 @@ public class ParkingFeeDaoImpl implements ParkingFeeDao {
     @Override
     public void add(ParkingFee parkingFee) throws SQLException {
         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
-        String sql = "insert into parkingfee(username,car_number,parking_time,fee,parkplace_ID) values(?,?,?,?,?)";
+        String sql = "insert into parkingfee(username,car_number,parking_time,fee,parkingplace_ID) values(?,?,?,?,?)";
         Object params[] = {parkingFee.getUsername(),parkingFee.getCar_number(),parkingFee.getParking_time(),parkingFee.getFee(),parkingFee.getParkplace_ID()};
         qr.update(sql, params);
     }
