@@ -12,10 +12,37 @@ public class UserW {
 	private String ID_number;
 	private String phone_number;
 	private String Face_ID=null;
-	private Integer VIP_level=null;
+	private Integer balance;
 
+	public UserW(){}
 
-	private Integer balance=null;
+	public UserW(String username, String password, String name, Integer age, String sex, String ID_number, String phone_number, String face_ID, Integer balance) {
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.age = age;
+		this.sex = sex;
+		this.ID_number = ID_number;
+		this.phone_number = phone_number;
+		Face_ID = face_ID;
+		this.balance = balance;
+	}
+
+	@Override
+	public String toString() {
+		return "UserW{" +
+				"username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", name='" + name + '\'' +
+				", age=" + age +
+				", sex='" + sex + '\'' +
+				", ID_number='" + ID_number + '\'' +
+				", phone_number='" + phone_number + '\'' +
+				", Face_ID='" + Face_ID + '\'' +
+				", balance=" + balance +
+				'}';
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -72,12 +99,12 @@ public class UserW {
 		this.phone_number = phone_number;
 	}
 
-	public Integer getVIP_level() {
-		return VIP_level;
+	public String getFace_ID() {
+		return Face_ID;
 	}
 
-	public void setVIP_level(Integer VIP_level) {
-		this.VIP_level = VIP_level;
+	public void setFace_ID(String face_ID) {
+		Face_ID = face_ID;
 	}
 
 	public Integer getBalance() {
@@ -86,37 +113,5 @@ public class UserW {
 
 	public void setBalance(Integer balance) {
 		this.balance = balance;
-	}
-
-	public UserW() {
-	}
-
-	public UserW(String username, String password, String name, Integer age, String sex, String ID_number, String phone_number, String Face_ID, Integer balance, String VIP_level) {
-		this.username = username;
-		this.password = password;
-		this.name = name;
-		this.age = age;
-		this.sex = sex;
-		this.ID_number = ID_number;
-		this.phone_number = phone_number;
-		Face_ID=null;
-		balance=null;
-		VIP_level=null;
-	}
-
-	@Override
-	public String toString() {
-		return "UserW{" +
-				"username='" + username + '\'' +
-				", password='" + password + '\'' +
-				", name='" + name + '\'' +
-				", age=" + age +
-				", sex='" + sex + '\'' +
-				", ID_number='" + ID_number + '\'' +
-				", phone_number='" + phone_number + '\'' +
-				", Face_ID='" + Face_ID + '\'' +
-				", VIP_level=" + VIP_level +
-				", balance=" + balance +
-				'}';
 	}
 }

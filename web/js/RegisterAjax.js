@@ -1,12 +1,9 @@
-function FaceRegister(path) {
+function FaceRegister() {
     setTimeout(function () {
-
-        let index = window.location.href .lastIndexOf("\/")
-        var str  =  window.location.href .substring(0,index)
         img = getFace();
         $.ajax({
             type:"post",
-            url:`${str}/register`,//后台接口
+            url:"http://localhost:8080/SE_design_Web_exploded/user/register",//后台接口
             data:{
             	"imgId":$("#imgId").val(),
                 "imgStr":img,
@@ -27,7 +24,7 @@ function FaceRegister(path) {
                 }
             },
             error:function () {
-                // alert("连接服务器失败")
+                alert("连接服务器失败")
             },
             async:true
         })

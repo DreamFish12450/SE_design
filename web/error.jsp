@@ -8,5 +8,6 @@
 <body id="error">
 	<div>
 	<h1>An error occurred</h1>
+	</div>
 </body>
 </html>

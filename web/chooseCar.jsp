@@ -36,23 +36,11 @@
 
 <app id="app" :info="info" :state="state">
     <!-- Content -->
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <input type="checkbox" class="checkbox-template" name="whether_new" id="whether_new">
-                </div>
-            </div>
-            <input type="text" class="form-control" name="whether_new" disabled="disabled" value="若您对自己的停车没有自信，请勾选右边的框，系统将自动为您选择合适的车位">
-        </div>
-    </div>
-    <script>
-        window.test =  document.getElementById("whether_new").checked ? '是' : '否'
-    </script>
+
     <div class="row">
         <c:forEach items="${sessionScope.carList}" var="car">
         <div class="col-lg-4">
-
+            <form method="get" action="${pageContext.request.contextPath}/chooseCar.do?car_number=${car.car_number}">
                 <div class="work-amount card">
                     <div class="card-close">
                         <div class="dropdown">
@@ -65,9 +53,9 @@
                     </div>
                     <div class="card-body">
                         <h3>车牌号是${car.car_number}</h3>
+
                         <h3>您的车型是:${car.car_model}</h3>
-<%--                        <input type="submit" class="btn-primary btn" value="出行" onclick="formSubmit(${car.car_number})">--%>
-                        <button  class="btn btn-primary"   onclick="formSubmit(${car.car_number})">出行</button>
+                        <button type="submit" class="btn btn-primary" id="sub" value="${car.car_number}">出行</button>
                         <div class="chart text-center">
                             <div class="chartjs-size-monitor"
                                  style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
@@ -88,13 +76,14 @@
                             <c:if test="${car.car_model.equals('货车')}">
                                 <img src="img/truck.png" height="200px" width="200px">
                             </c:if>
-
+                            <%--                        <c:otherwise>--%>
+                            <%--                            <img src="img/truck.png" height="50px" width="50px">--%>
+                            <%--                        </c:otherwise>--%>
                         </div>
                     </div>
                 </div>
-
+            </form>
         </div>
-
         </c:forEach>
         <br>
         <div class="col-lg-4">
@@ -102,7 +91,8 @@
                 <div class="card-close">
                     <div class="dropdown">
                         <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a
-                                href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit">
+                                href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#"
+                                                                                                              class="dropdown-item edit">
                             <i class="fa fa-gear"></i>Edit</a></div>
                     </div>
                 </div>
@@ -111,6 +101,7 @@
                     <br>
                     <br>
                     <br>
+                    <!--                       <button type="button"  class="btn btn-primary">添加新车</button>-->
                     <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                          class="modal fade text-left" style="display: none;" aria-hidden="true">
                         <div role="document" class="modal-dialog">
@@ -171,6 +162,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -234,35 +226,15 @@
         let getPermit = document.getElementById("checkboxCustom1").checked ? '是' : '否'
         let index = document.getElementById("car_model").selectedIndex
         let carModel = document.getElementById("car_model").options[index].value
-        // let temp = document.getElementById("whether_new").checked?"是":"否"
-
         $.ajax({
             type: 'post',
             cache: 'false',
             data: {car_number: carNumber, car_brand: carBrand, get_permit: getPermit, car_model: carModel},
             url: '<%=application.getContextPath()%>/addNewCar.do',
             success: function (data) {
-                let index = window.location.href .lastIndexOf("\/")
-                let str  =  window.location.href.substring(0,index)
-                window.location.href=str+'/chooseCar.jsp'
+                window.location.href('/chooseCar.jsp')
             }
         })
-    }
-    formSubmit = function (carNumber){
-        let index = window.location.href .lastIndexOf("\/")
-        let temp = document.getElementById("whether_new").checked?"是":"否"
-        let str  =  window.location.href.substring(0,index)
-        console.log(str)
-        $.ajax({
-            type: 'post',
-            cache: 'false',
-            data: {car_number: carNumber,whether_new:temp},
-            url: '<%=application.getContextPath()%>/chooseCar.do',
-            success: function (data) {
-                window.location.href=str+"/guide.jsp"
-            }
-        })
-
     }
     chooseThisCar = (car_number) => {
         <%--$.ajax({--%>

@@ -21,8 +21,6 @@ public interface UserDao {
 	/** 对用户的金额进行处理*/
 	void updateBalance(String phone, int money) throws SQLException;
 
-	UserW getBalanceAndPassword(String user) throws SQLException;
-
 	/** 修改密码*/
 	//void updatePasswd(String phone, String NewPasswd) throws SQLException;
 
