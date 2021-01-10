@@ -51,12 +51,12 @@
     </script>
     <div class="row">
         <c:forEach items="${sessionScope.carList}" var="car">
-        <div class="col-lg-4">
+            <div class="col-lg-4">
 
                 <div class="work-amount card">
                     <div class="card-close">
                         <div class="dropdown">
-                            <%--                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>--%>
+                                <%--                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>--%>
                             <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a
                                     href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a
                                     href="#" class="dropdown-item edit">
@@ -66,7 +66,7 @@
                     <div class="card-body">
                         <h3>车牌号是${car.car_number}</h3>
                         <h3>您的车型是:${car.car_model}</h3>
-<%--                        <input type="submit" class="btn-primary btn" value="出行" onclick="formSubmit(${car.car_number})">--%>
+                            <%--                        <input type="submit" class="btn-primary btn" value="出行" onclick="formSubmit(${car.car_number})">--%>
                         <button  class="btn btn-primary"   onclick="formSubmit(${car.car_number})">出行</button>
                         <div class="chart text-center">
                             <div class="chartjs-size-monitor"
@@ -80,8 +80,8 @@
                                     <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                 </div>
                             </div>
-                            <%--                        <div class="text"><strong>90</strong><br><span>Hours</span></div>--%>
-                            <%--                        <canvas id="pieChart" width="428" height="213" class="chartjs-render-monitor" style="display: block; height: 171px; width: 343px;"></canvas>--%>
+                                <%--                        <div class="text"><strong>90</strong><br><span>Hours</span></div>--%>
+                                <%--                        <canvas id="pieChart" width="428" height="213" class="chartjs-render-monitor" style="display: block; height: 171px; width: 343px;"></canvas>--%>
                             <c:if test="${car.car_model.equals('轿车')}">
                                 <img src="img/car.png" height="200px" width="200px">
                             </c:if>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
 
-        </div>
+            </div>
 
         </c:forEach>
         <br>
