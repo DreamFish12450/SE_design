@@ -30,7 +30,7 @@ public class writeloginServlet extends HttpServlet {
 
         UserDaoImpl ud=new UserDaoImpl();
         HttpSession session=request.getSession();
-        try {
+        try {System.out.println("1");
             if(ud.find(username,pwd)!=null)
             {
                 UserW u1=ud.find(username,pwd);
