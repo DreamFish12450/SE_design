@@ -5,10 +5,7 @@ import com.google.gson.Gson;
 import main.com.wswenyue.db.dao.UserDao;
 import main.com.wswenyue.db.dao.impl.UserDaoImpl;
 
-import main.com.wswenyue.db.domain.Car;
-import main.com.wswenyue.db.domain.Parking;
-import main.com.wswenyue.db.domain.UserW;
-import main.com.wswenyue.db.domain.personnel;
+import main.com.wswenyue.db.domain.*;
 import main.com.wswenyue.db.service.*;
 
 import javax.servlet.ServletException;
@@ -41,7 +38,12 @@ public class writeloginServlet extends HttpServlet {
 
         if(u1!=null)
         {
-
+            Amount amount= null;
+            try {
+                amount = AmountService.getAmount(u1.getUsername());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
             session.setAttribute("username",u1.getUsername());
             session.setAttribute("password",u1.getPassword());
             session.setAttribute("name",u1.getName());
@@ -49,12 +51,20 @@ public class writeloginServlet extends HttpServlet {
             session.setAttribute("sex",u1.getSex());
             session.setAttribute("ID_number",u1.getID_number());
             session.setAttribute("balance",u1.getBalance());
+            if(amount!=null){
+                session.setAttribute("VIP_level",amount.getVip_level());
+                session.setAttribute("totalMoney",amount.getTotal_amount());
+            }
+            List<Car> carList = CarService.getCarByUserName(username);
+            if(carList!=null){
+                session.setAttribute("carList",carList);
+            }
 //                session.setAttribute("VIP_level",u1.getVIP_level());
            // Amount amount=AmountService.getAmount(u1.getUsername());
             //session.setAttribute("VIP_level",amount.getVip_level());
             //session.setAttribute("totalMoney",amount.getTotal_amount());
-            List<Car> carList = CarService.getCarByUserName(username);
-            session.setAttribute("carList",carList);
+//            List<Car> carList = CarService.getCarByUserName(username);
+//            session.setAttribute("carList",carList);
             request.getRequestDispatcher("/home.jsp").forward(request, response);
         }
         else if(p1!=null){
@@ -62,7 +72,7 @@ public class writeloginServlet extends HttpServlet {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
         else {
-
+            System.out.println("err");
             session.setAttribute("error2","err");
            // request.setAttribute("error2","密码或者账号错误");
           //  request.getRequestDispatcher("/inite.jsp").forward(request, response);
