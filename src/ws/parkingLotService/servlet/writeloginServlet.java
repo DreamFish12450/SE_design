@@ -32,6 +32,7 @@ public class writeloginServlet extends HttpServlet {
         try {
             p1=ud.findad(username,pwd);
             u1=ud.find(username,pwd);
+            System.out.println(u1);
         } catch (SQLException e) {
             e.printStackTrace();
         }

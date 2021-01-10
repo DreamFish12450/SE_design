@@ -6,7 +6,7 @@ function FaceRegister() {
         img = getFace();
         $.ajax({
             type:"post",
-            url:`${str}/register`,//后台接口
+            url:`${str}/user/register`,//后台接口
             data:{
             	"imgId":$("#imgId").val(),
                 "imgStr":img,

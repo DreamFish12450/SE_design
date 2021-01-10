@@ -43,7 +43,6 @@ public class UserDaoImpl implements UserDao {
         try {
             //uname = "zjut";
             /*通过User帐号与数据库连接*/
-            String sql = "select * from user where username = ?";
             PreparedStatement ps = conn.prepareStatement("select * from personnel where ID = ? and ID_number=?"); /*创建预处理对象，并进行数据库查询*/
             ps.setString(1, ID);
             ps.setString(2,ID_number);

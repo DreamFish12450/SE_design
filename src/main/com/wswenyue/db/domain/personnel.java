@@ -11,6 +11,21 @@ public class personnel {
     String address;
     String post;
 
+    @Override
+    public String toString() {
+        return "personnel{" +
+                "ID='" + ID + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", sex='" + sex + '\'' +
+                ", ID_number='" + ID_number + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", Face_ID='" + Face_ID + '\'' +
+                ", address='" + address + '\'' +
+                ", post='" + post + '\'' +
+                '}';
+    }
+
     public String getID() {
         return ID;
     }
