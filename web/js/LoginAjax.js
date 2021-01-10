@@ -1,9 +1,11 @@
 function Facelogin() {
     setTimeout(function () {
         img = getFace();
+        let index = window.location.href .lastIndexOf("\/")
+        var str  =  window.location.href .substring(0,index)
         $.ajax({
             type:"post",
-            url:"http://localhost:8080/SE_design_Web_exploded/user/login",//后台接口
+            url:`${str}/user/login`,//后台接口
             data:{
                 "imgStr":img,
                 "imgType":"BASE64"
@@ -15,7 +17,7 @@ function Facelogin() {
                 if(start == true){
                     alert("用户id:"+data["userId"]+"登录"+data["msg"])
 
-                    let url2 = "http://localhost:8080/SE_design_Web_exploded/queryRole";
+                    let url2 = `${str}/queryRole`;
                     console.log(data["userId"]);
                     let name = data["userId"];
                     let data2 = {
@@ -28,7 +30,7 @@ function Facelogin() {
                         dataType: "json",
                         success: function(result){
                             //alert("success--result:"+result);
-                            location.href="http://localhost:8080/SE_design_Web_exploded/home.jsp"
+                            location.href=`${str}/home.jsp`
                         },
                         error: function(){
                             alert("error");
@@ -52,7 +54,9 @@ function Facelogin() {
     },500);
 }
 function countDown(secs,data){
-    let url = "http://localhost:8080/SE_design_Web_exploded/queryRole";
+    let index = window.location.href .lastIndexOf("\/")
+    var str  =  window.location.href .substring(0,index)
+    let url = `${str}/queryRole`;
     let name = data["userId"];
     let data2 = {
         name: name
@@ -74,7 +78,7 @@ function countDown(secs,data){
     if(--secs>0){
          setTimeout("countDown("+secs+")",1000);       
      }else{
-         location.href="http://localhost:8080/SE_design_Web_exploded/home.jsp";
+         location.href=`${str}/home.jsp`;
      }       
  }       
 
