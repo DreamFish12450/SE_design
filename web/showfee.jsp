@@ -79,22 +79,16 @@
         <%
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-
                 String url = "jdbc:mysql://118.25.154.83:3306/esparking"; //数据库名
                 String username1 = "root";  //数据库用户名
                 String password = "123456";  //数据库用户密码
                 Connection conn = DriverManager.getConnection(url, username1, password);  //连接状态
-
                 if(conn != null){
-
-
                     Statement stmt = null;
                     ResultSet rs = null;
                     String sql = "SELECT * FROM showfee;";  //查询语句
                     stmt = conn.createStatement();
                     rs = stmt.executeQuery(sql);
-
-
                     while (rs.next()) {
                         String username = rs.getString("username");
                         String car_brand = rs.getString("car_brand");
@@ -118,7 +112,6 @@
                         out.print(fee);
                         out.print("</td>");
                         out.print("</tr>");
-
                     }
                 }else{
                     out.print("连接失败！");
