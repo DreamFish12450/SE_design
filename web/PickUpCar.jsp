@@ -19,26 +19,30 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="template/img/favicon.ico">
     <script type="text/javascript" src="jquery-3.3.1/jquery-3.3.1.min.js" ></script>
-<%--    <script>--%>
-<%--        function draw(id) {--%>
-<%--            var canvas = document.getElementById(id);--%>
-<%--            if (canvas == null)--%>
-<%--                return false;--%>
-<%--            var context = canvas.getContext('2d');--%>
-<%--            //context.fillStyle = "#eeefff";--%>
-<%--            //context.fillRect(0,0,1000,5000);--%>
-<%--            for (var i = 0; i < 6; i++) {--%>
-<%--                for (var j = 0; j < 5; j++) {--%>
-<%--                    context.fillStyle = "grey";--%>
-<%--                    context.strokeStyle = "black";--%>
-<%--                    context.lineWidth = 1;--%>
-<%--                    context.fillRect(50 + i * 150, 50 + j * 250, 100, 150);--%>
-<%--                    context.strokeRect(50 + i * 150, 50 + j * 250, 100, 150);--%>
-<%--                }--%>
-<%--            }--%>
-
-<%--        }--%>
-<%--    </script>--%>
+    <script>
+        // function draw(id) {
+        //     var canvas = document.getElementById(id);
+        //     if (canvas == null)
+        //         return false;
+        //     var context = canvas.getContext('2d');
+        //     //context.fillStyle = "#eeefff";
+        //     //context.fillRect(0,0,1000,5000);
+        //     for (var i = 0; i < 6; i++) {
+        //         for (var j = 0; j < 5; j++) {
+        //             context.fillStyle = "grey";
+        //             context.strokeStyle = "black";
+        //             context.lineWidth = 1;
+        //             context.fillRect(50 + i * 150, 50 + j * 250, 100, 150);
+        //             context.strokeRect(50 + i * 150, 50 + j * 250, 100, 150);
+        //         }
+        //     }
+        //
+        // }
+        function retu(){
+            document.forms[0].action="updatePickUpTime.do";
+            document.forms[0].submit();
+        }
+    </script>
     <style>
         .wrapper{
             /*width:450px;*/
@@ -58,6 +62,7 @@
     </style>
 </head>
 <body onload="draw('canvas');">
+<form action="" method="post">
 <h1 align="center">ParkingLot</h1>
 <%--<canvas id="canvas" width="1500" height="1500" ></canvas>--%>
 <%--<%--%>
@@ -95,10 +100,11 @@
                 let str = $('.car_y').html()+"+"+$('.car_x').html()
 
                 document.getElementById(str).style.background="LightSkyBlue"
-                $(document.getElementById(str)).append("<button  class='btn btn-primary'>到达车位</button>")
+                $(document.getElementById(str)).append("<button  class='btn btn-primary' onclick='retu()'>取车完毕</button>")
             }
         })
     }
 </script>
+</form>
 </body>
 </html>

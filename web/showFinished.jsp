@@ -35,13 +35,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <br><br><br><br><br><br><br><br><br>
     <div><%String msg=(String)request.getAttribute("msg"); %><%=msg %></div>
     <form action="" method="post">
-      <table align="center">
-          <tr>
-            <td colspan="4" align="center">
-                <input type="button" onclick="retu()" value="我要取车"/>
-            </td>
-          </tr>
-      </table>
+<%--      <table align="center">--%>
+<%--          <tr>--%>
+<%--            <td colspan="4" align="center">--%>
+<%--                <input type="button" onclick="retu()" value="我要取车"/>--%>
+<%--            </td>--%>
+<%--          </tr>--%>
+<%--      </table>--%>
     </form>
   </body>
 </html>
