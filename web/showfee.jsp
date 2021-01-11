@@ -68,7 +68,15 @@
 <app id="app" :info="info" :state="state">
     <!-- Content -->
     <!-- 填写内容 -->
-    <table id="table">
+    <div class="card" style="margin: 10px">
+
+    <div class="card-header d-flex align-items-center">
+        <h3 class="h4">费用记录</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
         <tr>
             <th>用户名</th>
             <th>车型</th>
@@ -76,6 +84,8 @@
             <th>停车位置</th>
             <th>停车费</th>
         </tr>
+        </thead>
+        <tbody>
         <%
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -121,8 +131,11 @@
                 out.print("数据库连接异常！");
             }
         %>
+        </tbody>
     </table>
-
+    </div>
+    </div>
+    </div>
 </app>
 <!-- JavaScript files-->
 <script src="template/vendor/jquery/jquery.min.js"></script>
