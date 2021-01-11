@@ -33,8 +33,8 @@ public class updateParkingTimeServlet extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json;charset=utf-8");
             /*返回数据*/
-            //request.setAttribute("msg", "删除成功！");
-            //request.getRequestDispatcher("showMessage.jsp").forward(request, response);
+            request.setAttribute("msg", "停车成功！");
+            request.getRequestDispatcher("showMessage.jsp").forward(request, response);
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }
