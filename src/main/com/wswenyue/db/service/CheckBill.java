@@ -11,7 +11,7 @@ import java.util.List;
 public class  CheckBill {
     static ParkingPlaceDaoImpl placeDao = new ParkingPlaceDaoImpl();
     static ParkingFeeDaoImpl parkingFeeDao = new ParkingFeeDaoImpl();
-    public List<ParkingFee> checkBill(String username, String car_number) throws SQLException {
+    public static List<ParkingFee> checkBill(String username, String car_number) throws SQLException {
         return parkingFeeDao.find(username , car_number);
     }
 }

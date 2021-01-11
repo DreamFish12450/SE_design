@@ -43,7 +43,6 @@ public class UserDaoImpl implements UserDao {
         try {
             //uname = "zjut";
             /*通过User帐号与数据库连接*/
-            String sql = "select * from user where username = ?";
             PreparedStatement ps = conn.prepareStatement("select * from personnel where ID = ? and ID_number=?"); /*创建预处理对象，并进行数据库查询*/
             ps.setString(1, ID);
             ps.setString(2,ID_number);
@@ -115,8 +114,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void add(UserW user) throws SQLException {
         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
-        String sql = "insert into user(username,password,name,age,sex,ID_number,phone_number,Face_ID,balance) values(?,?,?,?,?,?,?,?,?,?)";
-        Object params[] = {user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getSex(), user.getID_number(), user.getPhone_number(), null, null};
+        String sql = "insert into user(username,password,name,age,sex,ID_number,phone_number,Face_ID,balance) values(?,?,?,?,?,?,?,?,?)";
+        Object params[] = {user.getUsername(), user.getPassword(), user.getName(), user.getAge(), user.getSex(), user.getID_number(), user.getPhone_number(), null,0};
         System.out.println(user.getSex());
         qr.update(sql, params);
     }
