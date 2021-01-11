@@ -41,7 +41,7 @@ public class ParkingPlaceTest {
         //得到一个timestamp格式的时间，存入mysql中的时间格式为"yyyy-MM-dd HH:mm:ss"
 //
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
-        pdl.reservePlace("3","1",1,1);
+        pdl.reservePlace("3","1",1,7);
 //        ComboPooledDataSource db=new ComboPooledDataSource();
 //        QueryRunner qr = new QueryRunner();
 //        String sql = "select * from parkinglot ";

@@ -23,7 +23,10 @@ public class chooseCar  extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             String car_number = request.getParameter("car_number");
-            session.setAttribute("car",car_number);
+            session.setAttribute("car_number",car_number);
+            String whether_new_p = request.getParameter("whether_new");
+            System.out.println(whether_new_p);
+            session.setAttribute("whether_new",whether_new_p);
             System.out.println(car_number);
             request.getRequestDispatcher("/guide.jsp").forward(request, response);
         } catch (Exception throwables) {

@@ -268,9 +268,14 @@
         let temp = new AMap.LngLat(lng, lat)
         driving.search(e, temp, function (status, result) {
             // var $newElement=;//创建元素,返回jQuery对象
-            $("#panel").append($('<button class="arrival btn btn-primary" id="arrivalButton" >确认已经到达</button>'))
+            $("#panel").append($('<button class="arrival btn btn-primary" id="arrivalButton" onclick="goToShowParking()">确认已经到达</button>'))
             // document.getElementById("arrivalButton").style.opacity = '1'
             // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+            goToShowParking = ()=>{
+                let index = window.location.href .lastIndexOf("\/")
+                let str  =  window.location.href.substring(0,index)
+                window.location.href=str+'/showParkingLot.jsp'
+            }
             console.log(parkingId)
             $.ajax({
                     type: 'post',

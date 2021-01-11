@@ -52,7 +52,6 @@
     <div class="row">
         <c:forEach items="${sessionScope.carList}" var="car">
             <div class="col-lg-4">
-
                 <div class="work-amount card">
                     <div class="card-close">
                         <div class="dropdown">
@@ -88,7 +87,6 @@
                             <c:if test="${car.car_model.equals('货车')}">
                                 <img src="img/truck.png" height="200px" width="200px">
                             </c:if>
-
                         </div>
                     </div>
                 </div>
@@ -173,8 +171,6 @@
             </div>
         </div>
     </div>
-
-
 </app>
 <!-- JavaScript files-->
 <script src="template/vendor/jquery/jquery.min.js"></script>
@@ -204,27 +200,31 @@
             },
             // 添加其他需要存储的数据
         },
+        create:function(){
+            console.log(1)
+            $.ajax({
+                type: 'post',
+                // ansyv:true,
+                cache: false,
+                data: {},
+                url: '<%=application.getContextPath()%>/listCar.do',
+                success: function (data) {
+                    console.log(data)
+                    // window.parking = new Array();
+                    // data.forEach((value, index) => {
+                    //     console.log(value)
+                    //     window.parking.push(new Parking(value.parkingName, value.lat, value.lng, value.charges, value.spare, value.maxSize))
+                    // })
+                },
+                error: function () {
+                }
+            })
+        },
         methods: {
             init: function () {
                 // common.getAppState((state) => app.state = state)
                 // 添加初始化代码
-                $.ajax({
-                    type: 'post',
-                    // ansyv:true,
-                    cache: false,
-                    data: {},
-                    url: '<%=application.getContextPath()%>/listCar.do',
-                    success: function (data) {
-                        console.log(data)
-                        // window.parking = new Array();
-                        // data.forEach((value, index) => {
-                        //     console.log(value)
-                        //     window.parking.push(new Parking(value.parkingName, value.lat, value.lng, value.charges, value.spare, value.maxSize))
-                        // })
-                    },
-                    error: function () {
-                    }
-                })
+               console.log(2)
             }
         }
     })

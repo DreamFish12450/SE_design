@@ -97,6 +97,3 @@
 
 </web-app>
 
-<httpHandlers>
-<add verb="POST,GET" path="ajax/*.ashx" type="Ajax.PageHandlerFactory, Ajax"/>
-</httpHandlers>
