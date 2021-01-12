@@ -33,14 +33,7 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="template/img/favicon.ico">
 </head>
-<%String mess=(String)request.getAttribute("error");
-    if("".equals(mess)&&mess==null)
-    {}else{%>
-<script type="text/javascript">
-    alert("<%=mess%>");
-</script>
-    <%}%>
-<body >
+
 
 <div class="page-content d-flex align-items-stretch">
     <!-- Forms Section-->
@@ -63,10 +56,10 @@
                             </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">Basic Form</h3>
+                            <h3 class="h4">个人信息 注册页面</h3>
                         </div>
                         <div class="card-body">
-                            <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            <p>以下信息为用户必填项</p>
                             <form action="Register" method="post" >
                                 <div class="form-group">
                                     <label class="form-control-label">用户名</label>
@@ -107,8 +100,6 @@
                                     <label class="form-control-label">电话</label>
                                     <input type="text"name="phone_number" placeholder="phone_number" class="form-control">
                                 </div>
-
-
                                 <div class="form-group" style="margin-left: 40%">
                                     <input type="submit" value="Sign up" class="btn btn-primary">
                                 </div>
