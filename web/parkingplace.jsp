@@ -5,76 +5,82 @@
   Time: 19:40
   To change this template use File | Settings | File Templates.
 --%>
+
+
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
 
-<html>
+
+
+
+<html lang="zh-cn">
 <head>
-    <title>按日期查询车位结果</title>
-    <style type="text/css">
-        #table thead, #table-3 tr {
-            border-top-width: 1px;
-            border-top-style: solid;
-            border-top-color: rgb(235, 242, 224);
-        }
-        #table {
-            border-bottom-width: 1px;
-            border-bottom-style: solid;
-            border-bottom-color: rgb(235, 242, 224);
-        }
 
-        /* Padding and font style */
-        #table td, #table th {
-            padding: 15px 75px;
-            font-size: 12px;
-            font-family: Verdana;
-            color: rgb(33, 38, 24);
-        }
-
-        /* Alternating background colors */
-        #table tr:nth-child(even) {
-            background: rgb(169, 169, 169)
-        }
-        #table tr:nth-child(odd) {
-            background: #FFF
-        }
-
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>showfee</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="template/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="template/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="template/css/fontastic.css">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="template/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="template/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="template/img/favicon.ico">
 </head>
+<!--<script src="js/Url.js"></script>-->
 <body>
-<table id="table">
-    <tr>
-        <th>车位号</th>
-        <th>停车场</th>
-        <th>车牌号</th>
-        <th>开始停车时间</th>
-        <th>结束停车时间</th>
-    </tr>
+<app id="app" :info="info" :state="state">
+    <!-- Content -->
+    <!-- 填写内容 -->
+    <div class="card" style="margin: 10px">
+
+        <div class="card-header d-flex align-items-center">
+            <h3 class="h4">费用记录</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+        <tr>
+            <th>车位号</th>
+            <th>停车场</th>
+            <th>车牌号</th>
+            <th>开始停车时间</th>
+            <th>结束停车时间</th>
+        </tr>
+                    </thead>
+                    <tbody>
         <%
-           request.setCharacterEncoding("utf-8");
-           String start=request.getParameter("start");
-           String end=request.getParameter("end");
+            request.setCharacterEncoding("utf-8");
+            String start=request.getParameter("start");
+            String end=request.getParameter("end");
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-
                 String url = "jdbc:mysql://118.25.154.83:3306/esparking"; //数据库名
                 String username1 = "root";  //数据库用户名
                 String password = "123456";  //数据库用户密码
                 Connection conn = DriverManager.getConnection(url, username1, password);  //连接状态
-
                 if(conn != null){
-
-
                     Statement stmt = null;
                     ResultSet rs = null;
                     String sql = "SELECT * FROM showparkingplace;";  //查询语句
                     stmt = conn.createStatement();
                     rs = stmt.executeQuery(sql);
-
-
                     while (rs.next()) {
-                       String parkingplace_ID=rs.getString("parkingplace_ID");
+                        String parkingplace_ID=rs.getString("parkingplace_ID");
                         String parking_name=rs.getString("parking_name");
                         String car_number=rs.getString("car_number");
                         String start_time=rs.getString("start_time");
@@ -100,7 +106,7 @@
                         }
                         else if(!start_time.equals("null")&&!end_time.equals("null"))
                         {   if(start.compareTo(start_time)<0&&end.compareTo(end_time)>0)
-                            {
+                        {
                             out.print("<tr>");
                             out.print("<td>");
                             out.print(parkingplace_ID);
@@ -129,7 +135,52 @@
                 out.print("数据库连接异常！");
             }
         %>
+                    </tbody>
 
-</table>
+                </table>
+            </div>
+        </div>
+    </div>
+</app>
+<!-- JavaScript files-->
+<script src="template/vendor/jquery/jquery.min.js"></script>
+<script src="template/vendor/popper.js/umd/popper.min.js"></script>
+<script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="template/vendor/jquery.cookie/jquery.cookie.js"></script>
+<script src="template/vendor/chart.js/Chart.min.js"></script>
+<script src="template/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="template/js/charts-home.js"></script>
+<!-- Main File-->
+<script src="template/js/front.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="components.js"></script>
+<script src="js/convert.js"></script>
+<script src="js/common.js"></script>
+<script>
+    <!-- Create a Vue app -->
+    let app = new Vue({
+        el: '#app',
+        data: {
+            // 用于存储用户的状态
+            state: common.defaultAppState(),
+            // 用于存储app的信息
+            info: {
+                title: '模板代码',
+                menu: common.template
+            },
+            // 添加其他需要存储的数据
+        },
+        methods: {
+            init: function () {
+                common.getAppState((state) => app.state = state)
+                // 添加初始化代码
+            }
+        }
+    })
+
+    window.addEventListener('load', () => {
+        app.init();
+    });
+</script>
 </body>
 </html>

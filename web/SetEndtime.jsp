@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: 孤独之星
+  Date: 2021/1/11
+  Time: 14:54
+  To change this template use File | Settings | File Templates.
+--%>
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -38,25 +45,21 @@
     <!-- 填写内容 -->
     <div class="card">
         <div class="card-header d-flex align-items-center">
-            <h3 class="h4">根据日期查询车位记录</h3>
+            <h3 class="h4">手动设置结束时间</h3>
         </div>
         <div class="card-body" style="margin: 10px">
-    <form action="parkingplace.jsp"method="post" >
+            <form action="setend_time.jsp"method="post" >
 
-            <div class="form-group">
-            <label class="form-control-label">开始时间</label>
-            <input type="text" name="start" id="start" class="form-control">
-                <small>时间格式：年-月-日 时：分：秒</small>
-            </div>
-            <div class="form-group">
-            <label class="form-control-label">结束时间</label>
-            <input type="text" name="end" id="end" class="form-control">
-             </div>
+                <div class="form-group">
+                    <label class="form-control-label">车位号</label>
+                    <input type="text" name="parkingplace_ID" id="parkingplace_ID" class="form-control">
 
-        <div class="form-group">
-            <input type="submit" value="查询" class="btn btn-primary">
-        </div>
-    </form>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="确认结束" class="btn btn-primary">
+                </div>
+            </form>
         </div>
     </div>
 </app>
