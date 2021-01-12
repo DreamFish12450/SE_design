@@ -52,6 +52,7 @@ public class writeloginServlet extends HttpServlet {
             session.setAttribute("sex",u1.getSex());
             session.setAttribute("ID_number",u1.getID_number());
             session.setAttribute("balance",u1.getBalance());
+            session.setAttribute("phone_number",u1.getPhone_number());
             if(amount!=null){
                 session.setAttribute("VIP_level",amount.getVip_level());
                 session.setAttribute("totalMoney",amount.getTotal_amount());
@@ -70,7 +71,7 @@ public class writeloginServlet extends HttpServlet {
         }
         else if(p1!=null){
             System.out.println("管理员登录！");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher(request.getContextPath()+"/guide.jsp").forward(request, response);
         }
         else {
             System.out.println("err");
