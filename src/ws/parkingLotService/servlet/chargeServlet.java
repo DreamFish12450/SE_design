@@ -25,9 +25,6 @@ public class chargeServlet extends HttpServlet {
         try {
             int amount = 0;
             if(request.getParameter("amount")!=null) amount= Integer.parseInt(String.valueOf(request.getParameter("amount")));
-
-
-
             String errorInfo= "no";
             HttpSession session = request.getSession();
             String username = (String) session.getAttribute("username");//TODO delete
