@@ -73,7 +73,7 @@
 <!-- Main File-->
 <script src="template/js/front.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="components.js"></script>
+<script src="components1.js"></script>
 <script src="js/convert.js"></script>
 <script src="js/common.js"></script>
 <script>
@@ -99,6 +99,13 @@
     })
 
     window.addEventListener('load', () => {
+        for(let i=1;i<document.querySelectorAll('ul > li > a').length;i++){
+            let href=document.querySelectorAll('ul > li > a')[i].getAttribute("href")
+            console.log(href)
+            if(window.location.href === href){
+                document.querySelectorAll('ul > li ')[i].setAttribute("class","active")
+            }
+        }
         app.init();
     });
 </script>
