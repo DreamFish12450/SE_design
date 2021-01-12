@@ -203,7 +203,7 @@
                     </div>
                     <div class="card-body text-center">
                         <button type="button" data-toggle="modal" data-target="#myModal" style="margin-top: -300px"
-                                class="btn btn-primary">&nbsp;绑 定 身 份 证 &nbsp;
+                                class="btn btn-primary">&nbsp;绑 定 人 脸 &nbsp;
                         </button>
                         <!-- Modal-->
 
