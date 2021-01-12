@@ -26,10 +26,12 @@ public class updateParkingTimeServlet extends HttpServlet {
 
             //int parkingId, int location_x , int location_y
             HttpSession session = request.getSession();
-            String parkingId = (String) request.getParameter("parkingId");
-            String location_x =(String) request.getParameter("location_x");
-            String location_y =(String) request.getParameter("location_y");
+            String parkingId = (String) request.getParameter("parking_id");
+            String location_x =(String) request.getParameter("car_x");
+            String location_y =(String) request.getParameter("car_y");
+            //System.out.println("parkingId:"+parkingId+"location_x:"+location_x+"location_y"+location_y);
             UpdateParkingTime.updateParkingTime(Integer.parseInt(parkingId),Integer.parseInt(location_x),Integer.parseInt(location_y));
+            //UpdateParkingTime.updateParkingTime(1,1,1);
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json;charset=utf-8");
             /*返回数据*/

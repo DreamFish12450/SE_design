@@ -46,11 +46,11 @@
             $.ajax({
                 type: 'post',
                 cache: 'false',
-                data: {car_number: carNumber,whether_new:temp},
+                // data: {car_number: carNumber,whether_new:temp},
                 url: '<%=application.getContextPath()%>/updateParkingTime.do',
-                success: function (data) {
-                    console.log(data)
-                }
+                // success: function (data) {
+                //     console.log(data)
+                // }
             })
 
         }
