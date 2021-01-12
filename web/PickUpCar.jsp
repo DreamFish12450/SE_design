@@ -39,20 +39,8 @@
         //
         // }
         function retu(){
-            document.forms[0].action="<%=application.getContextPath()%>/updateParkingTime.do";
+            document.forms[0].action="updatePickUpTime.do";
             document.forms[0].submit();
-        }
-        formSubmit = function (){
-            $.ajax({
-                type: 'post',
-                cache: 'false',
-                // data: {car_number: carNumber,whether_new:temp},
-                url: '<%=application.getContextPath()%>/updateParkingTime.do',
-                // success: function (data) {
-                //     console.log(data)
-                // }
-            })
-
         }
     </script>
     <style>
@@ -74,6 +62,7 @@
     </style>
 </head>
 <body onload="draw('canvas');">
+<form action="" method="post">
 <h1 align="center">ParkingLot</h1>
 <%--<canvas id="canvas" width="1500" height="1500" ></canvas>--%>
 <%--<%--%>
@@ -111,10 +100,11 @@
                 let str = $('.car_y').html()+"+"+$('.car_x').html()
 
                 document.getElementById(str).style.background="LightSkyBlue"
-                $(document.getElementById(str)).append("<button  class='btn btn-primary' onclick='formSubmit()' >停车完毕</button>")
+                $(document.getElementById(str)).append("<button  class='btn btn-primary' onclick='retu()'>取车完毕</button>")
             }
         })
     }
 </script>
+</form>
 </body>
 </html>
