@@ -67,6 +67,56 @@
             request.setCharacterEncoding("utf-8");
             String start=request.getParameter("start");
             String end=request.getParameter("end");
+            while(start.length()<10&&start.length()>6)
+            {
+                if(start.length()==9)
+                {
+                    if(start.charAt(6)=='-')
+                    {
+                        StringBuffer sb = new StringBuffer();
+                        sb.append(start).insert(5,'0');
+                        start=sb.toString();
+                    }
+                    else
+                    {
+                        StringBuffer sb = new StringBuffer();
+                        sb.append(start).insert(8,'0');
+                        start=sb.toString();
+                    }
+                }
+                else
+                {
+                    StringBuffer sb = new StringBuffer();
+                    sb.append(start).insert(5,'0').insert(8,'0');
+                    start=sb.toString();
+                }
+            }
+            while(end.length()<10&&end.length()>6)
+            {
+                if(end.length()==9)
+                {
+                    if(end.charAt(6)=='-')
+                    {
+                        StringBuffer sb = new StringBuffer();
+                        sb.append(end).insert(5,'0');
+                        end=sb.toString();
+                    }
+                    else
+                    {
+                        StringBuffer sb = new StringBuffer();
+                        sb.append(end).insert(8,'0');
+                        end=sb.toString();
+                    }
+                }
+                else
+                {
+                    StringBuffer sb = new StringBuffer();
+                    sb.append(end).insert(5,'0').insert(8,'0');
+                    end=sb.toString();
+                }
+            }
+            System.out.println(start);
+            System.out.println(end);
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 String url = "jdbc:mysql://118.25.154.83:3306/esparking"; //数据库名
@@ -85,6 +135,10 @@
                         String car_number=rs.getString("car_number");
                         String start_time=rs.getString("start_time");
                         String end_time=rs.getString("end_time");
+
+
+
+
                         if(start.equals("")||end.equals("")) {
                             out.print("<tr>");
                             out.print("<td>");
@@ -104,8 +158,10 @@
                             out.print("</td>");
                             out.print("</tr>");
                         }
-                        else if(!start_time.equals("null")&&!end_time.equals("null"))
-                        {   if(start.compareTo(start_time)<0&&end.compareTo(end_time)>0)
+
+                        else if(!start_time.equals("null")&&!end_time.isEmpty())
+                        {
+                            if(start.compareTo(start_time.substring(0,10))<=0&& end.compareTo(end_time.substring(0,10))>=0)
                         {
                             out.print("<tr>");
                             out.print("<td>");
@@ -132,7 +188,7 @@
                 }
             }catch (Exception e) {
                 //e.printStackTrace();
-                out.print("数据库连接异常！");
+                System.out.print("数据库连接异常！");
             }
         %>
                     </tbody>

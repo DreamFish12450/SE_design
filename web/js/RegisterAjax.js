@@ -23,7 +23,7 @@ function FaceRegister() {
                 }
                 else{
                 	alert(data["errorMsg"])
-                    Facelogin();
+
                 }
             },
             error:function () {
@@ -38,6 +38,6 @@ function countDown(secs){
     if(--secs>0){
         setTimeout("countDown("+secs+")",1000);
     }else{
-        location.href='/inite.jsp';
+        location.href=`${str}/inite.jsp`;
     }
 }

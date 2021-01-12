@@ -63,19 +63,19 @@
                             <form action="Register" method="post" >
                                 <div class="form-group">
                                     <label class="form-control-label">用户名</label>
-                                    <input type="text" name="username" placeholder="username" class="form-control">
+                                    <input type="text" name="username" placeholder="username" class="form-control" maxlength="8" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">密码</label>
-                                    <input type="password"  name="password" placeholder="密码" class="form-control">
+                                    <input type="password"  name="password" placeholder="密码" class="form-control" maxlength="15" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">姓名</label>
-                                    <input type="text" name="name" placeholder="name" class="form-control">
+                                    <input type="text" name="name" placeholder="name" class="form-control" maxlength="8" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">年龄</label>
-                                    <input type="text" name="age" placeholder="age" class="form-control">
+                                    <input type="text" name="age" placeholder="age" class="form-control" maxlength="3" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">性别</label>
@@ -83,7 +83,7 @@
 
                                         <div class="col-sm-9">
                                             <label class="checkbox-inline" style="margin-right: 20%">
-                                                <input id="inlineRadio1" name="radio1" type="radio" value="true"> 男
+                                                <input id="inlineRadio1" name="radio1" type="radio" value="true" > 男
                                             </label>
                                             <label class="checkbox-inline">
                                                 <input id="inlineRadio2" name="radio1" type="radio" value="false"> 女
@@ -94,14 +94,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">身份证</label>
-                                    <input type="text" name="ID_number" placeholder="ID_number" class="form-control">
+                                    <input type="text" name="ID_number" placeholder="ID_number" class="form-control" maxlength="20" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">电话</label>
-                                    <input type="text"name="phone_number" placeholder="phone_number" class="form-control">
+                                    <input type="text"name="phone_number" placeholder="phone_number" class="form-control"maxlength="13" required>
                                 </div>
                                 <div class="form-group" style="margin-left: 40%">
-                                    <input type="submit" value="Sign up" class="btn btn-primary">
+                                    <input type="submit" value="Sign up" class="btn btn-primary" >
                                 </div>
                             </form>
                         </div>

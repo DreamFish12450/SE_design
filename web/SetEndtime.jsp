@@ -51,8 +51,8 @@
             <form action="setend_time.jsp"method="post" >
 
                 <div class="form-group">
-                    <label class="form-control-label">车位号</label>
-                    <input type="text" name="parkingplace_ID" id="parkingplace_ID" class="form-control">
+                    <label class="form-control-label">车牌号</label>
+                    <input type="text" name="car_number" id="car_number" class="form-control">
 
                 </div>
 
