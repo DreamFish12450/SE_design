@@ -126,7 +126,7 @@
 <div class="container" style="height: 650px;background: rgba(255,255,255,0.5);">
     <div class="header-text" style="margin-top: 50px;">
 
-        <p class="header-text-description">Student Login</p>
+        <p class="header-text-description">User Login</p>
     </div>
     <div align="left" style="float: left;display: block;margin-left: 25%; margin-top:3% ;">
         <table> <tr><button type="submit" class="choice" style="border-radius:0px;background-color:rgb(113, 227, 247);color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></tr>
@@ -150,7 +150,7 @@
         <span class="inputTip" style="margin-left: 35%"></span>
         <div align="left" style="float: left;display: block;margin-top: 50px; ">
             <button type="submit" name="login"style="margin-left:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-            <button type="button" name="Register" style="margin-left:40px ;"onclick="window.location.href='http://localhost:8080/SE_design_Web_exploded/inforegist.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button type="button" name="Register" style="margin-left:40px ;"onclick="window.location.href='inforegist.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
         </div>
 
 

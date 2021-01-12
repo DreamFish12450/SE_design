@@ -50,7 +50,7 @@ pageEncoding="utf-8"%>
 			</div>
 			<h2 class="title">Register</h2>
 
-			<input style="display:block;margin:0 auto" type="text" name="imgId" id="imgId" value="" placeholder="username"/>
+			<input style="display:block;margin:0 auto" type="text" name="imgId" id="imgId" disabled value="<%=session.getAttribute("username")%>" placeholder="username"/>
 			<!--</form>-->
 		</div>
 		<br />

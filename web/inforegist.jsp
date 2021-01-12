@@ -33,14 +33,7 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="template/img/favicon.ico">
 </head>
-<%String mess=(String)request.getAttribute("error");
-    if("".equals(mess)&&mess==null)
-    {}else{%>
-<script type="text/javascript">
-    alert("<%=mess%>");
-</script>
-    <%}%>
-<body >
+
 
 <div class="page-content d-flex align-items-stretch">
     <!-- Forms Section-->
@@ -63,26 +56,26 @@
                             </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">Basic Form</h3>
+                            <h3 class="h4">个人信息 注册页面</h3>
                         </div>
                         <div class="card-body">
-                            <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            <p>以下信息为用户必填项</p>
                             <form action="Register" method="post" >
                                 <div class="form-group">
                                     <label class="form-control-label">用户名</label>
-                                    <input type="text" name="username" placeholder="username" class="form-control">
+                                    <input type="text" name="username" placeholder="username" class="form-control" maxlength="8" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">密码</label>
-                                    <input type="password"  name="password" placeholder="密码" class="form-control">
+                                    <input type="password"  name="password" placeholder="密码" class="form-control" maxlength="15" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">姓名</label>
-                                    <input type="text" name="name" placeholder="name" class="form-control">
+                                    <input type="text" name="name" placeholder="name" class="form-control" maxlength="8" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">年龄</label>
-                                    <input type="text" name="age" placeholder="age" class="form-control">
+                                    <input type="text" name="age" placeholder="age" class="form-control" maxlength="3" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">性别</label>
@@ -90,7 +83,7 @@
 
                                         <div class="col-sm-9">
                                             <label class="checkbox-inline" style="margin-right: 20%">
-                                                <input id="inlineRadio1" name="radio1" type="radio" value="true"> 男
+                                                <input id="inlineRadio1" name="radio1" type="radio" value="true" > 男
                                             </label>
                                             <label class="checkbox-inline">
                                                 <input id="inlineRadio2" name="radio1" type="radio" value="false"> 女
@@ -101,16 +94,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">身份证</label>
-                                    <input type="text" name="ID_number" placeholder="ID_number" class="form-control">
+                                    <input type="text" name="ID_number" placeholder="ID_number" class="form-control" maxlength="20" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">电话</label>
-                                    <input type="text"name="phone_number" placeholder="phone_number" class="form-control">
+                                    <input type="text"name="phone_number" placeholder="phone_number" class="form-control"maxlength="13" required>
                                 </div>
-
-
                                 <div class="form-group" style="margin-left: 40%">
-                                    <input type="submit" value="Sign up" class="btn btn-primary">
+                                    <input type="submit" value="Sign up" class="btn btn-primary" >
                                 </div>
                             </form>
                         </div>
@@ -124,7 +115,7 @@
 </body>
 <script src="template/vendor/jquery/jquery.min.js"></script>
 <script src="template/vendor/popper.js/umd/popper.min.js"></script>
-<script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
+<%--<script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>--%>
 <script src="template/vendor/jquery.cookie/jquery.cookie.js"></script>
 <script src="template/vendor/chart.js/Chart.min.js"></script>
 <script src="template/vendor/jquery-validation/jquery.validate.min.js"></script>

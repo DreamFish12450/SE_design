@@ -48,11 +48,13 @@ public class updatePickUpTimeServlet extends HttpServlet {
             int balance = userW.getBalance();
             if(money <= balance){
                 parkingFeeDao.updateBalance(username, (int) (balance-money));
+                request.setAttribute("msg", "支付成功！");
+                request.getRequestDispatcher("showFinished.jsp").forward(request, response);
             }
             else{
                 /*返回数据*/
                 //request.setAttribute("msg", "删除成功！");
-                //   request.getRequestDispatcher("showStaff.jsp").forward(request, response);
+                   request.getRequestDispatcher("charge.jsp").forward(request, response);
             }
         } catch (Exception throwables) {
             throwables.printStackTrace();
