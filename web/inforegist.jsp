@@ -115,7 +115,7 @@
 </body>
 <script src="template/vendor/jquery/jquery.min.js"></script>
 <script src="template/vendor/popper.js/umd/popper.min.js"></script>
-<script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
+<%--<script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>--%>
 <script src="template/vendor/jquery.cookie/jquery.cookie.js"></script>
 <script src="template/vendor/chart.js/Chart.min.js"></script>
 <script src="template/vendor/jquery-validation/jquery.validate.min.js"></script>

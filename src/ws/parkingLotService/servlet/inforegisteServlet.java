@@ -61,7 +61,7 @@ public class inforegisteServlet extends HttpServlet {
                     ud.add(u1);
                     System.out.println("添加成功：123");
 //                    request.getRequestDispatcher("/inforegist.jsp").forward(request, response);
-                    response.sendRedirect("http://localhost:8080/SE_design_Web_exploded/register.jsp");
+                    response.sendRedirect(request.getContextPath()+"/register.jsp");
                     System.out.println("跳转");
                 }
                 else

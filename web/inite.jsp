@@ -150,7 +150,7 @@
         <span class="inputTip" style="margin-left: 35%"></span>
         <div align="left" style="float: left;display: block;margin-top: 50px; ">
             <button type="submit" name="login"style="margin-left:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-            <button type="button" name="Register" style="margin-left:40px ;"onclick="window.location.href='http://localhost:8080/SE_design_Web_exploded/inforegist.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button type="button" name="Register" style="margin-left:40px ;"onclick="window.location.href='inforegist.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
         </div>
 
 

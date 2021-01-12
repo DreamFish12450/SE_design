@@ -158,28 +158,29 @@
 
                 <div class="chart col-lg-3 col-12" style="height: 400px">
                     <!-- Bar Chart   -->
-                    <div class="bar-chart has-shadow bg-white"style="height: 400px">
+                    <div class="bar-chart has-shadow bg-white" style="height: 400px">
                         <div class="renewal-icon">
-                            <img src="./img/set.png" style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"></img>
+                            <img src="./img/set.png" style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"/>
                         </div>
                         <div class="title"><strong class="text-violet"></strong><br><small></small></div>
                         <canvas id="barChartHome1"></canvas>
+                    </div>
                         <div class="card-body text-center">
-                            <button type="button" data-toggle="modal" data-target="#myModal" style="margin-top: -450px"
-                                    class="btn btn-primary"style="margin-top: -300px">&nbsp;修 改 密 码&nbsp;
+                            <button type="button" data-toggle="modal" data-target="#myModal"
+                                    class="btn btn-primary" style="margin-top: -300px">&nbsp;修 改 密 码&nbsp;
                             </button>
                             <!-- Modal-->
 
-                        </div>
+
 
                     </div>
 
                 </div>
                 <div class="chart col-lg-3 col-12" style="height: 400px">
                     <!-- Bar Chart   -->
-                    <div class="bar-chart has-shadow bg-white"style="height: 400px">
+                    <div class="bar-chart has-shadow bg-white" style="height: 400px">
                         <div class="renewal-icon">
-                            <img src="./img/my.png" style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"></img>
+                            <img src="./img/my.png" style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"/>
                         </div>
                         <div class="title"><strong class="text-violet"></strong><br><small></small></div>
                         <canvas id="barChartHome2"></canvas>
