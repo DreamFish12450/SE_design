@@ -14,7 +14,7 @@
 <%
 
     request.setCharacterEncoding("utf-8");
-    String parkingplace_ID = request.getParameter("parkingplace_ID");
+    String car_number = request.getParameter("car_number");
 
     try {
         Class.forName("com.mysql.jdbc.Driver");
@@ -30,11 +30,11 @@
         String nowdate=df.format(new Date());// new Date()为获取当前系统时间
 
         if(conn != null){
-            String sql = "update parkingplace set end_time=?where parkingplace_ID=?";
+            String sql = "update parkingplace set end_time=?where car_number=?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,nowdate);
-            ps.setString(2,parkingplace_ID);
+            ps.setString(2,car_number);
 
             ps.executeUpdate();
             conn.close();

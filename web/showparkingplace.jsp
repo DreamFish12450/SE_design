@@ -12,7 +12,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>showfee</title>
+    <title>showparkingplace</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="template/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="template/img/favicon.ico">
+    <script type="text/javascript" src="js/showdate.js"></script>
+
 </head>
 <!--<script src="js/Url.js"></script>-->
 <body>
@@ -45,12 +47,12 @@
 
             <div class="form-group">
             <label class="form-control-label">开始时间</label>
-            <input type="text" name="start" id="start" class="form-control">
-                <small>时间格式：年-月-日 时：分：秒</small>
+            <input type="text" name="start" id="time"value="选择时间" onClick="return Calendar('time');"class="form-control">
+
             </div>
             <div class="form-group">
             <label class="form-control-label">结束时间</label>
-            <input type="text" name="end" id="end" class="form-control">
+            <input type="text" name="end" id="time1"value="选择时间"onClick="return Calendar('time1');" class="form-control">
              </div>
 
         <div class="form-group">
