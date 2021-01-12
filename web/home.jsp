@@ -284,7 +284,7 @@
     })
 
     window.addEventListener('load', () => {
-        app.init();
+        // app.init();
     });
 </script>
 </body>
