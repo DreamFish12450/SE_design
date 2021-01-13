@@ -122,8 +122,8 @@
                 let index = window.location.href.lastIndexOf("\/")
                 let str = window.location.href.substring(0, index)
                 if(data === "\"finish\"")  {
-                    document.getElementById('btn').style.display='none'
-                    document.getElementById('go_to_btn').style.visibility='visible'
+                    // document.getElementById('btn').style.display='none'
+                    // document.getElementById('go_to_btn').style.visibility='visible'
                     alert('缴费成功');
                     setTimeout("javascript:location.href='home.jsp'", 0);
                     // location.assign()
@@ -133,7 +133,7 @@
                 else if(data === "\"unfinished\"") {
                     setTimeout("javascript:location.href='charge..jsp'", 0);
                     // location.assign()
-                    
+
                     window.event.returnValue = false
                 }
             },

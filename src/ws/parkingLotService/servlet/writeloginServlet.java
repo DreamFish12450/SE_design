@@ -71,7 +71,8 @@ public class writeloginServlet extends HttpServlet {
         }
         else if(p1!=null){
             System.out.println("管理员登录！");
-            request.getRequestDispatcher(request.getContextPath()+"/guide.jsp").forward(request, response);
+            request.getRequestDispatcher("/showfee.jsp").forward(request, response);
+//            request.getRequestDispatcher(request.getContextPath()+"/showfee.jsp").forward(request, response);
         }
         else {
             System.out.println("err");

@@ -32,8 +32,8 @@ public class chargeServlet extends HttpServlet {
             String request_password = (String) request.getParameter("pass");
             if(session_password.equals(request_password)){
                 AmountService.charges(username,amount);
-
                 session.setAttribute("balance", UserService.getUserPasswordAndBalance(username).getBalance());
+                session.setAttribute("totalMoney",AmountService.getAmount(username).getTotal_amount());
                 System.out.println("充值成功");
             }else {
                 errorInfo = "密码错误";
