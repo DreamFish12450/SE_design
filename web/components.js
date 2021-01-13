@@ -95,12 +95,18 @@ Vue.component('app', {
           <ul class="list-unstyled">
           
             <!-- 与书籍有关的三个相关界面，查找功能类似，在订阅功能上略有区别 -->
+<!--            <li>-->
+<!--              <a href="orderBook.html"><i class="icon-flask"></i>个人信息</a>-->
+<!--            </li>-->
             <li>
               <a href="orderBook.html"><i class="icon-flask"></i>个人信息</a>
             </li>
             <li>
-              <a href="${window.ppath}/showpersonalfee.jsp"><i class="icon-flask"></i>账单查询</a>
+              <a href="${window.ppath}/home.jsp"><i class="icon-flask"></i>首页</a>
             </li>
+			<li>
+			  <a href="${window.ppath}/showpersonalfee.jsp"><i class="icon-flask"></i>账单查询</a>
+			</li>
             <li>
               <a href="${window.ppath}/chooseCar.jsp"><i class="icon-flask"></i>出行模块</a>
             </li>
