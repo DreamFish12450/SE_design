@@ -90,7 +90,9 @@
 <%--session.setAttribute("car_y",3);--%>
 <%--%>--%>
 <h3>您预订的车位在第<span class="car_x">${sessionScope.car_x}</span>列，第<span class="car_y">${sessionScope.car_y}</span>行</h3>
+<h3>推荐路线：从此出入口向前驶<span class="car_x">(${sessionScope.car_x}*2-0.5)*2.5</span>米后右转，然后直行<span class="car_y">(${sessionScope.car_y}-0.5)*5</span>米后车位在你的右方</h3>
 <span class="parking_id" style="visibility: hidden">${sessionScope.parking_id}</span>
+<span class="id" style="visibility: hidden">${sessionScope.id}</span>
 <div class="wrapper">
     <c:forEach var="s" begin="1" end="6">
         <c:forEach var="s2" begin="1" end="5">
@@ -122,7 +124,7 @@
         })
 
         let str = $('.car_y').html() + "+" + $('.car_x').html()
-        alert(str);
+        //alert(str);
         document.getElementById(str).style.background = "LightSkyBlue";
         $(document.getElementById(str)).append("<button id='btn'  class='btn btn-primary' >停车完毕</button>");
         document.getElementById('btn').onclick = function () {
@@ -140,7 +142,8 @@
                     console.log(data)
                     let index = window.location.href.lastIndexOf("\/")
                     let str = window.location.href.substring(0, index)
-                    window.location.href = str + '/showMessage.jsp'
+
+                    window.location.href = str + '/PickUpCar.jsp'
                 }
             })
         }
@@ -153,7 +156,5 @@
     }
 
 </script>
-
-
 </body>
 </html>

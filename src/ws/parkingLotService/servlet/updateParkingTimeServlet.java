@@ -36,11 +36,12 @@ public class updateParkingTimeServlet extends HttpServlet {
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json;charset=utf-8");
             /*返回数据*/
-            String result = new Gson().toJson(parkingId);
+            session.setAttribute("msg", "停车成功！");
+            String msg = "停车成功";
+            String result = new Gson().toJson(msg);
             response.getWriter().write(result);
-            request.setAttribute("msg", "停车成功！");
 
-            request.getRequestDispatcher("showMessage.jsp").forward(request, response);
+
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }

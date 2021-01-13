@@ -70,7 +70,12 @@
 <%--session.setAttribute("car_y",3);--%>
 <%--%>--%>
 <h3>您预订的车位在第<span class="car_x">${sessionScope.car_x}</span>列，第<span class="car_y">${sessionScope.car_y}</span>行</h3>
-<div class="wrapper">
+    <h3>推荐路线：从此出入口向前驶<span class="car_x"><c:out value="(${sessionScope.car_x}*2-0.5)*2.5"/></span>米后右转，然后直行<span class="car_y">(${sessionScope.car_y}-0.5)*5</span>米后车位在你的右方</h3>
+    <span class="parking_id" style="visibility: hidden">${sessionScope.parking_id}</span>
+    <span class="username" style="visibility: hidden">${sessionScope.username}</span>
+    <span class="parkingplace_id" style="visibility: hidden">${sessionScope.parkingplace_id}</span>
+    <span class="car_number" style="visibility: hidden">${sessionScope.car_number}</span>
+    <div class="wrapper">
     <c:forEach var="s" begin="1" end="6">
         <c:forEach var="s2" begin="1" end="5">
             <div class="box" id="${s}+${s2}"
@@ -81,28 +86,51 @@
 <%--        <br>--%>
         <!-- 这个是输出的标签，相当于System.out.println(s); -->
     </c:forEach>
-</div>
+    </div>
 <script>
     window.onload = function (){
         $.ajax({
-            type:'get',
-            cache: false,
-            data: {},
-            url: '<%=application.getContextPath()%>/initParkingPlace.do',
-            success(data){
-                console.log(data);
-                data.forEach((value)=>{
-                    // console.log(value.location_x+"+"+value.location_y)
-                    let str = value.location_y+"+"+value.location_x
-                    document.getElementById(str).style.background = "SpringGreen"
-                    $(document.getElementById(str)).append('<p>空闲</p>')
-                })
-                let str = $('.car_y').html()+"+"+$('.car_x').html()
+                type: 'get',
+                cache: false,
+                data: {},
+                url: '<%=application.getContextPath()%>/initParkingPlace.do',
+                success(data) {
+                    console.log(data);
+                    data.forEach((value) => {
+                        // console.log(value.location_x+"+"+value.location_y)
+                        let str = value.location_y + "+" + value.location_x
+                        document.getElementById(str).style.background = "SpringGreen"
+                        $(document.getElementById(str)).append('<p>空闲</p>')
+                    })
+                }
+            })
+            //String parkingId,int parkingplace_id,String username,String car_number
+            let str = $('.car_y').html() + "+" + $('.car_x').html()
+            //alert(str);
+            document.getElementById(str).style.background = "LightSkyBlue";
+            $(document.getElementById(str)).append("<button id='btn'  class='btn btn-primary' >取车完毕</button>");
+        document.getElementById('btn').onclick = function () {
+            let username = $('.username').html();
+            let car_number = $('.car_number').html();
+            let parking_id = $(".parking_id").html();
+            let parkingplace_id = $(".parkingplace_id").html();
+            console.log("1111"+username + car_number + parking_id + parkingplace_id)
+            $.ajax({
+                type: 'post',
+                cache: 'false',
+                data: {username: username, car_number: car_number, parking_id: parking_id,parkingplace_id:parkingplace_id},
+                url: '<%=application.getContextPath()%>/updatePickUpTime.do',
+                success: function (data) {
+                    console.log(data)
+                    let index = window.location.href.lastIndexOf("\/")
+                    let str = window.location.href.substring(0, index)
 
-                document.getElementById(str).style.background="LightSkyBlue"
-                $(document.getElementById(str)).append("<button  class='btn btn-primary' onclick='retu()'>取车完毕</button>")
-            }
-        })
+                    //取车成功
+                    if(data === "finish")  {alert('缴费成功');}
+                    else if(data === "unfinished") {window.location.href = str + '/charge.jsp'}
+                }
+            })
+        }
     }
 </script>
 </form>

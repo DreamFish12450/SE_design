@@ -1,5 +1,6 @@
 package ws.parkingLotService.servlet;
 
+import com.google.gson.Gson;
 import main.com.wswenyue.db.dao.impl.ParkingFeeDaoImpl;
 import main.com.wswenyue.db.dao.impl.ParkingPlaceDaoImpl;
 import main.com.wswenyue.db.domain.ParkingPlace;
@@ -25,13 +26,15 @@ public class updatePickUpTimeServlet extends HttpServlet {
 
         try {
 
-            //String parkingId,int parkingplace_id,String username,String car_mumber
+            //String parkingId,int parking's_id,String username,String car_number
             HttpSession session = request.getSession();
-            String parkingId = (String) request.getParameter("parkingId");
-            String parkingplace_id =(String) request.getParameter("parkingplace_id");
-            String username =(String) request.getParameter("username");
-            String car_mumber =(String) request.getParameter("car_mumber");
-            UpdatePickUpTime.UpdatePickUpTime(parkingId,Integer.parseInt(parkingplace_id),username,car_mumber);
+            String parkingId =  request.getParameter("parking_id").trim();
+            System.out.println("here is a test"+request.getParameter("parking_id"));
+            String parkingplace_id =request.getParameter("parkingplace_id").trim();
+            String username = request.getParameter("username").trim();
+            String car_number = request.getParameter("car_number").trim();
+            System.out.println("parkingId:"+parkingId+"parkingplace_id:"+parkingplace_id+"username"+username+"car_number"+car_number);
+            UpdatePickUpTime.UpdatePickUpTime(parkingId,Integer.parseInt(parkingplace_id),username,car_number);
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json;charset=utf-8");
             //扣费 如果账户余额充足则直接扣 写入数据库； 如果账户余额不充足则转向充值页面
@@ -48,13 +51,19 @@ public class updatePickUpTimeServlet extends HttpServlet {
             int balance = userW.getBalance();
             if(money <= balance){
                 parkingFeeDao.updateBalance(username, (int) (balance-money));
-                request.setAttribute("msg", "支付成功！");
-                request.getRequestDispatcher("showFinished.jsp").forward(request, response);
+                String msg = "finish";
+                String result = new Gson().toJson(msg);
+                response.getWriter().write(result);
+//                session.setAttribute("msg", "支付成功！");
+//                request.getRequestDispatcher("showFinished.jsp").forward(request, response);
             }
             else{
+                String msg = "unfinished";
+                String result = new Gson().toJson(msg);
+                response.getWriter().write(result);
                 /*返回数据*/
                 //request.setAttribute("msg", "删除成功！");
-                   request.getRequestDispatcher("charge.jsp").forward(request, response);
+//                   request.getRequestDispatcher("charge.jsp").forward(request, response);
             }
         } catch (Exception throwables) {
             throwables.printStackTrace();

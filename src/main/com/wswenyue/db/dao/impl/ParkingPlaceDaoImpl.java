@@ -27,9 +27,9 @@ public class ParkingPlaceDaoImpl implements ParkingPlaceDao {
     JDBCUTIL jdbcutil = new JDBCUTIL();
 
     @Override
-    public void reservePlace(String car_number, String parking_ID, int location_x, int location_y) throws SQLException, ParseException {
-        final long l = System.currentTimeMillis();
-        final int i = (int) (l % 10000);
+    public void reservePlace(String car_number, String parking_ID, int location_x, int location_y,int i) throws SQLException, ParseException {
+//        final long l = System.currentTimeMillis();
+//        final int i = (int) (l % 10000);
         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
         String sql = "insert into parkingplace values(?,?,?,?,?,?,?,?)";
         SimpleDateFormat temp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

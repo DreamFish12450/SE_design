@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <br><br><br><br><br><br><br><br><br>
-    <div><%String msg=(String)request.getAttribute("msg"); %><%=msg %></div>
+    <div><%String msg=(String)session.getAttribute("msg"); %><%=msg %></div>
     <form action="" method="post">
 <%--      <table align="center">--%>
 <%--          <tr>--%>

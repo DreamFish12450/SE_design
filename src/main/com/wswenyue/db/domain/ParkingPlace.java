@@ -17,6 +17,12 @@ public class ParkingPlace {
         this.location_x = location_x;
         this.location_y = location_y;
     }
+    public ParkingPlace(int location_x,
+                        int location_y,int parkingplace_id) {
+        this.location_x = location_x;
+        this.location_y = location_y;
+        this.parkingplace_id = parkingplace_id;
+    }
 
     public ParkingPlace(int parkingplace_id, String car_number, Date start_time, Date end_time, String parking_id, int status, int location_y, int location_x) {
         this.parkingplace_id = parkingplace_id;
