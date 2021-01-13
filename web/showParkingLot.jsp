@@ -20,24 +20,6 @@
     <link rel="shortcut icon" href="template/img/favicon.ico">
     <script type="text/javascript" src="jquery-3.3.1/jquery-3.3.1.min.js"></script>
     <script>
-        // function draw(id) {
-        //     var canvas = document.getElementById(id);
-        //     if (canvas == null)
-        //         return false;
-        //     var context = canvas.getContext('2d');
-        //     //context.fillStyle = "#eeefff";
-        //     //context.fillRect(0,0,1000,5000);
-        //     for (var i = 0; i < 6; i++) {
-        //         for (var j = 0; j < 5; j++) {
-        //             context.fillStyle = "grey";
-        //             context.strokeStyle = "black";
-        //             context.lineWidth = 1;
-        //             context.fillRect(50 + i * 150, 50 + j * 250, 100, 150);
-        //             context.strokeRect(50 + i * 150, 50 + j * 250, 100, 150);
-        //         }
-        //     }
-        //
-        // }
         function retu() {
             window.onload = function () {
                 alert(111);
@@ -90,9 +72,10 @@
 <%--session.setAttribute("car_y",3);--%>
 <%--%>--%>
 <h3>您预订的车位在第<span class="car_x">${sessionScope.car_x}</span>列，第<span class="car_y">${sessionScope.car_y}</span>行</h3>
-<h3>推荐路线：从此出入口向前驶<span class="car_x">(${sessionScope.car_x}*2-0.5)*2.5</span>米后右转，然后直行<span class="car_y">(${sessionScope.car_y}-0.5)*5</span>米后车位在你的右方</h3>
+<h3>推荐路线：从此出入口向前驶<span class="car_x">${(sessionScope.car_x*2-0.5)*2.5}</span>米后右转，然后直行<span class="car_y">${(sessionScope.car_y-0.5)*5}</span>米后车位在你的右方</h3>
 <span class="parking_id" style="visibility: hidden">${sessionScope.parking_id}</span>
 <span class="id" style="visibility: hidden">${sessionScope.id}</span>
+<span class="plid">${sessionScope.plid}</span>
 <div class="wrapper">
     <c:forEach var="s" begin="1" end="6">
         <c:forEach var="s2" begin="1" end="5">
@@ -126,7 +109,7 @@
         let str = $('.car_y').html() + "+" + $('.car_x').html()
         //alert(str);
         document.getElementById(str).style.background = "LightSkyBlue";
-        $(document.getElementById(str)).append("<button id='btn'  class='btn btn-primary' >停车完毕</button>");
+        $(document.getElementById(str)).append("<button id='btn'  class='btn btn-primary' onclick='goToupdate()'>停车完毕</button>");
         document.getElementById('btn').onclick = function () {
             let car_x = $('.car_x').html();
             let car_y = $('.car_y').html();

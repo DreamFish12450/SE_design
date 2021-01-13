@@ -285,7 +285,14 @@
     })
 
     window.addEventListener('load', () => {
-        // app.init();
+        for(let i=1;i<document.querySelectorAll('ul > li > a').length;i++){
+            let href=document.querySelectorAll('ul > li > a')[i].getAttribute("href")
+            console.log(href)
+            if(window.location.href === href){
+                document.querySelectorAll('ul > li ')[i].setAttribute("class","active")
+            }
+        }
+        app.init();
     });
 </script>
 </body>

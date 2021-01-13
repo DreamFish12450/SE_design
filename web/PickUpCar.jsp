@@ -20,24 +20,7 @@
     <link rel="shortcut icon" href="template/img/favicon.ico">
     <script type="text/javascript" src="jquery-3.3.1/jquery-3.3.1.min.js" ></script>
     <script>
-        // function draw(id) {
-        //     var canvas = document.getElementById(id);
-        //     if (canvas == null)
-        //         return false;
-        //     var context = canvas.getContext('2d');
-        //     //context.fillStyle = "#eeefff";
-        //     //context.fillRect(0,0,1000,5000);
-        //     for (var i = 0; i < 6; i++) {
-        //         for (var j = 0; j < 5; j++) {
-        //             context.fillStyle = "grey";
-        //             context.strokeStyle = "black";
-        //             context.lineWidth = 1;
-        //             context.fillRect(50 + i * 150, 50 + j * 250, 100, 150);
-        //             context.strokeRect(50 + i * 150, 50 + j * 250, 100, 150);
-        //         }
-        //     }
-        //
-        // }
+
         function retu(){
             document.forms[0].action="updatePickUpTime.do";
             document.forms[0].submit();
@@ -60,21 +43,27 @@
             margin: 0 auto;
         }
     </style>
+    <script src="template/vendor/jquery/jquery.min.js"></script>
+    <script src="template/vendor/popper.js/umd/popper.min.js"></script>
+    <script src="template/vendor/jquery.cookie/jquery.cookie.js"></script>
+    <script src="template/vendor/chart.js/Chart.min.js"></script>
+    <script src="template/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="template/js/charts-home.js"></script>
+    <script src="template/js/front.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body onload="draw('canvas');">
 <form action="" method="post">
 <h1 align="center">ParkingLot</h1>
-<%--<canvas id="canvas" width="1500" height="1500" ></canvas>--%>
-<%--<%--%>
-<%--session.setAttribute("car_x",1);--%>
-<%--session.setAttribute("car_y",3);--%>
-<%--%>--%>
+
+
 <h3>您预订的车位在第<span class="car_x">${sessionScope.car_x}</span>列，第<span class="car_y">${sessionScope.car_y}</span>行</h3>
-    <h3>推荐路线：从此出入口向前驶<span class="car_x"><c:out value="(${sessionScope.car_x}*2-0.5)*2.5"/></span>米后右转，然后直行<span class="car_y">(${sessionScope.car_y}-0.5)*5</span>米后车位在你的右方</h3>
+    <h3>推荐路线：从此出入口向前驶<span class="car_x">${(sessionScope.car_x*2-0.5)*2.5}></span>米后右转，然后直行<span class="car_y">${(sessionScope.car_y-0.5)*5}</span>米后车位在你的右方</h3>
     <span class="parking_id" style="visibility: hidden">${sessionScope.parking_id}</span>
     <span class="username" style="visibility: hidden">${sessionScope.username}</span>
-    <span class="parkingplace_id" style="visibility: hidden">${sessionScope.parkingplace_id}</span>
+    <span class="parkingplace_id" style="visibility: hidden">${sessionScope.plid}</span>
     <span class="car_number" style="visibility: hidden">${sessionScope.car_number}</span>
+    <button class="btn btn-primary" onclick="gotoHome()" id="go_to_btn" style="visibility: hidden">回到首页</button>
     <div class="wrapper">
     <c:forEach var="s" begin="1" end="6">
         <c:forEach var="s2" begin="1" end="5">
@@ -108,29 +97,50 @@
             let str = $('.car_y').html() + "+" + $('.car_x').html()
             //alert(str);
             document.getElementById(str).style.background = "LightSkyBlue";
-            $(document.getElementById(str)).append("<button id='btn'  class='btn btn-primary' >取车完毕</button>");
-        document.getElementById('btn').onclick = function () {
-            let username = $('.username').html();
-            let car_number = $('.car_number').html();
-            let parking_id = $(".parking_id").html();
-            let parkingplace_id = $(".parkingplace_id").html();
-            console.log("1111"+username + car_number + parking_id + parkingplace_id)
-            $.ajax({
-                type: 'post',
-                cache: 'false',
-                data: {username: username, car_number: car_number, parking_id: parking_id,parkingplace_id:parkingplace_id},
-                url: '<%=application.getContextPath()%>/updatePickUpTime.do',
-                success: function (data) {
-                    console.log(data)
-                    let index = window.location.href.lastIndexOf("\/")
-                    let str = window.location.href.substring(0, index)
+            $(document.getElementById(str)).append("<button id='btn'  class='btn btn-primary' onclick='testupdate()' >取车完毕</button>");
 
-                    //取车成功
-                    if(data === "finish")  {alert('缴费成功');}
-                    else if(data === "unfinished") {window.location.href = str + '/charge.jsp'}
+    }
+    gotoHome = ()=>{
+        let index = window.location.href.lastIndexOf("\/")
+        let str = window.location.href.substring(0, index)
+        window.location.href = str +'/home.jsp'
+    }
+    testupdate = function () {
+        let username = $('.username').html();
+        let car_number = $('.car_number').html();
+        let parking_id = $(".parking_id").html();
+        let parkingplace_id = $(".parkingplace_id").html();
+        console.log("1111"+username + car_number + parking_id + parkingplace_id)
+        $.ajax({
+            async:false,
+            type: 'post',
+            cache: 'false',
+            data: {username: username, car_number: car_number, parking_id: parking_id,parkingplace_id:parkingplace_id},
+            url: '<%=application.getContextPath()%>/updatePickUpTime.do',
+            success: function (data) {
+                // alert(data)
+                let index = window.location.href.lastIndexOf("\/")
+                let str = window.location.href.substring(0, index)
+                if(data === "\"finish\"")  {
+                    document.getElementById('btn').style.display='none'
+                    document.getElementById('go_to_btn').style.visibility='visible'
+                    alert('缴费成功');
+                    setTimeout("javascript:location.href='home.jsp'", 0);
+                    // location.assign()
+                    window.event.returnValue = false
+
                 }
-            })
-        }
+                else if(data === "\"unfinished\"") {
+                    setTimeout("javascript:location.href='charge..jsp'", 0);
+                    // location.assign()
+                    
+                    window.event.returnValue = false
+                }
+            },
+            error:function (data){
+                alert(data)
+            }
+        })
     }
 </script>
 </form>

@@ -27,12 +27,13 @@ public class ReserveParkingServlet extends HttpServlet {
 //        String car = "888";
         String car = (String) session.getAttribute("car_number");
         long l = System.currentTimeMillis();
-
+        String rand =""+ (((int) (Math.random()*10000)));
+        session.setAttribute("plid",rand);
         String i = String.valueOf (l % 10000);
 
         if(whether_newP.equals("否")){
             try {
-                ParkingPlace parkingPlace=ParkingPlaceService.reserveLocation(parking_id,car,Integer.parseInt(i));
+                ParkingPlace parkingPlace=ParkingPlaceService.reserveLocation(parking_id,car,Integer.parseInt(rand));
                 session.setAttribute("id",parkingPlace.getParkingplace_id());
                 session.setAttribute("car_x",parkingPlace.getLocation_x());
                 session.setAttribute("car_y",parkingPlace.getLocation_y());
@@ -44,7 +45,7 @@ public class ReserveParkingServlet extends HttpServlet {
             }
         }else {
             try {
-                ParkingPlace parkingPlace= ParkingPlaceService.reserveLocationForNewMan(parking_id,car,Integer.parseInt(i));
+                ParkingPlace parkingPlace= ParkingPlaceService.reserveLocationForNewMan(parking_id,car,Integer.parseInt(rand));
                 System.out.println("the parking place is "+parkingPlace);
                 session.setAttribute("id",parkingPlace.getParkingplace_id());
                 session.setAttribute("car_x",parkingPlace.getLocation_x());

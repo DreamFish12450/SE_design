@@ -35,13 +35,12 @@ public class updatePickUpTimeServlet extends HttpServlet {
             String car_number = request.getParameter("car_number").trim();
             System.out.println("parkingId:"+parkingId+"parkingplace_id:"+parkingplace_id+"username"+username+"car_number"+car_number);
             UpdatePickUpTime.UpdatePickUpTime(parkingId,Integer.parseInt(parkingplace_id),username,car_number);
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("application/json;charset=utf-8");
+
             //扣费 如果账户余额充足则直接扣 写入数据库； 如果账户余额不充足则转向充值页面
             ParkingFeeDaoImpl parkingFeeDao = new ParkingFeeDaoImpl();
             ParkingPlaceDaoImpl placeDao = new ParkingPlaceDaoImpl();
             ParkingPlace parkingPlace = placeDao.getParkingPlace(parkingId,Integer.parseInt(parkingplace_id));
-            System.out.printf("开始时间："+parkingPlace.getEnd_time().getTime()+" "+"结束时间："+parkingPlace.getStart_time().getTime());
+            System.out.println("开始时间："+parkingPlace.getEnd_time().getTime()+" "+"结束时间："+parkingPlace.getStart_time().getTime());
             long diff = parkingPlace.getEnd_time().getTime() - parkingPlace.getStart_time().getTime();
             long hour = diff/1000/3600;
             hour = (int) (hour+0.5);
@@ -60,6 +59,8 @@ public class updatePickUpTimeServlet extends HttpServlet {
             else{
                 String msg = "unfinished";
                 String result = new Gson().toJson(msg);
+                response.setCharacterEncoding("utf-8");
+                response.setContentType("application/json;charset=utf-8");
                 response.getWriter().write(result);
                 /*返回数据*/
                 //request.setAttribute("msg", "删除成功！");
