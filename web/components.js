@@ -98,9 +98,9 @@ Vue.component('app', {
 <!--            <li>-->
 <!--              <a href="orderBook.html"><i class="icon-flask"></i>个人信息</a>-->
 <!--            </li>-->
-            <li>
-              <a href="orderBook.html"><i class="icon-flask"></i>个人信息</a>
-            </li>
+<!--            <li>-->
+<!--              <a href="orderBook.html"><i class="icon-flask"></i>个人信息</a>-->
+<!--            </li>-->
             <li>
               <a href="${window.ppath}/home.jsp"><i class="icon-flask"></i>首页</a>
             </li>
