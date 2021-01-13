@@ -54,7 +54,7 @@
 </head>
 <body onload="draw('canvas');">
 <form action="" method="post">
-<h1 align="center">ParkingLot</h1>
+<h1 align="center">ParkingLot-取车</h1>
 
 
 <h3>您预订的车位在第<span class="car_x">${sessionScope.car_x}</span>列，第<span class="car_y">${sessionScope.car_y}</span>行</h3>

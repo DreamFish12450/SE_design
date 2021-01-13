@@ -65,7 +65,7 @@
 </head>
 <body onload="draw('canvas');">
 
-<h1 align="center">ParkingLot</h1>
+<h1 align="center">ParkingLot-停车</h1>
 <%--<canvas id="canvas" width="1500" height="1500" ></canvas>--%>
 <%--<%--%>
 <%--session.setAttribute("car_x",1);--%>
