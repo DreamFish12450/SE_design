@@ -173,7 +173,7 @@
             data: {pass: password, amount:amount},
             url: '<%=application.getContextPath()%>/charge.do',
             success: function (data) {
-                alert(data)
+                // alert(data)
                 if(data==='no'){
                     let index = window.location.href .lastIndexOf("\/")
                     let str  =  window.location.href.substring(0,index)

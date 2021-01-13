@@ -1,7 +1,9 @@
 package ws.parkingLotService.servlet;
 
+import main.com.wswenyue.db.dao.impl.AmountDaoImpl;
 import main.com.wswenyue.db.dao.impl.UserDaoImpl;
 import main.com.wswenyue.db.domain.UserW;
+import main.com.wswenyue.db.service.AmountService;
 
 import javax.jms.Session;
 import javax.servlet.ServletException;
@@ -59,6 +61,8 @@ public class inforegisteServlet extends HttpServlet {
                 UserDaoImpl ud = new UserDaoImpl();
                 if(ud.findUserByName(username)==null) {
                     ud.add(u1);
+                    AmountDaoImpl amountDao = new AmountDaoImpl();
+                    amountDao.create_amount(username);
                     System.out.println("添加成功：123");
 //                    request.getRequestDispatcher("/inforegist.jsp").forward(request, response);
                     response.sendRedirect(request.getContextPath()+"/register.jsp");

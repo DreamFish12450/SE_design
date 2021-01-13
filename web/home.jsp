@@ -32,6 +32,13 @@
 
 </head>
 <script src="js/Url.js"></script>
+<style>
+    .number {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
 
 <body>
 <app id="app" :info="info" :state="state">
@@ -49,7 +56,8 @@
                                      aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                             </div>
                         </div>
-                        <div class="number"><strong><%=session.getAttribute("username")%></strong></div>
+                        <div class="number"><strong><%=session.getAttribute("username")%>
+                        </strong></div>
                     </div>
                 </div>
                 <!-- Item -->
@@ -62,7 +70,8 @@
                                      aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
                             </div>
                         </div>
-                        <div class="number"><strong><%=session.getAttribute("phone_number")%></strong></div>
+                        <div class="number" title="${sessionScope.phone_number}"><strong><%=session.getAttribute("phone_number")%>
+                        </strong></div>
                     </div>
                 </div>
                 <!-- Item -->
@@ -88,7 +97,8 @@
                                      aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
                             </div>
                         </div>
-                        <div class="number"><strong><%=session.getAttribute("ID_number")%></strong></div>
+                        <div class="number" title="${sessionScope.ID_number}"><strong><%=session.getAttribute("ID_number")%>
+                        </strong></div>
                     </div>
                 </div>
             </div>
@@ -108,7 +118,8 @@
                                      aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
                             </div>
                         </div>
-                        <div class="number"><strong><%=session.getAttribute("age")%></strong></div>
+                        <div class="number"><strong><%=session.getAttribute("age")%>
+                        </strong></div>
                     </div>
                 </div>
                 <!-- Item -->
@@ -121,7 +132,8 @@
                                      aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                             </div>
                         </div>
-                        <div class="number"><strong><%=session.getAttribute("name")%></strong></div>
+                        <div class="number" title="${sessionScope.name}"><strong><%=session.getAttribute("name")%>
+                        </strong></div>
                     </div>
                 </div>                <!-- Item -->
 
@@ -135,20 +147,23 @@
                                      aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
                             </div>
                         </div>
-                        <div class="number"><strong><%=session.getAttribute("balance")%></strong></div>
+                        <div class="number" title="${sessionScope.balance}"><strong><%=session.getAttribute("balance")%>
+                        </strong></div>
                     </div>
-                </div> <div class="col-xl-3 col-sm-6">
-                <div class="item d-flex align-items-center">
-                    <div class="icon bg-green"><i class="icon-bill"></i></div>
-                    <div class="title"><span>用户<br>性别</span>
-                        <div class="progress">
-                            <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40"
-                                 aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
-                        </div>
-                    </div>
-                    <div class="number"><strong><%=session.getAttribute("sex")%></strong></div>
                 </div>
-            </div>
+                <div class="col-xl-3 col-sm-6">
+                    <div class="item d-flex align-items-center">
+                        <div class="icon bg-green"><i class="icon-bill"></i></div>
+                        <div class="title"><span>用户<br>性别</span>
+                            <div class="progress">
+                                <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
+                            </div>
+                        </div>
+                        <div class="number"><strong><%=session.getAttribute("sex")%>
+                        </strong></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>    <!-- Dashboard Header Section    -->
@@ -160,17 +175,17 @@
                     <!-- Bar Chart   -->
                     <div class="bar-chart has-shadow bg-white" style="height: 400px">
                         <div class="renewal-icon">
-                            <img src="./img/set.png" style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"/>
+                            <img src="./img/set.png"
+                                 style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"/>
                         </div>
                         <div class="title"><strong class="text-violet"></strong><br><small></small></div>
                         <canvas id="barChartHome1"></canvas>
                     </div>
-                        <div class="card-body text-center">
-                            <button type="button" data-toggle="modal" data-target="#myModal"
-                                    class="btn btn-primary" style="margin-top: -300px">&nbsp;修 改 密 码&nbsp;
-                            </button>
-                            <!-- Modal-->
-
+                    <div class="card-body text-center">
+                        <button type="button" data-toggle="modal" data-target="#myModal"
+                                class="btn btn-primary" style="margin-top: -300px">&nbsp;修 改 密 码&nbsp;
+                        </button>
+                        <!-- Modal-->
 
 
                     </div>
@@ -180,7 +195,8 @@
                     <!-- Bar Chart   -->
                     <div class="bar-chart has-shadow bg-white" style="height: 400px">
                         <div class="renewal-icon">
-                            <img src="./img/my.png" style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"/>
+                            <img src="./img/my.png"
+                                 style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"/>
                         </div>
                         <div class="title"><strong class="text-violet"></strong><br><small></small></div>
                         <canvas id="barChartHome2"></canvas>
@@ -195,9 +211,10 @@
                 </div>
                 <div class="chart col-lg-3 col-12" style="height: 400px">
                     <!-- Bar Chart   -->
-                    <div class="bar-chart has-shadow bg-white"style="height: 400px">
+                    <div class="bar-chart has-shadow bg-white" style="height: 400px">
                         <div class="renewal-icon">
-                            <img src="./img/3.png" style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"></img>
+                            <img src="./img/3.png"
+                                 style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"></img>
                         </div>
                         <div class="title"><strong class="text-violet"></strong><br><small></small></div>
                         <canvas id="barChartHome5"></canvas>
@@ -213,9 +230,10 @@
                 <div class="chart col-lg-3 col-12" style="height: 400px;background-color: #f6f6f6">
                     <!-- Bar Chart   -->
 
-                    <div class="bar-chart has-shadow bg-white"style="height: 400px;background-color: #f6f6f6">
+                    <div class="bar-chart has-shadow bg-white" style="height: 400px;background-color: #f6f6f6">
                         <div class="renewal-icon">
-                            <img src="./img/1.png" style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"></img>
+                            <img src="./img/1.png"
+                                 style="width: 40%;height:40%;text-align: center;margin-left:30%;margin-top: 20%;"></img>
                         </div>
                         <div class="title"><strong class="text-violet"></strong><br><small></small></div>
                         <canvas id="barChartHome4"></canvas>
@@ -235,7 +253,6 @@
             </div>
         </div>
     </section>
-
 
 
 </app>
@@ -285,11 +302,11 @@
     })
 
     window.addEventListener('load', () => {
-        for(let i=1;i<document.querySelectorAll('ul > li > a').length;i++){
-            let href=document.querySelectorAll('ul > li > a')[i].getAttribute("href")
+        for (let i = 1; i < document.querySelectorAll('ul > li > a').length; i++) {
+            let href = document.querySelectorAll('ul > li > a')[i].getAttribute("href")
             console.log(href)
-            if(window.location.href === href){
-                document.querySelectorAll('ul > li ')[i].setAttribute("class","active")
+            if (window.location.href === href) {
+                document.querySelectorAll('ul > li ')[i].setAttribute("class", "active")
             }
         }
         app.init();

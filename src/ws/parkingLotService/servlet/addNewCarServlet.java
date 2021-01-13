@@ -22,8 +22,8 @@ public class addNewCarServlet extends HttpServlet {
 
         try {
             HttpSession session = request.getSession();
-            String username = "zky";//TODO delete
-//            String username = session.getAttribute("username");
+//            String username = "zky";//TODO delete
+            String username = (String) session.getAttribute("username");
             String car_number = request.getParameter("car_number");
             String car_model = request.getParameter("car_model");
             String car_brand = request.getParameter("car_brand");
@@ -31,6 +31,10 @@ public class addNewCarServlet extends HttpServlet {
             Car car = new Car(car_number, car_brand, car_model, get_permit, username);
             System.out.println(car.toString());
             CarService.insertCar(car);
+            List<Car> carList = CarService.getCarByUserName(username);
+            if(carList!=null){
+                session.setAttribute("carList",carList);
+            }
 //            List<Car> carList = CarService.getCarByUserName(username);
 
             /*返回数据*/

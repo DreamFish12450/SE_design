@@ -63,7 +63,8 @@
                             <form action="Register" method="post" >
                                 <div class="form-group">
                                     <label class="form-control-label">用户名</label>
-                                    <input type="text" name="username" placeholder="username" class="form-control" maxlength="8" required>
+                                    <input type="text" name="username" placeholder="username" class="form-control" maxlength="5" required>
+<%--                                    <small>用户名长度小于5</small>--%>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">密码</label>
@@ -71,7 +72,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">姓名</label>
-                                    <input type="text" name="name" placeholder="name" class="form-control" maxlength="8" required>
+                                    <input type="text" name="name" placeholder="name" class="form-control" maxlength="15" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">年龄</label>

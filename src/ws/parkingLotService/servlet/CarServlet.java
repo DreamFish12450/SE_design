@@ -25,8 +25,8 @@ public class CarServlet extends HttpServlet {
 
         try {
             HttpSession session = request.getSession();
-            String username = "zky";//TODO delete
-//            String username = (String) session.getAttribute("username");
+//            String username = "zky";//TODO delete
+            String username = (String) session.getAttribute("username");
             List<Car> carList = CarService.getCarByUserName(username);
             session.setAttribute("carList",carList);
             String result = new Gson().toJson(carList);
