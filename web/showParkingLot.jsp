@@ -75,7 +75,7 @@
 <h3>推荐路线：从此出入口向前驶<span class="car_x">${(sessionScope.car_x*2-0.5)*2.5}</span>米后右转，然后直行<span class="car_y">${(sessionScope.car_y-0.5)*5}</span>米后车位在你的右方</h3>
 <span class="parking_id" style="visibility: hidden">${sessionScope.parking_id}</span>
 <span class="id" style="visibility: hidden">${sessionScope.id}</span>
-<span class="plid">${sessionScope.plid}</span>
+<span class="plid" style="visibility: hidden">${sessionScope.plid}</span>
 <div class="wrapper">
     <c:forEach var="s" begin="1" end="6">
         <c:forEach var="s2" begin="1" end="5">
