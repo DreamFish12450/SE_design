@@ -58,7 +58,7 @@
 
 
 <h3>您预订的车位在第<span class="car_x">${sessionScope.car_x}</span>列，第<span class="car_y">${sessionScope.car_y}</span>行</h3>
-    <h3>推荐路线：从此出入口向前驶<span class="car_x">${(sessionScope.car_x*2-0.5)*2.5}></span>米后右转，然后直行<span class="car_y">${(sessionScope.car_y-0.5)*5}</span>米后车位在你的右方</h3>
+    <h3>推荐路线：从此出入口向前驶<span class="car_x">${(sessionScope.car_x*2-0.5)*2.5}</span>米后右转，然后直行<span class="car_y">${(sessionScope.car_y-0.5)*5}</span>米后车位在你的右方</h3>
     <span class="parking_id" style="visibility: hidden">${sessionScope.parking_id}</span>
     <span class="username" style="visibility: hidden">${sessionScope.username}</span>
     <span class="parkingplace_id" style="visibility: hidden">${sessionScope.plid}</span>
