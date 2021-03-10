@@ -168,7 +168,8 @@ public class UserDaoImpl implements UserDao {
                     String sex = rs.getString(5);
                     String ID_number = rs.getString(6);
                     String ph = rs.getString(7);
-                    u1 = new UserW(name, pw, na, age, sex, ID_number, ph, null, null);
+                    Integer balance = rs.getInt(9);
+                    u1 = new UserW(name, pw, na, age, sex, ID_number, ph, null, balance);
 //            parkingList.add(p);
                     System.out.println(u1);
                     return u1;

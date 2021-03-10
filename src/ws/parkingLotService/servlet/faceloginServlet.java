@@ -1,7 +1,11 @@
 package ws.parkingLotService.servlet;
 
 import main.com.wswenyue.db.dao.impl.UserDaoImpl;
+import main.com.wswenyue.db.domain.Amount;
+import main.com.wswenyue.db.domain.Car;
 import main.com.wswenyue.db.domain.UserW;
+import main.com.wswenyue.db.service.AmountService;
+import main.com.wswenyue.db.service.CarService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class faceloginServlet extends HttpServlet {
@@ -44,9 +49,23 @@ public class faceloginServlet extends HttpServlet {
             session.setAttribute("sex",w1.getSex());
             session.setAttribute("ID_number",w1.getID_number());
             session.setAttribute("phone_number",w1.getPhone_number());
+//            session.setAttribute("balance",w1.getBalance());
             session.setAttribute("balance",w1.getBalance());
-
-            System.out.println("3up");
+            Amount amount= null;
+            try {
+                amount = AmountService.getAmount(w1.getUsername());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            if(amount!=null){
+                session.setAttribute("VIP_level",amount.getVip_level());
+                session.setAttribute("totalMoney",amount.getTotal_amount());
+            }
+            List<Car> carList = CarService.getCarByUserName(name);
+            if(carList!=null){
+                session.setAttribute("carList",carList);
+            }
+//            System.out.println("3up");
         } catch (SQLException e) {
             e.printStackTrace();
         }

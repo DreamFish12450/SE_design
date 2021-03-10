@@ -43,7 +43,7 @@
             <h3 class="h4">根据日期查询车位记录</h3>
         </div>
         <div class="card-body" style="margin: 10px">
-    <form action="parkingplace.jsp"method="post" >
+    <form action="parkingplace.jsp" method="post" >
 
             <div class="form-group">
             <label class="form-control-label">开始时间</label>

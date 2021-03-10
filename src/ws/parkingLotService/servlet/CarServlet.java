@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
 @WebServlet("/listCar.do")
 public class CarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,16 +23,15 @@ public class CarServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             HttpSession session = request.getSession();
 //            String username = "zky";//TODO delete
-            String username = (String) session.getAttribute("username");
+            String username = request.getParameter("username");
+//            String username = (String) session.getAttribute("username");
             List<Car> carList = CarService.getCarByUserName(username);
-            session.setAttribute("carList",carList);
+            session.setAttribute("carList", carList);
             String result = new Gson().toJson(carList);
             System.out.println("返回的结果：" + result);
-
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json;charset=utf-8");
             /*返回数据*/
@@ -39,9 +39,6 @@ public class CarServlet extends HttpServlet {
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }
-
-
-
         /*将实体类转成json*/
 
 

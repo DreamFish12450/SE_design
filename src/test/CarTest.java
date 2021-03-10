@@ -15,8 +15,12 @@ public class CarTest {
     }
     @Test
     public void insertCar() throws SQLException {
-
-        Car car = new Car("119","大众","轿车","是","zky");
+        Car car = new Car("1119","大众","轿车","是","zky");
         carDaoimpl.insertCar(car);
     }
+    @Test
+    public void angry(){
+        String accessToken = main.com.wswenyue.db.utils.getAuth.getAuth();
+    }
+
 }

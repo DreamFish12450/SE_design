@@ -117,12 +117,13 @@
             }
             System.out.println(start);
             System.out.println(end);
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://118.25.154.83:3306/esparking"; //数据库名
+            String username1 = "root";  //数据库用户名
+            String password = "123456";  //数据库用户密码
+            Connection conn = DriverManager.getConnection(url, username1, password);  //连接状态
             try {
-                Class.forName("com.mysql.jdbc.Driver");
-                String url = "jdbc:mysql://118.25.154.83:3306/esparking"; //数据库名
-                String username1 = "root";  //数据库用户名
-                String password = "123456";  //数据库用户密码
-                Connection conn = DriverManager.getConnection(url, username1, password);  //连接状态
+
                 if(conn != null){
                     Statement stmt = null;
                     ResultSet rs = null;
@@ -134,12 +135,28 @@
                         String parking_name=rs.getString("parking_name");
                         String car_number=rs.getString("car_number");
                         String start_time=rs.getString("start_time");
-                        String end_time=rs.getString("end_time");
-
-
-
-
+                        String end_time = null;
+                        if(rs.getString("end_time")==null) {end_time=null;}
+                        else { end_time=rs.getString("end_time");};
                         if(start.equals("")||end.equals("")) {
+                            out.print("<tr>");
+                            out.print("<td>");
+                            out.print(parkingplace_ID);
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print(parking_name);
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print(car_number);
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print(start_time);
+                            out.print("</td>");
+                            out.print("<td>");
+                            out.print(end_time);
+                            out.print("</td>");
+                            out.print("</tr>");
+                        }else if(end_time == null&&start.compareTo(start_time.substring(0,10))<=0){
                             out.print("<tr>");
                             out.print("<td>");
                             out.print(parkingplace_ID);
@@ -183,12 +200,16 @@
                         }
                         }
                     }
+                    conn.close();
                 }else{
                     out.print("连接失败！");
                 }
             }catch (Exception e) {
-                //e.printStackTrace();
+                e.printStackTrace();
                 System.out.print("数据库连接异常！");
+                conn.close();
+            }finally {
+
             }
         %>
                     </tbody>
